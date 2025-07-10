@@ -1,0 +1,37 @@
+<mat-dialog-content>
+  <div>
+    <mat-form-field class="form-field" color="accent">
+      <mat-label>BPN</mat-label>
+      <div *ngIf="!isEditMode">
+        <input [(ngModel)]="id" matInput>
+      </div>
+      <div *ngIf="isEditMode">
+        <input [(ngModel)]="id" readonly matInput>
+      </div>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="form-field" color="accent">
+      <mat-label>Groups</mat-label>
+      <input [(ngModel)]="groups" placeholder='a-partners,b-partners' matInput>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+
+
+<mat-dialog-actions>
+    <div *ngIf="!isEditMode">
+      <button (click)="onSave()" color="accent" mat-stroked-button>
+        <mat-icon>add_circle_outline</mat-icon> Save
+    </button>
+    </div>
+    <div *ngIf="isEditMode">
+      <button (click)="onSave()" color="accent" mat-stroked-button>
+        <mat-icon>save</mat-icon> Update
+      </button>
+    </div>   
+
+    <button color="accent" mat-dialog-close mat-stroked-button>
+        <mat-icon>cancel</mat-icon> Cancel
+    </button>
+</mat-dialog-actions>

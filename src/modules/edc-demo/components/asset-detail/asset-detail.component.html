@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Asset Detail</h1>
+<mat-divider></mat-divider>
+
+<mat-dialog-content>
+  <h3>Id</h3>
+  <div> {{ asset.id }} </div>
+  <h3>Name</h3>
+  <div> {{ asset.properties.optionalValue('edc','name') }} </div>
+  <h3>Content Type</h3>
+  <div> {{ asset.properties.optionalValue('edc','contenttype') }} </div>
+  <h3>Version</h3>
+  <div> {{ asset.properties.optionalValue('edc','version') }}  </div>
+  <h3>BaseUrl</h3>
+  <div> {{ asset.dataAddress.optionalValue('edc','baseUrl') }} </div>
+  <h3>Destination</h3>
+  <div> {{ asset.dataAddress.optionalValue('edc','type') }} </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button color="accent" mat-dialog-close mat-stroked-button>
+      <mat-icon>cancel</mat-icon> Cancel
+  </button>
+</mat-dialog-actions>

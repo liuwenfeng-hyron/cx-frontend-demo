@@ -1,0 +1,17 @@
+.image-popup-fixed {
+    position: relative;
+    display: inline-block;
+}
+
+.image-popup-fixed img {
+    display: block;
+}
+
+.image-popup-fixed:hover img {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(3);
+    z-index: 1000;
+    box-shadow: 0 0 20px rgba(53, 81, 240, 0.5);
+}

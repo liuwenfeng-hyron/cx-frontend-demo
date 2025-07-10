@@ -1,0 +1,8 @@
+{
+  "apiKey": "ApiKeyDefaultValue",
+  "managementApiUrl": "http://host-10-0-20-130.oraclevcn.com/alice/management",
+  "catalogUrl": "http://host-10-0-20-130.oraclevcn.com/alice/management",
+  "storageAccount": "company2assets",
+  "storageExplorerLinkTemplate": "storageexplorer://v=1",
+  "theme": "theme-2"
+}

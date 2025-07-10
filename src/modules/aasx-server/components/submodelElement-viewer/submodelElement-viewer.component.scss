@@ -1,0 +1,57 @@
+.submodelElements-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: -1px;
+  margin-bottom: -1px;
+  margin-left: -1px;
+  margin-right: -1px;
+}
+
+.submodelElements-table-header th {
+  font-weight: bold;
+  background-color: #b3d0e7de;
+  color: rgb(20, 20, 20);
+}
+
+.table-header-container{
+  gap: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.mdc-data-table__cell {
+    background-color: #d2e2f0de;
+    border-top: 1px solid #fcf8f8;
+    border-left: 1px solid #fcf8f8;
+    border-bottom: 1px solid #fcf8f8;
+    color:rgb(0, 0, 0);
+    padding: 0 0 0 0px;
+}
+
+.mdc-data-table__header-cell {
+    padding: 0 0 0 10px;
+}
+
+.td-idShort {
+  width: 285px;
+  max-width: 300px;
+  padding-left: 5px;
+  padding-right: 1px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.td-value {
+  max-width: 500px;
+  padding-left: 5px;
+}
+
+.td-value-span {
+  color: rgb(241, 101, 101);
+  padding-left: 5px;
+}
+
+input {
+  width: 350px;
+  margin-left: 5px;
+}

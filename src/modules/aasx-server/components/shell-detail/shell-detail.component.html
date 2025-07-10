@@ -1,0 +1,78 @@
+<h1 mat-dialog-title>Shell Detail</h1>
+<mat-divider></mat-divider>
+
+<div *ngIf="shell$ | async as shell">
+  <mat-dialog-content>
+    <div class="container">
+        <div class="text-section">
+          <p>IdShort : <span class="value-span"> {{shell.idShort}} </span></p>
+          <p>Id : <span class="value-span"> {{shell.id}} </span></p>
+          <p *ngIf="shell.displayName">DisplayName : <span class="value-span"> {{shell.displayName}} </span></p>
+          <p *ngIf="shell.description">Description : <span class="value-span"> {{shell.description | json}} </span></p>
+          <p *ngIf="shell.administration">Administration :
+            <span>
+              <ul>
+                <p *ngIf="shell.administration?.version">Version : <span class="value-span"> {{shell.administration.version}} </span></p>
+                <p *ngIf="shell.administration?.revision">Tevision : <span class="value-span"> {{shell.administration.revision}} </span></p>
+                <!--
+                <p *ngIf="shell.administration?.creator">Creator : <span class="value-span"> {{shell.administration.creator | json}} </span></p>
+                <p *ngIf="shell.administration?.templateId">TemplateId : <span class="value-span"> {{shell.administration.templateId}} </span></p>
+                <p *ngIf="shell.administration?.embeddedDataSpecifications">EmbeddedDataSpecifications : <span class="value-span"> {{shell.administration.embeddedDataSpecifications | json}} </span></p>
+                -->
+              </ul>
+            </span>
+          </p>
+          <p *ngIf="shell.assetInformation">AssetInformation :
+            <span>
+              <ul>
+                <p *ngIf="shell.assetInformation?.assetKind">AssetKind : <span class="value-span"> {{shell.assetInformation.assetKind}} </span></p>
+                <p *ngIf="shell.assetInformation?.globalAssetId">GlobalAssetId : <span class="value-span"> {{shell.assetInformation.globalAssetId}} </span></p>
+                <p *ngIf="shell.assetInformation?.specificAssetIds">SpecificAssetId : <span class="value-span"> {{shell.assetInformation.specificAssetIds}} </span></p>
+                <p *ngIf="shell.assetInformation?.assetType">AssetType : <span class="value-span"> {{shell.assetInformation.assetType}} </span></p>
+                <p *ngIf="shell.assetInformation?.defaultThumbnail">DefaultThumbnail :
+                    <span>
+                      <ul>
+                        <p *ngIf="shell.assetInformation.defaultThumbnail.path">Path : <span class="value-span"> {{shell.assetInformation.defaultThumbnail.path}} </span></p>
+                        <p *ngIf="shell.assetInformation.defaultThumbnail.contentType">ContentType : <span class="value-span"> {{shell.assetInformation.defaultThumbnail.contentType}} </span></p>
+                      </ul>
+                    </span>                    
+                </p>
+              </ul>
+            </span>
+          </p>
+          <p *ngIf="shell.extensions">Extensions : <span class="value-span"> {{shell.extensions | json}} </span></p>
+          <p *ngIf="shell.category">Category : <span class="value-span"> {{shell.category}} </span></p>
+          <p *ngIf="shell.embeddedDataSpecifications">EmbeddedDataSpecifications : <span class="value-span"> {{shell.embeddedDataSpecifications | json}} </span></p>
+          <p *ngIf="shell.derivedFrom">DerivedFrom :
+            <span>
+              <ul>
+                <p *ngIf="shell.derivedFrom?.type">Type : <span class="value-span"> {{shell.derivedFrom.type}} </span></p>
+                <p *ngIf="shell.derivedFrom?.keys">Keys : <span class="value-span"> {{shell.derivedFrom.keys | json}} </span></p>
+              </ul>
+            </span>
+          </p>
+          <p *ngIf="shell.modelType">ModelType : <span class="value-span"> {{shell.modelType}} </span></p>
+          <p>Submodels :</p>
+          <ul *ngFor="let submodel of shell.submodels">
+            <p>
+              <a
+                class="link"
+                href="javascript:void(0)"
+                (click)="onShowSubmodelDetail(submodel.keys[0]?.value)">
+                {{submodel.keys[0]?.value}}
+              </a>
+            </p>
+          </ul>
+        </div>
+        <div class="image-section">
+          <span *ngIf="shell.assetInformation?.defaultThumbnail"><shell-thumbnail-viewer [id]="shell.id" [imageWidth]="300" [imageHeight]="300"></shell-thumbnail-viewer></span>
+        </div>
+    </div>
+  </mat-dialog-content>  
+</div>
+
+<mat-dialog-actions>
+  <button color="accent" mat-dialog-close mat-stroked-button>
+      <mat-icon>cancel</mat-icon> Cancel
+  </button>  
+</mat-dialog-actions>

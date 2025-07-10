@@ -1,0 +1,26 @@
+<mat-dialog-content>
+  <div>
+    <mat-form-field class="form-field" color="accent">
+      <mat-label>Shell Descriptor</mat-label>
+      <textarea [(ngModel)]="shellDescriptor" matInput rows="20"></textarea>
+    </mat-form-field>    
+  </div>
+</mat-dialog-content>
+
+
+<mat-dialog-actions>
+    <div *ngIf="!isEditMode">
+      <button (click)="onSave()" color="accent" mat-stroked-button>
+        <mat-icon>add_circle_outline</mat-icon> Save
+    </button>
+    </div>
+    <div *ngIf="isEditMode">
+      <button (click)="onSave()" color="accent" mat-stroked-button>
+        <mat-icon>save</mat-icon> Update
+      </button>
+    </div>
+
+    <button color="accent" mat-dialog-close mat-stroked-button>
+        <mat-icon>cancel</mat-icon> Cancel
+    </button>
+</mat-dialog-actions>

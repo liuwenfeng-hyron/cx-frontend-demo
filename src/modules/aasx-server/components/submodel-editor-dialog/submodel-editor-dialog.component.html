@@ -1,0 +1,58 @@
+<mat-dialog-content>
+  <div>
+    <mat-form-field class="form-field" color="accent">
+      <mat-label>Id</mat-label>
+      <input *ngIf="id !==''" [(ngModel)]="submodel.id" readonly matInput>
+      <input *ngIf="id ===''" [(ngModel)]="submodel.id" matInput>
+    </mat-form-field>
+    <mat-form-field class="form-field" color="accent">
+      <mat-label>IdShort</mat-label>
+      <input [(ngModel)]="submodel.idShort" matInput>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="form-field" color="accent">
+      <mat-label>Kind</mat-label>
+      <mat-select [(ngModel)]="submodel.kind">
+        <mat-option *ngFor="let submodelKind of submodelKinds " [value]="submodelKind.id">
+          {{submodelKind.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="form-field" color="accent">
+      <mat-label>ModelType</mat-label>
+      <input [(ngModel)]="submodel.modelType" matInput>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="form-field-big" color="accent">
+      <mat-label>SemanticId</mat-label>
+      <textarea #semanticIdTextarea
+        [value]="jsonFields['semanticId']"
+        (change)="onJsonFieldChange('semanticId', semanticIdTextarea.value)"
+        matInput rows="8">
+      </textarea>
+    </mat-form-field>
+  </div>
+  <div>
+      <mat-label>SubmodelElements</mat-label>
+      <div class="div-submodel-element"><submodel-element-table [dataSource]="submodel.submodelElements"></submodel-element-table></div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <div *ngIf="!isEditMode">
+      <button (click)="onSave()" color="accent" mat-stroked-button>
+        <mat-icon>add_circle_outline</mat-icon> Save
+    </button>
+    </div>
+    <div *ngIf="isEditMode">
+      <button (click)="onSave()" color="accent" mat-stroked-button>
+        <mat-icon>save</mat-icon> Update
+      </button>
+    </div>
+
+    <button color="accent" mat-dialog-close mat-stroked-button>
+        <mat-icon>cancel</mat-icon> Cancel
+    </button>
+</mat-dialog-actions>

@@ -1,0 +1,21 @@
+<mat-dialog-content>
+  <div>
+    <mat-form-field class="form-field" color="accent">
+      <mat-label>Submodel Descriptor</mat-label>
+      <textarea [(ngModel)]="submodelDescriptor" matInput rows="36"></textarea>
+    </mat-form-field>    
+  </div>
+</mat-dialog-content>
+
+
+<mat-dialog-actions>
+    <div>
+      <button (click)="onSave()" color="accent" mat-stroked-button>
+        <mat-icon>add_circle_outline</mat-icon> Save
+    </button>
+    </div>
+
+    <button color="accent" mat-dialog-close mat-stroked-button>
+        <mat-icon>cancel</mat-icon> Cancel
+    </button>
+</mat-dialog-actions>

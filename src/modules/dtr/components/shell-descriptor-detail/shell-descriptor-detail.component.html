@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Shell Descriptor Detail</h1>
+<mat-divider></mat-divider>
+
+<mat-dialog-content>
+  <div *ngIf="shellDesc$ | async as shellDesc">
+    <ngx-json-viewer [json]="shellDesc" [depth]="2"></ngx-json-viewer>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button color="accent" mat-dialog-close mat-stroked-button>
+      <mat-icon>cancel</mat-icon> Cancel
+  </button>  
+</mat-dialog-actions>

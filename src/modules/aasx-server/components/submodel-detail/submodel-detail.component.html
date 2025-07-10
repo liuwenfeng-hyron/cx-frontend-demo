@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Submodel Detail</h1>
+<mat-divider></mat-divider>
+
+<div *ngIf="submodel$ | async as submodel">
+  <mat-tab-group>
+    <mat-tab label="payload">
+      <mat-dialog-content>
+        <p>Id : <span class="value-span"> {{submodel.id}} </span></p>
+        <p>IdShort: <span class="value-span"> {{submodel.idShort}} </span></p>
+        <p>Kind : <span class="value-span"> {{submodel.kind}} </span></p>
+        <p>SubmodelElements :</p>
+        <submodel-element-table [dataSource]="submodel.submodelElements" [isReadOnly]="true"></submodel-element-table>
+      </mat-dialog-content>
+    </mat-tab>
+    <mat-tab label="json">
+      <mat-dialog-content>
+          <ngx-json-viewer [json]=submodel [depth]="2"></ngx-json-viewer>
+      </mat-dialog-content>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+<mat-dialog-actions>
+  <button color="accent" mat-dialog-close mat-stroked-button>
+      <mat-icon>cancel</mat-icon> Cancel
+  </button>  
+</mat-dialog-actions>

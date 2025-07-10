@@ -1,0 +1,8 @@
+{
+  "apiKey": "password",
+  "managementApiUrl": "http://localhost:4200/bob/management",
+  "catalogUrl": "http://localhost:4200/bob/management",
+  "storageAccount": "company2assets",
+  "storageExplorerLinkTemplate": "storageexplorer://v=1",
+  "theme": "theme-2"
+}

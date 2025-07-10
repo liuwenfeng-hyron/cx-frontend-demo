@@ -1,0 +1,41 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 300px;
+}
+
+.sidenav .mat-toolbar {
+  /* background: inherit; */
+  background: rgb(0, 28, 119);  /* modified by ljz on 2024.10.29*/
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: rgb(0, 28, 119);  /* added by ljz on 2024.10.29*/
+  display: flex;                  /* added by ljz on 2024.10.30*/
+  justify-content: space-between; /* added by ljz on 2024.10.30*/
+}
+
+.toolbar-logo {
+  height: 64px;  
+  width: auto;   
+  margin-right: 0px;  
+}
+
+.toolbar-span {
+  height: 33px;  
+  width: auto;   
+  margin-right: 1px;  
+  font-size:20pt;
+  font-weight: bold; 
+  font-style: italic; 
+  color: rgb(0, 91, 172); 
+}
+
+.mat-mdc-list-item.mdc-list-item--with-leading-icon.mdc-list-item--with-one-line {
+    height: 50px;
+}

@@ -1,0 +1,48 @@
+mat-dialog-content {
+    width: 1200px;
+}
+
+mat-dialog-content p {
+    color: rgb(20, 20, 20);
+}
+
+.item-title-span {
+    display: inline-block;
+    width: 138px;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.item-title-span-short {
+    display: inline-block;
+    width: 100px;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+mat-dialog-content input {
+    width: 400px;
+}
+
+mat-dialog-content textarea {
+    width: 400px;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.mdc-button {
+    margin: 10px;
+}
+
+mat-select {
+    width: 230px;
+    background-color: rgb(169, 191, 201);
+}
+
+.ul-submodels {
+    margin-top: -10px;
+    margin-bottom: -10px;
+}

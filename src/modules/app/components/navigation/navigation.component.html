@@ -1,0 +1,36 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar class="toolbar-title"><img src="assets/NRI_logo02-2.PNG" alt="NRI" class="toolbar-logo" /></mat-toolbar>
+    <mat-nav-list>
+        <!-- Modified By Ljz On 2024.11.6 Start-->
+        <div *ngFor="let route of routes">
+          <a *ngIf="route.path == 'groupTitle'" mat-list-item >
+            {{ route.data?.title }}
+          </a>
+          <a *ngIf="route.path != 'groupTitle'" mat-list-item [routerLink]="[route.path]">
+            <mat-icon matListItemIcon>{{route.data?.icon}}</mat-icon>
+            {{route.data?.title ?? route.path}}
+          </a> 
+        </div>    
+        <!-- Modified By Ljz On 2024.11.6 End-->    
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>{{titleService.getTitle()}}</span>
+      <span><app-user-info></app-user-info></span>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

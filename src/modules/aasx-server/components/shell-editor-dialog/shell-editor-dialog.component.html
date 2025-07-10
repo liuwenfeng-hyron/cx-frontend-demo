@@ -1,0 +1,174 @@
+<mat-dialog-content>
+  <div class="container">
+      <div class="text-section">
+        <p><span class="item-title-span">IdShort :</span><input [(ngModel)]="shell.idShort" matInput></p>
+        <p><span class="item-title-span">Id :</span>
+          <input *ngIf="isUpdateMode" [(ngModel)]="shell.id" readonly matInput>
+          <input *ngIf="!isUpdateMode" [(ngModel)]="shell.id" matInput>
+        </p>
+        <p><span class="item-title-span">DisplayName :</span>
+          <textarea #displayNameTextarea
+            [value]="jsonFields['displayName']"
+            (change)="onJsonFieldChange('displayName', displayNameTextarea.value)"
+            matInput 
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="10">
+          </textarea>
+        </p>
+        <p><span class="item-title-span">Description :</span>
+          <textarea #descriptionTextarea
+            [value]="jsonFields['description']"
+            (change)="onJsonFieldChange('description', descriptionTextarea.value)"
+            matInput
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="10">
+          </textarea>
+        </p>
+        <p *ngIf="shell.administration">Administration :
+          <span>
+            <ul>
+              <p><span class="item-title-span-short">Version :</span><input [(ngModel)]="shell.administration.version" matInput></p>
+              <p><span class="item-title-span-short">Tevision :</span><input [(ngModel)]="shell.administration.revision" matInput></p>
+              <!--
+              <p><span class="item-title-span-short">Creator :</span>
+                <span>
+                  <ul>
+                    <P><span class="item-title-span">Type :</span>
+                      <mat-select [(ngModel)]="shell.administration.creator.type">
+                        <mat-option *ngFor="let assetKind of assetKinds " [value]="assetKind.id">
+                          {{assetKind.name}}
+                        </mat-option>
+                      </mat-select>
+                    </P>
+                    <P><span class="item-title-span">Keys :</span><input [(ngModel)]="shell.administration.creator.keys" matInput></P>
+                  </ul>
+                </span>
+              </p>
+              <p><span class="item-title-span-short">TemplateId :</span><input [(ngModel)]="shell.administration.templateId" matInput></p>
+              <p><span>EmbeddedDataSpecifications :</span><input [(ngModel)]="shell.administration.embeddedDataSpecifications" matInput></p>
+              -->
+            </ul>
+          </span>
+        </p>
+        <p *ngIf="shell.assetInformation">AssetInformation :
+          <span>
+            <ul>
+              <p><span class="item-title-span">AssetKind :</span>
+                <mat-select [(ngModel)]="shell.assetInformation.assetKind">
+                  <mat-option *ngFor="let assetKind of assetKinds " [value]="assetKind.id">
+                    {{assetKind.name}}
+                  </mat-option>
+                </mat-select>
+              </p>
+              <p><span class="item-title-span">GlobalAssetId :</span> <input [(ngModel)]="shell.assetInformation.globalAssetId" matInput></p>              
+              <p><span class="item-title-span">SpecificAssetIds :</span> <input [(ngModel)]="shell.assetInformation.specificAssetIds" matInput></p>
+              <p><span class="item-title-span">AssetType :</span> <input [(ngModel)]="shell.assetInformation.assetType" matInput></p>
+              <p><span class="item-title-span">Default<br>Thumbnail :</span> 
+                <span>
+                  <ul>
+                    <P><span class="item-title-span">Path :</span><input [(ngModel)]="shell.assetInformation.defaultThumbnail.path" matInput></P>
+                    <P><span class="item-title-span">ContentType :</span><input [(ngModel)]="shell.assetInformation.defaultThumbnail.contentType" matInput></P>
+                  </ul>
+                </span>
+              </p>
+            </ul>
+          </span>
+        </p>
+        <p><span class="item-title-span">Extensions :</span>
+          <textarea #extensionsTextarea
+            [value]="jsonFields['extensions']"
+            (change)="onJsonFieldChange('extensions', extensionsTextarea.value)"
+            matInput
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="10">
+          </textarea>
+        <p><span class="item-title-span">Category :</span> <input [(ngModel)]="shell.category" matInput></p>
+        <p><span class="item-title-span">EmbeddedData<br>Specifications :</span>
+          <textarea #embeddedDataSpecificationsTextarea
+            [value]="jsonFields['embeddedDataSpecifications']"
+            (change)="onJsonFieldChange('embeddedDataSpecifications', embeddedDataSpecificationsTextarea.value)"
+            matInput
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="10">
+          </textarea>
+        </p>
+        <p *ngIf="shell.derivedFrom">DerivedFrom :
+          <span>
+            <ul>
+              <p><span class="item-title-span-short">Type :</span>
+                <mat-select [(ngModel)]="shell.derivedFrom.type">
+                  <mat-option *ngFor="let derivedFromType of derivedFromTypes " [value]="derivedFromType.id">
+                    {{derivedFromType.name}}
+                  </mat-option>
+                </mat-select>
+              </p>
+              <p><span class="item-title-span-short">Keys :</span>
+                <textarea #derivedFromKeysTextarea
+                  [value]="jsonFields['derivedFrom.keys']"
+                  (change)="onJsonFieldChange('derivedFrom.keys', derivedFromKeysTextarea.value)"
+                  matInput
+                  cdkTextareaAutosize
+                  cdkAutosizeMinRows="1"
+                  cdkAutosizeMaxRows="10">
+                </textarea>
+              </p>
+            </ul>
+          </span>
+        </p>
+        <p><span class="item-title-span">ModelType : </span><input [(ngModel)]="shell.modelType" matInput></p>
+        <p><span class="item-title-span">Submodels : </span>
+          <!-- <span *ngIf="isUpdateMode">
+            <button (click)="onReferenceToExistingSubmodel()" color="accent" mat-stroked-button>
+              <mat-icon>add</mat-icon> Reference to existing Submodel
+            </button>
+            <button (click)="onCreateNewSubmodel()" color="accent" mat-stroked-button>
+              <mat-icon>add</mat-icon> Create new Submodel
+            </button>
+          </span> -->
+          <input [(ngModel)]="newReferSubmodelId" matInput>
+          <button (click)="onAddNewReferSubmodel()" color="accent" mat-stroked-button>
+            <mat-icon>add</mat-icon> Add this Submodel
+          </button>
+        </p>
+        <ul *ngFor="let submodel of shell.submodels" class="ul-submodels">
+            <a
+              class="link"
+              href="javascript:void(0)"
+              (click)="onShowSubmodelEditorDialog(submodel.keys[0]?.value)">
+              {{submodel.keys[0]?.value}}
+            </a>
+            <button (click)="onRemoveReferSubmodel(submodel.keys[0]?.value)" color="accent" mat-stroked-button>
+              <mat-icon>remove</mat-icon> Remove
+            </button>
+        </ul>
+      </div>
+      <div class="image-section" *ngIf="shell$ | async as shell">
+        <span><shell-thumbnail-viewer [id]="shell.id" [imageWidth]="300" [imageHeight]="300"></shell-thumbnail-viewer></span>
+        <div *ngIf="this.shellThumbnailViewerComponent?.image_url">
+          <input type="file" (change)="onFileSelected($event)" accept="image/*">
+          <button (click)="uploadFile()">Upload Thumbnail</button>
+          <p *ngIf="uploadStatus">{{ uploadStatus }}</p>
+        </div>
+      </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <div *ngIf="!isUpdateMode">
+      <button (click)="onSave()" color="accent" mat-stroked-button>
+        <mat-icon>add_circle_outline</mat-icon> Save
+    </button>
+    </div>
+    <div *ngIf="isUpdateMode">
+      <button (click)="onSave()" color="accent" mat-stroked-button>
+        <mat-icon>save</mat-icon> Update
+      </button>
+    </div>
+    <button (click)="onCancel()"  color="accent" mat-dialog-close mat-stroked-button>
+        <mat-icon>cancel</mat-icon> Cancel
+    </button>
+</mat-dialog-actions>

@@ -1,0 +1,54 @@
+#wrapper {
+  margin: 20px;
+}
+
+.shell-descriptor-card {
+  width: 400px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  background-color: #89B7C6;
+}
+
+.main-property-icon {
+  font-size: 12px;
+}
+
+.search-form-field {
+  min-width: 200px;
+  width: 30%;
+  margin-top: 18px;
+}
+
+.card-actions {
+  margin-left: 0;
+}
+
+.shell-descriptor-property {
+  font-weight: bold !important;
+}
+
+mat-paginator {
+  display: inline-block;
+  background-color: transparent;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Adjust the gap between elements */
+}
+
+.mdc-button {    
+  margin: 10px;
+}
+
+.shell-descriptors-table-header th {
+  font-weight: bold;
+  background-color: #89B7C6;
+}
+
+.table-header-container{
+  gap: 10px;
+  display: flex;
+  align-items: center;
+}

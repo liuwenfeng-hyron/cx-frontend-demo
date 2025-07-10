@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>EDR Info and RealData</h1>
+<mat-divider></mat-divider>
+<mat-dialog-content>
+  <div *ngIf="edrinfo">
+    <!--<div>{{ edrinfo | json }}</div> -->
+    <h3>Transfer ID</h3>
+    <div>{{id}}</div>
+    <h3>Endpoint</h3>
+    <!--<textarea class="endpoint">{{ edrinfo['https://w3id.org/edc/v0.0.1/ns/endpoint'][0]['@value'] }}</textarea>-->
+    <textarea class="endpoint">{{ edrinfo.optionalValue('edc','endpoint') }}</textarea>
+    <h3>Authorization</h3>
+    <!--<textarea>{{ edrinfo['https://w3id.org/edc/v0.0.1/ns/authorization'][0]['@value'] }}</textarea>-->
+    <textarea class="endpoint">{{ edrinfo.optionalValue('edc','authorization') }}</textarea>
+    <h3>AuthType</h3>
+    <!--<div>{{ edrinfo['https://w3id.org/edc/v0.0.1/ns/authType'][0]['@value'] }}</div>-->
+    <div>{{ edrinfo.optionalValue('edc','authType')  }}</div>
+  </div>
+  <div *ngIf="realData">
+    <h3>RealData</h3>
+    <textarea class="realData">{{ realData }}</textarea>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button color="accent" mat-dialog-close mat-stroked-button>
+        <mat-icon>cancel</mat-icon> Cancel
+    </button>
+</mat-dialog-actions>

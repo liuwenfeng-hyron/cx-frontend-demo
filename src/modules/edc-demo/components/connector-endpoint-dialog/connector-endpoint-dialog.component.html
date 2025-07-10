@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Connector List</h1>
+<mat-divider></mat-divider>
+<mat-dialog-content>
+    <div *ngIf="connectorinfo">
+        <table class="tb-connectorinfo">
+            <thead>
+                <tr>
+                    <th class="td-bpn">BPN</th>
+                    <th>Connector Endpoint</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let info of connectorinfo">
+                    <td>{{ info["bpn"] }}</td>
+                    <td>
+                        <ul *ngFor='let endpoint of info["connectorEndpoint"]'>
+                            <span class="span-endpoint">{{ endpoint }}</span><button (click)='onSelect(info["bpn"], endpoint)' color="accent" mat-stroked-button>Select</button>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button color="accent" mat-dialog-close mat-stroked-button>
+        <mat-icon>cancel</mat-icon> Cancel
+    </button>
+</mat-dialog-actions>

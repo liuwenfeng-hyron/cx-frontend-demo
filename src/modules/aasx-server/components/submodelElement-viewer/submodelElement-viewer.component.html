@@ -1,0 +1,35 @@
+ <table mat-table [dataSource]="dataSource" class="submodelElements-table">
+  <ng-container matColumnDef="idShort">
+      <th mat-header-cell *matHeaderCellDef scope="col">Item</th>
+      <td mat-cell *matCellDef="let item" class="td-idShort">{{item.idShort}}</td>
+  </ng-container>
+  <ng-container matColumnDef="value">
+    <th mat-header-cell *matHeaderCellDef scope="col">Value</th>
+    <td mat-cell *matCellDef="let item">
+      <ng-container [ngSwitch]="item.modelType">
+        <submodel-element-table *ngSwitchCase="'SubmodelElementList'" [dataSource]="item.value" [isReadOnly]="isReadOnly"></submodel-element-table>
+        <submodel-element-table *ngSwitchCase="'SubmodelElementCollection'" [dataSource]="item.value" [isReadOnly]="isReadOnly"></submodel-element-table>
+        <div *ngSwitchDefault >
+          <div *ngIf="!isReadOnly">
+            <ng-container [ngSwitch]="item.valueType">
+              <input *ngSwitchCase="'xs:dateTime'" type="datetime-local" [(ngModel)]="item.value" matInput>
+              <input *ngSwitchCase="'xs:float'" type="number" [ngModel]="item.value?.toString()" (ngModelChange)="item.value = $event.toString()" step="0.1" matInput>
+              <input *ngSwitchCase="'xs:decimal'" type="number" [ngModel]="item.value?.toString()" (ngModelChange)="item.value = $event.toString()" step="0.1" matInput>
+              <input *ngSwitchDefault [(ngModel)]="item.value" matInput>
+            </ng-container>            
+            <span *ngIf="item.valueType" class="td-value-span">( {{item.valueType}} )</span>
+          </div>
+          <div *ngIf="isReadOnly">
+            <span class="td-value-span">{{item.value}}</span>
+          </div>
+        </div>
+      </ng-container>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="valueType">
+      <th mat-header-cell *matHeaderCellDef scope="col">ValueType</th>
+      <td mat-cell *matCellDef="let item">{{item.valueType}}</td>
+  </ng-container>
+  <!-- <tr mat-header-row *matHeaderRowDef="columns" class="submodelElements-table-header"></tr> -->
+  <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+</table>

@@ -1,0 +1,7 @@
+<div *ngIf="isLoggedIn">
+  <span style="padding-right:30px">{{ username }}</span>
+  <img src="assets/signout-icon.jpg" alt="sign out" class="signoutbtn" (click)="logout()"/>
+</div>
+<div *ngIf="!isLoggedIn">
+  <h2>Please log in</h2>
+</div>

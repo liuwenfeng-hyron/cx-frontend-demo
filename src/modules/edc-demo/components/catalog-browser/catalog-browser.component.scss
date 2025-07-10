@@ -1,0 +1,64 @@
+#wrapper {
+  margin: 20px;
+}
+
+.asset-card {
+  width: 31%;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  background-color: #89B7C6;
+  
+}
+
+.main-property-icon {
+  font-size: 12px;
+}
+
+:host ::ng-deep div.mat-expansion-panel-body {
+  padding-left: 0 !important;
+}
+
+.search-form-field {
+  min-width: 200px;
+  width: 50%;
+  margin-top: 2px;
+}
+
+.search-form-field-endpoints {
+  min-width: 200px;
+  width: 50%;
+  margin-top: 8px;
+}
+
+.search-form-field-bpn {
+  min-width: 200px;
+  width: 30%;
+  margin-top: 8px;
+}
+
+
+.card-actions {
+  margin-left: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.asset-property-name {
+  font-weight: bold !important;
+}
+
+.asset-property-constraint {
+  font-weight: bold !important;
+  margin-bottom: -30px;
+}
+
+mat-paginator {
+  display: inline-block;
+  background-color: transparent;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

@@ -1,0 +1,71 @@
+<div id="wrapper">
+    <div *ngIf="filteredShells$ | async as filteredShells" >
+      <!-- Search Bar -->
+      <mat-form-field class="search-form-field" color="accent">
+        <mat-label>Search by IdShort</mat-label>
+        <input (input)="onSearch()" [(ngModel)]="searchText" matInput>
+        <mat-icon matPrefix>search</mat-icon>
+        <button (click)="searchText=''; onSearch()" *ngIf="searchText" mat-icon-button matSuffix>
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <!-- paginator -->
+      <mat-paginator [length]="(filteredShells)?.length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons (page)="onPageChange($event)"> </mat-paginator>
+      <button (click)="onCreate()" color="primary" mat-raised-button  class="action-button">
+        Create
+      </button>
+      <table mat-table [dataSource]="filteredShells | slice: offset : (offset + pageSize)" class="mat-elevation-z8">
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef scope="col">Id</th>
+            <td mat-cell *matCellDef="let item">
+                <a
+                  class="link"
+                  href="javascript:void(0)"
+                  (click)="onShowDetail(item.id)">
+                  {{item.id}}
+                </a>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="idShort">
+            <th mat-header-cell *matHeaderCellDef scope="col">IdShort</th>
+            <td mat-cell *matCellDef="let item">{{item.idShort}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="thumbnail">
+            <th mat-header-cell *matHeaderCellDef scope="col">Thumbnail</th>
+            <td mat-cell *matCellDef="let item"><shell-thumbnail-viewer [id]="item.id"></shell-thumbnail-viewer></td>
+        </ng-container>
+
+        <ng-container matColumnDef="assetKind">
+            <th mat-header-cell *matHeaderCellDef scope="col">AssetKind</th>
+            <td mat-cell *matCellDef="let item">{{item.assetInformation.assetKind}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="submodelCount">
+            <th mat-header-cell *matHeaderCellDef scope="col">SubmodelCount</th>
+            <td mat-cell *matCellDef="let item">{{item.submodels.length}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="modelType">
+            <th mat-header-cell *matHeaderCellDef scope="col">ModelType</th>
+            <td mat-cell *matCellDef="let item">{{item.modelType}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef scope="col">Actions</th>
+          <td mat-cell *matCellDef="let item" class="singleline-cell">
+            <button (click)="onUpdate(item.id)" color="primary" mat-raised-button  class="action-button">
+              Edit
+            </button>
+            <button (click)="onDelete(item.id)" color="warn" mat-raised-button  class="action-button">
+              Delete
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns" class="shells-table-header"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    </div>
+</div>
