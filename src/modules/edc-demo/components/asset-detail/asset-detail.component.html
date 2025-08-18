@@ -2,18 +2,34 @@
 <mat-divider></mat-divider>
 
 <mat-dialog-content>
-  <h3>Id</h3>
-  <div> {{ asset.id }} </div>
-  <h3>Name</h3>
-  <div> {{ asset.properties.optionalValue('edc','name') }} </div>
-  <h3>Content Type</h3>
-  <div> {{ asset.properties.optionalValue('edc','contenttype') }} </div>
-  <h3>Version</h3>
-  <div> {{ asset.properties.optionalValue('edc','version') }}  </div>
-  <h3>BaseUrl</h3>
-  <div> {{ asset.dataAddress.optionalValue('edc','baseUrl') }} </div>
-  <h3>Destination</h3>
-  <div> {{ asset.dataAddress.optionalValue('edc','type') }} </div>
+  <div class="row">
+      <span class="label">Id</span>
+      <span class="value">{{ asset.id }}</span>
+  </div>
+  <div class="row">
+      <span class="label">Name</span>
+      <span class="value">{{ asset.properties.optionalValue('edc','name') }}</span>
+  </div>
+  <div class="row">
+      <span class="label">Type</span>
+      <span class="value">{{ getOptionalValue(asset.properties["http://purl.org/dc/terms/type"])}}</span>
+  </div>
+  <div class="row">
+      <span class="label">Content Type</span>
+      <span class="value">{{ asset.properties.optionalValue('edc','contenttype') }}</span>
+  </div>
+  <div class="row">
+      <span class="label">Version</span>
+      <span class="value">{{ asset.properties.optionalValue('edc','version') }}</span>
+  </div>
+  <div class="row">
+      <span class="label">BaseUrl</span>
+      <span class="value">{{ asset.dataAddress.optionalValue('edc','baseUrl') }}</span>
+  </div>
+  <div class="row">
+      <span class="label">Destination</span>
+      <span class="value">{{ asset.dataAddress.optionalValue('edc','type') }}</span>
+  </div>
 </mat-dialog-content>
 
 <mat-dialog-actions>

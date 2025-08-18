@@ -12,6 +12,7 @@ import {ContractNegotiation, ContractNegotiationRequest} from "../../../mgmt-api
 import {environment} from '../../../../environments/environment';
 import {ConnectorEndpointDialog} from "../connector-endpoint-dialog/connector-endpoint-dialog.component";
 import {AssetType} from '../../models/asset-type';
+import {AppConfigService, AppConfig} from "../../../app/app-config.service";
 
 interface RunningTransferProcess {
   processId: string;
@@ -28,6 +29,7 @@ export class CatalogBrowserComponent implements OnInit {
 
   filteredContractOffers$: Observable<ContractOffer[]> = of([]);
   searchText = '';
+  config?: AppConfig;
   customProviders = '';
   presetProvidersMessage = '';
   counterPartyId = '';
@@ -39,6 +41,7 @@ export class CatalogBrowserComponent implements OnInit {
   private pollingHandleNegotiation?: any;
 
   constructor(private apiService: CatalogBrowserService,
+              private configService: AppConfigService,
               public dialog: MatDialog,
               private router: Router,
               private notificationService: NotificationService,
@@ -47,9 +50,12 @@ export class CatalogBrowserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.customProviders = environment.counterPartyAddress;
+    this.config = this.configService.getConfig();
+    // this.customProviders = environment.counterPartyAddress;
+    this.customProviders = this.config?.counterPartyAddress || '';
     this.presetProvidersMessage = this.customProviders;
-    this.counterPartyId = environment.counterPartyId;
+    // this.counterPartyId = environment.counterPartyId;
+    this.counterPartyId = this.config?.counterPartyId || '';
     this.filteredContractOffers$ = this.fetch$
       .pipe(
         switchMap(() => {
@@ -181,7 +187,8 @@ export class CatalogBrowserComponent implements OnInit {
     let conectorEndpointUrl = this.customProviders;
     if(conectorEndpointUrl 
       && ''!==conectorEndpointUrl
-      && !conectorEndpointUrl.endsWith("/api/v1/dsp")) {
+      && !conectorEndpointUrl.endsWith("/api/v1/dsp")
+      && !conectorEndpointUrl.endsWith("/dsp")) {
       if(conectorEndpointUrl.endsWith("/")) {
         conectorEndpointUrl = conectorEndpointUrl + "api/v1/dsp";
       } else {

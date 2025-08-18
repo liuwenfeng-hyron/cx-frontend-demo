@@ -1,8 +1,33 @@
 {
+  "cofinityXcentralidpUrl": "/beta/cofinityXcentralidp",
+  "cofinityX_client_id": "sa837",
+  "cofinityX_grant_type": "client_credentials",
+  "cofinityX_client_secret": "fl8lgK3uOCz3suAN07q0vSAyifuW9OEo",
+  "cofinityXbackendUrl": "/beta/cofinityXbackend",
+
   "apiKey": "password",
-  "managementApiUrl": "http://localhost:4200/bob/management",
-  "catalogUrl": "http://localhost:4200/bob/management",
-  "storageAccount": "company2assets",
-  "storageExplorerLinkTemplate": "storageexplorer://v=1",
-  "theme": "theme-2"
+  "managementApiUrl": "/beta/edc/management",
+  "catalogUrl": "/beta/edc/management",
+  "dataPlaneProxyApiUrl": "/beta/edc/proxy",
+
+  "counterPartyAddress": "{{COUNTER_PARTY_ADDRESS}}",
+  "counterPartyId": "{{COUNTER_PARTY_ID}}",
+  "theme": "theme-4",  
+
+  "keycloak_url": "{{KEYCLOAK_URL}}",
+  "keycloak_realm": "{{KEYCLOAK_REALM}}",
+  "keycloak_clientId": "{{KEYCLOAK_CLIENT_ID}}",
+
+  "backendServerUrl": "/beta/backendServer",
+
+  "dtrUrl": "/beta/dtr",
+  "dtrTenant": "TENANT_ONE",
+
+  "assxServerUrl": "/beta/assxServer",
+
+  "storageAccount": "",
+  "storageExplorerLinkTemplate": "",
+  "enddpointOverride": "",
+  "receiverHttpEndpoint": "",
+  "production": ""
 }

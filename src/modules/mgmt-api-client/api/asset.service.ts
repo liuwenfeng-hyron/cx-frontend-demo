@@ -17,13 +17,16 @@ import { Observable, from }                                        from 'rxjs';
 
 import { EdcConnectorClient } from '@think-it-labs/edc-connector-client';
 import { AssetInput, Asset, IdResponse, QuerySpec } from "../model"
+import {AssetController} from "../../mgmt-api-client";
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AssetService {
 
-    private assets = this.edcConnectorClient.management.assets;
+    // private assets = this.edcConnectorClient.management.assets;
+    private assets = new AssetController(this.edcConnectorClient.createContext(environment.apiKey, this.edcConnectorClient.addresses));
       
     constructor(private edcConnectorClient: EdcConnectorClient) {
     }

@@ -11,7 +11,6 @@ import {Submodel} from '../../models/submodel';
   styleUrls: ['./submodel-detail.component.scss']
 })
 export class SubmodelDetail implements OnInit {
-  columns: string[] = ['idShort', 'value', 'valueType', 'modelType'];
   submodel$: Observable<Submodel> = of();
 
   constructor(private apiService: SubmodelService, private payloadService: PayloadService, @Inject(MAT_DIALOG_DATA) id:string) {
@@ -22,7 +21,7 @@ export class SubmodelDetail implements OnInit {
 
   }
 
-  getPayload(apiResponse:any): { [key: string]: any }[]  {
-    return this.payloadService.extractPayload(apiResponse);
-  }
+  // getPayload(apiResponse:any): { [key: string]: any }[]  {
+  //   return this.payloadService.extractPayload(apiResponse);
+  // }
 }

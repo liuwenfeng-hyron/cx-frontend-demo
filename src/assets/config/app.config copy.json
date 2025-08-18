@@ -1,0 +1,33 @@
+{
+  "cofinityXcentralidpUrl": "/beta/cofinityXcentralidp",
+  "cofinityX_client_id": "sa837",
+  "cofinityX_grant_type": "client_credentials",
+  "cofinityX_client_secret": "fl8lgK3uOCz3suAN07q0vSAyifuW9OEo",
+  "cofinityXbackendUrl": "/beta/cofinityXbackend",
+
+  "apiKey": "password",
+  "managementApiUrl": "/beta/edc/management",
+  "catalogUrl": "/beta/edc/management",
+  "dataPlaneProxyApiUrl": "/beta/edc/proxy",
+
+  "counterPartyAddress": "https://edc.hk.us.nri-caas.com/api/v1/dsp",
+  "counterPartyId": "BPNL0000000MOUR8",
+  "theme": "theme-4",  
+
+  "keycloak_url": "https://idp.us.nri-caas.com:8443/",
+  "keycloak_realm": "demoEDC",
+  "keycloak_clientId": "demoNri",
+
+  "backendServerUrl": "/beta/backendServer",
+
+  "dtrUrl": "/beta/dtr",
+  "dtrTenant": "TENANT_ONE",
+
+  "assxServerUrl": "/beta/assxServer",
+
+  "storageAccount": "",
+  "storageExplorerLinkTemplate": "",
+  "enddpointOverride": "",
+  "receiverHttpEndpoint": "",
+  "production": ""
+}

@@ -73,7 +73,7 @@ export class AasxPackagesViewerComponent implements OnInit {
   }
 
   onDownload(id: string) {
-    
+    this.apiService.downloadPackage(id);
   }
 
   onUpdate(id: string) {

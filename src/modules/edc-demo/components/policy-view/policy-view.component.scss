@@ -31,6 +31,12 @@ mat-paginator {
 }
 
 .mat-mdc-list-item-title {
-  margin-bottom: -18px;
+  margin-bottom: -10px;
+  height: 35px;
+}
+
+.mat-mdc-list-item-line {
+  margin-top: 5px;
+  margin-bottom: 3px;
   height: 30px;
 }

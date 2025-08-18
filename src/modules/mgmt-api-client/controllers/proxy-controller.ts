@@ -47,4 +47,36 @@ export class ProxyController {
       const response = await fetch(request);
       return response.text();
   }
+
+  async requestBlob(query = {}, context?: EdcConnectorClientContext): Promise<Blob> {
+    const baseUrl = environment.dataPlaneProxyApiUrl;
+    const apiToken = environment.apiKey;
+    const innerRequest : InnerRequest = {
+        path: `${this.#basePath}`,
+        method: "POST",
+        apiToken: apiToken,
+        body:
+          Object.keys(query).length === 0
+            ? null
+            : {
+                ...query,
+                "@context": JSON_LD_DEFAULT_CONTEXT,
+              },
+      };
+
+      const url = `${baseUrl}${innerRequest.path}`;
+
+      const method = innerRequest.method;
+      const request = new Request(url, {
+        method,
+        headers: {
+          "Content-type": "application/json",
+          "X-Api-Key": innerRequest.apiToken ?? "",
+        },
+        body: innerRequest.body ? JSON.stringify(innerRequest.body) : undefined,
+      });
+  
+      const response = await fetch(request);
+      return response.blob();
+  }
 }

@@ -1,4 +1,4 @@
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpResponse, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {EMPTY, Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
@@ -67,6 +67,15 @@ export class AasxHttpClient {
     const url = baseUrl + `${urlPath}`;
     let headers = new HttpHeaders({"Content-type": "application/json"});
     return this.httpClient.delete<T>(url, {headers});
+  }
+
+  public downloadFile(urlPath: string): Observable<HttpResponse<Blob>> {
+    let baseUrl = environment.assxServerUrl;
+    const url = baseUrl + `${urlPath}`;
+    return this.httpClient.get(url, {
+      responseType: 'blob',
+      observe: 'response'
+    });
   }
 
   private catchError<T>(observable: Observable<T>, url: string, method: string): Observable<T> {

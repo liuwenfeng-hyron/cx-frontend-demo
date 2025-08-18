@@ -1,0 +1,40 @@
+<div id="wrapper">
+    <div>
+      <span class="searchCond">
+        <mat-label>Search By BPN : </mat-label>
+        <input type="text" [(ngModel)]="searchCond.bpn" matInput>
+      </span>
+      <button (click)="onSearch()" color="primary" mat-raised-button  class="action-button">
+          Search
+        </button>
+      <button (click)="onCreate()" color="primary" mat-raised-button  class="action-button">
+        Create
+      </button>
+    </div>
+    <div *ngIf="transferIdRecord$ | async as transferIdRecord" >
+      <table mat-table [dataSource]="transferIdRecord" class="mat-elevation-z8">
+        <ng-container matColumnDef="transferId">
+            <th mat-header-cell *matHeaderCellDef scope="col">Transfer Id</th>
+            <td mat-cell *matCellDef="let item">
+              <a
+                class="link"
+                href="javascript:void(0)"
+                (click)="onUpdate(item)">
+                {{item.transferId}}
+              </a>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="bpn">
+            <th mat-header-cell *matHeaderCellDef scope="col">BPN</th>
+            <td mat-cell *matCellDef="let item">{{item.bpn}}</td>
+        </ng-container>
+        <ng-container matColumnDef="edcUrl">
+            <th mat-header-cell *matHeaderCellDef scope="col">EDC Url</th>
+            <td mat-cell *matCellDef="let item">{{item.edcUrl}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns" class="table-header"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+      </table>
+    </div>
+</div>

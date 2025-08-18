@@ -1,4 +1,4 @@
-import {HttpParams} from '@angular/common/http';
+import {HttpParams, HttpResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {EMPTY, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -67,15 +67,38 @@ export class AasxPackageService {
     }
   }
 
-  downloadPackage(id: string): Observable<Blob> {
-    let httpParams = new HttpParams();
+  downloadPackage(id: string) {
     let idBase64 = ''
 
     if(id) {
       idBase64 = btoa(id);
-      return this.aasxHttpClient.getBlob<any>("/packages/" + idBase64, httpParams);
-    } else {
-      return EMPTY;
+      this.aasxHttpClient.downloadFile("/packages/" + idBase64).subscribe((response: HttpResponse<Blob>) => {
+        if(response.body) {
+          const blob: Blob = response.body;
+          const headers = response.headers;
+          const xFileName = headers.get('X-FileName');
+
+          if (xFileName) {
+            console.log('FileName:', xFileName);
+            this.downloadBlob(blob, xFileName);
+          } else {
+            console.warn('X-FileName Header Not Found');
+          }
+        } else {
+          console.error('response is null');
+        }        
+      });
     }
-  }  
+  }
+
+  downloadBlob(blob: Blob, fileName: string) {
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+  }
 }

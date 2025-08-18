@@ -34,6 +34,11 @@
             <div matListItemLine>{{asset.properties.optionalValue('edc','name')}}</div>
           </mat-list-item>
           <mat-list-item>
+            <mat-icon matListItemIcon>info</mat-icon>
+            <div class="asset-property" matListItemTitle>Type</div>
+            <div>{{getOptionalValue(asset.properties["http://purl.org/dc/terms/type"])}}</div>
+          </mat-list-item>
+          <mat-list-item>
             <mat-icon matListItemIcon>category</mat-icon>
             <div class="asset-property" matListItemTitle>Content Type</div>
             <div matListItemLine>{{asset.properties.optionalValue('edc','contenttype')}}</div>

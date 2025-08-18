@@ -1,3 +1,15 @@
 mat-dialog-content {
     width: 800px;
 }
+
+.row {
+    margin-bottom: 8px;
+}
+.label {
+    display: inline-block;
+    width: 150px;
+    font-weight: bold;
+}
+.value {
+    display: inline-block;
+}

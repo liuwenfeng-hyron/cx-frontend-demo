@@ -18,7 +18,7 @@ export class NewPolicyDialogComponent implements OnInit {
   policyDefinition= {
     "policy": this.policy,
     "id": '',
-    "@id": ''
+    "@id": ''    
   };
 
   policyTypeId: string = '';
@@ -53,9 +53,7 @@ export class NewPolicyDialogComponent implements OnInit {
     }
 
     this.policy["@context"]="http://www.w3.org/ns/odrl.jsonld"
-
-
-    this.dialogRef.close({
+     this.dialogRef.close({
 
       policy : this.policyDefinition.policy,
       '@id': this.policyDefinition.id

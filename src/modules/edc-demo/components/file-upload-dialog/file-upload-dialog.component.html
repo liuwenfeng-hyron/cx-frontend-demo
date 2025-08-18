@@ -1,0 +1,27 @@
+<mat-dialog-content>
+  <!--<div>
+    <input type="checkbox" [(ngModel)]="autoLinkToEdc"> <span>Auto Send File</span>
+  </div>-->
+  <br>
+  <div>
+    <input type="file" (change)="onFileSelected($event)" accept=".json"> <button (click)="uploadFile()">Upload</button>
+  </div>
+  <div>
+    <p *ngIf="uploadStatus">{{ uploadStatus }}</p>
+    <div *ngIf="response">
+      <p *ngIf="response.result.fileName">fileName: {{ response.result.fileName }}</p>
+      <p *ngIf="response.result.url" class="form-field">url:{{ response.result.url }}</p>
+      <p *ngIf="response.result.uploadTime">uploadTime:{{ response.result.uploadTime }}</p>
+      <p *ngIf="response.message">message:{{ response.message }}</p>
+    </div>
+    <div *ngIf="err">
+      <p *ngIf="err.error.message">{{ err.error.message }}</p>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button (click)="onCancel()"  color="accent" mat-dialog-close mat-stroked-button>
+        <mat-icon>cancel</mat-icon> Cancel
+    </button>
+</mat-dialog-actions>

@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import {FileUploadViewer} from '../edc-demo/components/file-upload/file-upload-viewer.component';
 import {AssetViewerComponent} from '../edc-demo/components/asset-viewer/asset-viewer.component';
 import {CatalogBrowserComponent} from '../edc-demo/components/catalog-browser/catalog-browser.component';
 import {IntroductionComponent} from '../edc-demo/components/introduction/introduction.component';
@@ -10,6 +11,7 @@ import {PartnerGroupsViewerComponent} from '../edc-demo/components/partner-group
 import {
   TransferHistoryViewerComponent
 } from '../edc-demo/components/transfer-history/transfer-history-viewer.component';
+import {TransferIdViewer} from '../edc-demo/components/transfer-id/transfer-id-viewer.component';
 import {PolicyViewComponent} from "../edc-demo/components/policy-view/policy-view.component";
 import {ContractViewerComponent} from "../edc-demo/components/contract-viewer/contract-viewer.component";
 //import {DashboardComponent} from '../edc-demo/components/dashboard/dashboard.component';
@@ -27,6 +29,11 @@ export const routes: Routes = [
   {
     path: 'groupTitle',
     data: {title: 'PROVIDING'}
+  },
+  {
+    path: 'file-upload',
+    component: FileUploadViewer,
+    data: {title: 'FileUpload', icon: 'upload'}
   },
   {
     path: 'my-assets', // must not be "assets" to prevent conflict with assets directory
@@ -67,7 +74,16 @@ export const routes: Routes = [
     path: 'transfer-history',
     component: TransferHistoryViewerComponent,
     data: {title: 'Transfer History', icon: 'assignment'}
-  },  
+  },
+  {
+    path: 'groupTitle',
+    data: {title: 'SYSTEM CONFIG'}
+  },
+  {
+    path: 'transfer-id',
+    component: TransferIdViewer,
+    data: {title: 'Transfer Id Config', icon: 'assignment'}
+  },
   {
     path: 'groupTitle',
     data: {title: 'AASX SERVER'}

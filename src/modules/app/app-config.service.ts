@@ -1,17 +1,41 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-
+import { lastValueFrom } from 'rxjs';
 import {environment} from '../../environments/environment';
 
 export interface AppConfig {
-  // Added By Lujianzhou On 20250123 Start
-  dataPlaneProxyApiUrl: string;
-  // Added By Lujianzhou On 20250123 End
-  managementApiUrl: string;
-  catalogUrl: string;
+  // 1.cofinityX(beta)
+  cofinityXcentralidpUrl:  string;
+  cofinityX_client_id:  string;
+  cofinityX_grant_type:  string;
+  cofinityX_client_secret:  string;
+  cofinityXbackendUrl:  string;
+  // 2.EDC
+  apiKey:  string;
+  managementApiUrl:  string;
+  catalogUrl:  string;
+  dataPlaneProxyApiUrl:  string;
+  // 3.Dashboard
+  counterPartyAddress:  string;
+  counterPartyId:  string;
+  theme:  string;
+  // 4.keycloak
+  keycloak_url: string;
+  keycloak_realm: string;
+  keycloak_clientId: string;
+  // 5.NRI backend
+  backendServerUrl: string;
+  // 6.DTR
+  dtrUrl: string;
+  dtrTenant: string;
+  // 7.assxServer
+  assxServerUrl: string;
+
   storageAccount: string;
   storageExplorerLinkTemplate: string;
-  theme: string;
+  enddpointOverride: string;
+  receiverHttpEndpoint: string;
+  production: boolean
 }
 
 @Injectable({
@@ -19,32 +43,19 @@ export interface AppConfig {
 })
 export class AppConfigService {
   config?: AppConfig;
-  edcId: string | null ='';  
   constructor(private http: HttpClient) {}
 
-  loadConfig(): void /* Promise<void> */ {
-/*    return this.http
-      .get<AppConfig>('/assets/config/app.config.json')
-      .toPromise()
-      .then(data => {
-        this.config = data;
-      });
-     */
-    this.config = environment
-    console.log(this.config.managementApiUrl)
-    // temp test 2025.1.24 start
-    //localStorage.setItem('edcId', 'edc001'); // do it in edc Management page
-    
-    this.edcId = localStorage.getItem('edcId');
-    console.log('edcId:' + this.edcId);
-    // doto get edcInfo from DB by edcId
+  // loadConfig2(): void /* Promise<void> */ {
+  //   this.config = environment
+  //   console.log(this.config.managementApiUrl)
+  // }
 
-    // temp test 2025.1.24 end
-    /*this.config.managementApiUrl = environment.managementApiUrl;
-    this.config.catalogUrl = environment.catalogUrl;
-    this.config.storageAccount = environment.storageAccount;
-    this.config.storageExplorerLinkTemplate = environment.storageExplorerLinkTemplate;
-    this.config.theme = environment.theme;*/
+  async loadConfig(): Promise<AppConfig> {
+    const data = await lastValueFrom(
+      this.http.get<AppConfig>('/assets/config/app.config.json')
+    );
+    this.config = data;
+    return this.config;
   }
 
   getConfig(): AppConfig | undefined {

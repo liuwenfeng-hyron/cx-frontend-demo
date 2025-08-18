@@ -26,6 +26,19 @@
     </mat-form-field>
   </div>
   <div>
+    <!-- Asset Type -->
+    <mat-form-field
+      class="form-field form-field-assetTypes" color="accent" matBadgeColor="warn"
+      >
+      <mat-label>Asset Type</mat-label>
+      <mat-select (selectionChange)="onAssetTypeChange()" [(ngModel)]="assetTypeId">
+        <mat-option *ngFor="let assetType of assetTypes " [value]="assetType.id">
+          {{assetType.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div>
     <mat-form-field class="form-field form-field-baseUrl" color="accent" id="form-field-baseUrl">
       <mat-label>baseUrl</mat-label>
       <input [(ngModel)]="baseUrl" matInput>
@@ -39,6 +52,10 @@
           {{storageType.name}}
         </mat-option>
       </mat-select>
+    </mat-form-field>
+    <mat-form-field class="form-field" color="accent" id="form-field-semanticId">
+      <mat-label>semanticId</mat-label>
+      <input [(ngModel)]="semanticId" matInput>
     </mat-form-field>
     <!--
     <mat-form-field class="form-field" color="accent" id="form-field-account">

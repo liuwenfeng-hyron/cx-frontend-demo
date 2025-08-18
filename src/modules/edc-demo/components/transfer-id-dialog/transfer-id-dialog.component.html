@@ -1,0 +1,34 @@
+<mat-dialog-content>
+  <div>
+    <mat-form-field class="form-field" color="accent">
+      <mat-label>TransferId</mat-label>
+      <input [(ngModel)]="transferIdInput.transferId" matInput>
+    </mat-form-field>
+
+    <mat-form-field class="form-field" color="accent">
+      <mat-label>bpn</mat-label>
+      <input [(ngModel)]="transferIdInput.bpn" matInput >
+    </mat-form-field>
+
+    <mat-form-field class="form-field" color="accent">
+      <mat-label>edcUrl</mat-label>
+      <input [(ngModel)]="transferIdInput.edcUrl" matInput>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <div *ngIf="!isEditMode">
+      <button (click)="onSave()" color="accent" mat-stroked-button>
+        <mat-icon>add_circle_outline</mat-icon> Create
+      </button>
+    </div>
+    <div *ngIf="isEditMode">
+      <button (click)="onUpdate()" color="accent" mat-stroked-button>
+        <mat-icon>save</mat-icon> Update
+      </button>
+    </div>
+    <button color="accent" mat-dialog-close mat-stroked-button>
+        <mat-icon>cancel</mat-icon> Cancel
+    </button>
+</mat-dialog-actions>

@@ -22,6 +22,11 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
+    <div *ngIf="edrinfo">
+      <button (click)="onDowndload()" color="accent" mat-stroked-button>
+        <mat-icon>save</mat-icon> Downdload
+      </button>
+    </div>
     <button color="accent" mat-dialog-close mat-stroked-button>
         <mat-icon>cancel</mat-icon> Cancel
     </button>

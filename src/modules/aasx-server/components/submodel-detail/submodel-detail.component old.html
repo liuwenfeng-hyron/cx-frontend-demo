@@ -1,0 +1,52 @@
+<h1 mat-dialog-title>Submodel Detail</h1>
+<mat-divider></mat-divider>
+
+<div *ngIf="submodel$ | async as submodel">
+  <mat-tab-group>
+    <mat-tab label="payload">
+      <mat-dialog-content>
+        <p>Id : {{submodel.id}}</p>
+        <p>IdShort: {{submodel.idShort}}</p>
+        <p>Kind : {{submodel.kind}}</p>
+        <p>SubmodelElements :</p>
+        <table mat-table [dataSource]="submodel.submodelElements" class="submodelElements-table">
+          <ng-container matColumnDef="idShort">
+              <th mat-header-cell *matHeaderCellDef scope="col">Item</th>
+              <td mat-cell *matCellDef="let item">{{item.idShort}}</td>
+          </ng-container>
+          <ng-container matColumnDef="value">
+            <th mat-header-cell *matHeaderCellDef scope="col">Value</th>
+            <td mat-cell *matCellDef="let item" class="td-value">
+              <ng-container [ngSwitch]="item.modelType">
+                <ngx-json-viewer *ngSwitchCase="'SubmodelElementList'" [json]="item.value" [depth]="2"></ngx-json-viewer>
+                <ngx-json-viewer *ngSwitchCase="'SubmodelElementCollection'" [json]="getPayload(item.value)" [depth]="4"></ngx-json-viewer>
+                <span *ngSwitchDefault>{{item.value}}</span>
+              </ng-container>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="valueType">
+              <th mat-header-cell *matHeaderCellDef scope="col">ValueType</th>
+              <td mat-cell *matCellDef="let item">{{item.valueType}}</td>
+          </ng-container>
+          <ng-container matColumnDef="modelType">
+              <th mat-header-cell *matHeaderCellDef scope="col">ModelType</th>
+              <td mat-cell *matCellDef="let item">{{item.modelType}}</td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="columns" class="submodelElements-table-header"></tr>
+          <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+      </table>
+      </mat-dialog-content>
+    </mat-tab>
+    <mat-tab label="json">
+      <mat-dialog-content>
+          <ngx-json-viewer [json]=submodel [depth]="2"></ngx-json-viewer>
+      </mat-dialog-content>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+<mat-dialog-actions>
+  <button color="accent" mat-dialog-close mat-stroked-button>
+      <mat-icon>cancel</mat-icon> Cancel
+  </button>  
+</mat-dialog-actions>

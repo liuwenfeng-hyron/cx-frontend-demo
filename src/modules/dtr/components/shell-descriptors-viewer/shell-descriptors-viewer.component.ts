@@ -40,16 +40,16 @@ export class ShellDescriptorsViewerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.filteredShellDescriptors$ = this.fetch$
-        .pipe(
-          switchMap(() => {
-            const shellDescs$ = this.apiService.getShellDescriptors();
-            return !!this.searchText ?
-              shellDescs$.pipe(map(shellDescs => shellDescs.filter(shellDesc => shellDesc.idShort.toLowerCase().includes(this.searchText.toLowerCase()))))
-              :
-              shellDescs$;
-          }));
-    }
+    this.filteredShellDescriptors$ = this.fetch$
+      .pipe(
+        switchMap(() => {
+          const shellDescs$ = this.apiService.getShellDescriptors();
+          return !!this.searchText ?
+            shellDescs$.pipe(map(shellDescs => shellDescs.filter(shellDesc => shellDesc.idShort.toLowerCase().includes(this.searchText.toLowerCase()))))
+            :
+            shellDescs$;
+        }));
+  }
   
   onSearch() {
     this.offset = 0;
@@ -72,17 +72,17 @@ export class ShellDescriptorsViewerComponent implements OnInit {
   }
 
   onCreate() {
-      const dialogRef = this.dialog.open(ShellDescriptorEditorDialog, {data: ""});
-      dialogRef.afterClosed().pipe(first()).subscribe((result: { shellDescriptor?: ShellDescriptor }) => {
-          const newShellDescriptor = result?.shellDescriptor;
-          if (newShellDescriptor) {
-            this.apiService.createShellDescriptor(newShellDescriptor).subscribe({
-              next: () => this.onSearch(),
-              error: err => this.showError(err, "This Shell Descriptor cannot be created"),
-              complete: () => this.notificationService.showInfo("Successfully created"),
-            })
-          }
-      })
+    const dialogRef = this.dialog.open(ShellDescriptorEditorDialog, {data: ""});
+    dialogRef.afterClosed().pipe(first()).subscribe((result: { shellDescriptor?: ShellDescriptor }) => {
+        const newShellDescriptor = result?.shellDescriptor;
+        if (newShellDescriptor) {
+          this.apiService.createShellDescriptor(newShellDescriptor).subscribe({
+            next: () => this.onSearch(),
+            error: err => this.showError(err, "This Shell Descriptor cannot be created"),
+            complete: () => this.notificationService.showInfo("Successfully created"),
+          })
+        }
+    })
   }
 
   onUpdate(id: string) {

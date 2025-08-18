@@ -8,6 +8,7 @@ import {AssetEditorDialog} from "../asset-editor-dialog/asset-editor-dialog.comp
 import {ConfirmationDialogComponent, ConfirmDialogModel} from "../confirmation-dialog/confirmation-dialog.component";
 import {NotificationService} from "../../services/notification.service";
 import {AssetDetail} from "../asset-detail/asset-detail.component";
+import { JsonLdObject } from '@think-it-labs/edc-connector-client';
 
 
 @Component({
@@ -115,5 +116,25 @@ export class AssetViewerComponent implements OnInit {
     this.dialog.open(AssetDetail, {data: asset});
   }
   // Added By Nri 2025.3.6 End
+  getOptionalValue(types: JsonLdObject): any {
+    if (types && Array.isArray(types) && types.length > 0) {
+      const firstType = types[0];
+      if (firstType && typeof firstType === 'object' && '@id' in firstType) {
+        return this.processString(firstType['@id']);
+      }
+    }
+  }
+
+  processString(value: string): string {
+    if (typeof value !== 'string') {
+      return value; 
+    }
+
+    return value
+      .replace('http://bmwgroup.com/catenax/taxonomy#', '')
+      .replace('https://w3id.org/catenax/taxonomy#', '')
+      .replace('EcuCertificateSigningRequestDataPushFeedbackNotification', 'EcuCSRDataPushFeedbackNotification')
+      .replace('EcuCertificateSigningRequestDataPushNotification', 'EcuCSRDataPushNotification')
+  }
 
 }

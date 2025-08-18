@@ -9,7 +9,7 @@
         <p>IdShort: <span class="value-span"> {{submodel.idShort}} </span></p>
         <p>Kind : <span class="value-span"> {{submodel.kind}} </span></p>
         <p>SubmodelElements :</p>
-        <submodel-element-table [dataSource]="submodel.submodelElements" [isReadOnly]="true"></submodel-element-table>
+        <div class="div-submodel-element"><submodel-element-table [dataSource]="submodel.submodelElements" [isReadOnly]="true"></submodel-element-table></div>        
       </mat-dialog-content>
     </mat-tab>
     <mat-tab label="json">

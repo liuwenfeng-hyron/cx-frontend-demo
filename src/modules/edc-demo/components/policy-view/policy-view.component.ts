@@ -113,4 +113,10 @@ export class PolicyViewComponent implements OnInit {
       .replace(/lt/g, '<') 
       .replace(/eq/g, '='); 
   }
+
+  dohandan(value: any) :boolean{
+    return Array.isArray(value);
+  }
 }
+
+

@@ -61,6 +61,11 @@ export class CatalogBrowserService {
             "operator": "=",
             "operandRight": "https://w3id.org/catenax/taxonomy#" + assetTypeId
       };
+      if(assetTypeId === "EcuCSRDataPushNotification") {
+        filterExpObj.operandRight = "http://bmwgroup.com/catenax/taxonomy#" + "EcuCertificateSigningRequestDataPushNotification";
+      } else if(assetTypeId === "EcuCSRDataPushFeedbackNotification") {
+        filterExpObj.operandRight = "http://bmwgroup.com/catenax/taxonomy#" + "EcuCertificateSigningRequestDataPushFeedbackNotification";
+      }
       filterExp = JSON.stringify(filterExpObj, null, 2);
     }
     // Added by Nri On 2025.4.22 End

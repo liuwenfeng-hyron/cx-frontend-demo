@@ -84,7 +84,7 @@ import {AasxServerModule} from '../aasx-server/aasx-server.module';
     },
     {
       provide: 'ASSET_TYPES',
-      useFactory: () => [{id: "", name: ""}, {id: "DigitalTwinRegistry", name: "DigitalTwinRegistry"}, {id: "PcfExchange", name: "Submodel(Pcf)"}, {id: "Submodel", name: "Submodel"}],
+      useFactory: () => [{id: "", name: ""}, {id: "EcuCSRDataPushNotification", name: "EcuCSRDataPushNotification"}, {id: "EcuCSRDataPushFeedbackNotification", name: "EcuCSRDataPushFeedbackNotification"}, {id: "DigitalTwinRegistry", name: "DigitalTwinRegistry"}, {id: "PcfExchange", name: "PcfExchange"}, {id: "Submodel", name: "Submodel"}],
     },
     {
       provide: 'SUBMODEL_KIND',
@@ -115,7 +115,7 @@ import {AasxServerModule} from '../aasx-server/aasx-server.module';
       provide: APP_INITIALIZER,
       useFactory: initializeKeycloak,
       multi: true,
-      deps: [KeycloakService],
+      deps: [AppConfigService, KeycloakService],
     },
     {
       provide: AuthService,

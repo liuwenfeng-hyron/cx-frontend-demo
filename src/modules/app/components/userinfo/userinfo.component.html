@@ -1,5 +1,6 @@
 <div *ngIf="isLoggedIn">
   <span style="padding-right:30px">{{ username }}</span>
+  <span style="padding-right:15px"><img src="assets/personInfo-60.png" alt="person info" class="personInfo" (click)="showPersonInfo()"/></span>
   <img src="assets/signout-icon.jpg" alt="sign out" class="signoutbtn" (click)="logout()"/>
 </div>
 <div *ngIf="!isLoggedIn">

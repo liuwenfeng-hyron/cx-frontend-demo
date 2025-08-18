@@ -36,6 +36,7 @@ import {
 } from './components/catalog-browser-transfer-dialog/catalog-browser-transfer-dialog.component';
 import {ContractViewerComponent} from './components/contract-viewer/contract-viewer.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { MatRadioModule } from '@angular/material/radio';
 import {SafePipe} from "./pipes/safe.pipe";
 import {ReplacePipe} from "./pipes/replace.pipe";
 import {AssetEditorDialog} from "./components/asset-editor-dialog/asset-editor-dialog.component";
@@ -51,6 +52,10 @@ import {EdrInfoDialog} from "./components/edr-info-dialog/edr-info-dialog.compon
 import {ConnectorEndpointDialog} from "./components/connector-endpoint-dialog/connector-endpoint-dialog.component";
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {AssetDetail} from "./components/asset-detail/asset-detail.component";
+import {FileUploadViewer} from "./components/file-upload/file-upload-viewer.component";
+import {FileUploadDialog} from "./components/file-upload-dialog/file-upload-dialog.component";
+import {TransferIdViewer} from "./components/transfer-id/transfer-id-viewer.component";
+import {TransferIdDialog} from "./components/transfer-id-dialog/transfer-id-dialog.component";
 
 @NgModule({
   imports: [
@@ -77,6 +82,7 @@ import {AssetDetail} from "./components/asset-detail/asset-detail.component";
     MatListModule,
     RouterModule,
     MatProgressSpinnerModule,
+    MatRadioModule
   ],
   declarations: [
     CatalogBrowserComponent,
@@ -104,6 +110,10 @@ import {AssetDetail} from "./components/asset-detail/asset-detail.component";
     ConnectorEndpointDialog,
     AssetDetail,
     DashboardComponent,
+    FileUploadViewer,
+    FileUploadDialog,
+    TransferIdViewer,
+    TransferIdDialog
   ],
   exports: [
     CatalogBrowserComponent,

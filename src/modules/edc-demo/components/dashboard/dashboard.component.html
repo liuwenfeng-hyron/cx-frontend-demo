@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDC管理页面DEMO</title>
+    <script>
+        function setAndRedirect(edcId, url) {
+            localStorage.setItem('edcId', edcId); // 存储 edcId 到 localStorage
+			sessionStorage.setItem('edcId', edcId); // 存储 edcId 到 localStorage
+            //window.location.href = url; // 跳转到目标 URL
+        }
+    </script>
+</head>
+<body>
+    <h1>EDC一览</h1>
+    <ul>
+        <li><a href="#" onclick="setAndRedirect('edc001', '/introduction')">edc001</a></li>
+        <li><a href="#" onclick="setAndRedirect('edc002', '/introduction')">edc002</a></li>
+        <li><a href="#" onclick="setAndRedirect('edc003', '/introduction')">edc003</a></li>
+    </ul>
+</body>
+</html>

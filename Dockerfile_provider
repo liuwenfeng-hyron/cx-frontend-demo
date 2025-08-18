@@ -12,6 +12,10 @@ FROM nginx:alpine
 COPY --from=build /app/deployment/nginx.conf /etc/nginx/nginx.conf
 COPY --from=build /app/dist/edc-demo-client /usr/share/nginx/html
 COPY --from=build /app/src/assets /usr/share/nginx/html/assets
+
+RUN chmod +x /usr/share/nginx/html/assets/config/entrypoint.sh
+ENTRYPOINT ["/usr/share/nginx/html/assets/config/entrypoint.sh"]
+
 # Added 2025.2.19
 COPY ./ssl/certfile.pem /etc/nginx/ssl/certfile.pem
 COPY ./ssl/keyfile.pem /etc/nginx/ssl/keyfile.pem
