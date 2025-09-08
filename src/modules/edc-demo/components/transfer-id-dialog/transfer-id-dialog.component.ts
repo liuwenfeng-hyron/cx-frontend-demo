@@ -11,11 +11,6 @@ import {TransferIdInput} from '../../models/file-status';
   styleUrls: ['./transfer-id-dialog.component.scss']
 })
 export class TransferIdDialog implements OnInit {
-  id: string = '';
-  autoLinkToEdc : boolean = false;
-  selectedFile: File | null = null;  
-  uploadStatus: string = '';
-  sChecked: boolean = false;
   response: any;
   isEditMode = false;
 

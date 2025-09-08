@@ -2,8 +2,7 @@ import {HttpClient, HttpResponse, HttpErrorResponse, HttpHeaders, HttpParams} fr
 import {Injectable} from '@angular/core';
 import {EMPTY, Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import {environment} from '../../../environments/environment';
-
+import {AppConfigService, AppConfig} from "../../app/app-config.service";
 
 
 /**
@@ -13,65 +12,60 @@ import {environment} from '../../../environments/environment';
   providedIn: 'root'
 })
 export class AasxHttpClient {
-
-  constructor(private httpClient: HttpClient) {
+  config?: AppConfig;
+  baseUrl:string = "";
+  constructor(private configService: AppConfigService, private httpClient: HttpClient) {
+    this.config = this.configService.getConfig();
+    this.baseUrl = this.config?.assxServerUrl ?? "";
   }
 
   public get<T>(urlPath: string, params?: HttpParams | { [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>; })
     : Observable<T> {
-    let baseUrl = environment.assxServerUrl;
-    const url = baseUrl + `${urlPath}`;
+    const url = this.baseUrl + `${urlPath}`;
     let headers = new HttpHeaders({"Content-type": "application/json"});
     return this.catchError(this.httpClient.get<T>(url, {headers, params}), url, 'GET');
   }
 
   public getBlob<T>(urlPath: string, params?: HttpParams | { [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>; }, responseType?: string)
     : Observable<Blob> {
-    let baseUrl = environment.assxServerUrl;
-    const url = baseUrl + `${urlPath}`;
+    const url = this.baseUrl + `${urlPath}`;
     return this.httpClient.get(url, { responseType: 'blob' });
   }
 
   public post<T>(urlPath: string, body: string, params?: HttpParams | { [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>; })
   : Observable<T> {
-    let baseUrl = environment.assxServerUrl;
-    const url = baseUrl + `${urlPath}`;
+    const url = this.baseUrl + `${urlPath}`;
     let headers = new HttpHeaders({"Content-type": "application/json"});
     return this.httpClient.post<T>(url, body, {headers, params});
   }
 
   public postFile<T>(urlPath: string, formData: FormData)
   : Observable<T> {
-    let baseUrl = environment.assxServerUrl;
-    const url = baseUrl + `${urlPath}`;
+    const url = this.baseUrl + `${urlPath}`;
     return this.httpClient.post<T>(url, formData);
   }
 
   public put<T>(urlPath: string, body: string, params?: HttpParams | { [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>; })
   : Observable<T> {
-    let baseUrl = environment.assxServerUrl;
-    const url = baseUrl + `${urlPath}`;
+    const url = this.baseUrl + `${urlPath}`;
     let headers = new HttpHeaders({"Content-type": "application/json"});
     return this.httpClient.put<T>(url, body, {headers, params});
   }
 
   public putFile<T>(urlPath: string, formData: FormData)
   : Observable<T> {
-    let baseUrl = environment.assxServerUrl;
-    const url = baseUrl + `${urlPath}`;
+    const url = this.baseUrl + `${urlPath}`;
     return this.httpClient.put<T>(url, formData);
   }
 
   public delete<T>(urlPath: string): Observable<T> {
-    let baseUrl = environment.assxServerUrl;
-    const url = baseUrl + `${urlPath}`;
+    const url = this.baseUrl + `${urlPath}`;
     let headers = new HttpHeaders({"Content-type": "application/json"});
     return this.httpClient.delete<T>(url, {headers});
   }
 
   public downloadFile(urlPath: string): Observable<HttpResponse<Blob>> {
-    let baseUrl = environment.assxServerUrl;
-    const url = baseUrl + `${urlPath}`;
+    const url = this.baseUrl + `${urlPath}`;
     return this.httpClient.get(url, {
       responseType: 'blob',
       observe: 'response'

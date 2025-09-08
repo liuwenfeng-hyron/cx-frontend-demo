@@ -54,7 +54,7 @@ export const routes: Routes = [
   {
     path: 'partner-groups', // by nri 2025.2.6
     component: PartnerGroupsViewerComponent,
-    data: {title: 'Partner Groups', icon: 'rule'}
+    data: {title: 'Partner Groups', icon: 'assignment'}
   }, 
   {
     path: 'groupTitle',
@@ -96,12 +96,12 @@ export const routes: Routes = [
   {
     path: 'shells',
     component: ShellsViewerComponent,
-    data: {title: 'Shells', icon: 'rule'}
+    data: {title: 'Shells', icon: 'assignment'}
   },
   {
     path: 'packages',
     component: AasxPackagesViewerComponent,
-    data: {title: 'Packages', icon: 'rule'}
+    data: {title: 'Packages', icon: 'attachment'}
   },
   {
     path: 'groupTitle',

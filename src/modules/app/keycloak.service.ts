@@ -1,14 +1,20 @@
 import { Injectable } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 import {BusinessBackEndService} from "../edc-demo/services/businessBackEnd.service";
-import {TokenResponse} from '../edc-demo/models/file-status';
-import { lastValueFrom } from 'rxjs';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {AppConfigService, AppConfig} from "./app-config.service";
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private keycloakService: KeycloakService, private businessBackEndService: BusinessBackEndService) {}
+  config?: AppConfig;
+  constructor(private keycloakService: KeycloakService, private businessBackEndService: BusinessBackEndService, 
+    private configService: AppConfigService, private httpClient: HttpClient) {
+      this.config = this.configService.getConfig();
+  }
 
   isLoggedIn(): boolean {
     return this.keycloakService.isLoggedIn();
@@ -23,6 +29,51 @@ export class AuthService {
   }
 
   getToken(): any {
+    // Added By nri For WAF check on 2025.8.25 Start
+    let url = this.config?.wafCheckUrl + "";
+    this.httpClient.get<any>(url).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.log('WAFcheck:', error);
+        if (error.status === 403) {
+          console.log('error.error.message:', error.error.message);
+          this.keycloakService.logout();
+        }
+        return throwError(() => error);
+      })).subscribe({
+      next: () => {
+        console.log('WAFcheck OK');
+      },
+      error: (err: HttpErrorResponse) => {
+        console.log('WAFcheck:', err);
+        if (err.status === 403) {
+          console.log('err.error.message:', err.error.message);
+          this.keycloakService.logout();
+        }
+      }
+    });
+
+    // this.businessBackEndService.getForWAFcheck().pipe(
+    //   catchError((error: HttpErrorResponse) => {
+    //     console.log('WAFcheck:', error);
+    //     if (error.status === 403) {
+    //       console.log('error.error.message:', error.error.message);
+    //       this.keycloakService.logout();
+    //     }
+    //     return throwError(() => error);
+    //   })
+    // ).subscribe({
+    //   next: () => {
+    //     console.log('WAFcheck OK');
+    //   },
+    //   error: (err: HttpErrorResponse) => {
+    //     console.log('WAFcheck:', err);
+    //     if (err.status === 403) {
+    //       console.log('err.error.message:', err.error.message);
+    //       this.keycloakService.logout();
+    //     }
+    //   }
+    // });
+    // Added By nri For WAF check on 2025.8.25 End
     return this.keycloakService.getToken();
   }
 

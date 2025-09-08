@@ -17,17 +17,23 @@ import { Observable, from } from 'rxjs';
 
 import { EdcConnectorClient } from '@think-it-labs/edc-connector-client';
 import { ContractAgreement, QuerySpec } from '../model'
-
+import {ContractAgreementController} from "../../mgmt-api-client";
+import {AppConfigService, AppConfig} from "../../app/app-config.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContractAgreementService {
 
-    private contractAgreements = this.edcConnectorClient.management.contractAgreements;
+    config?: AppConfig;
+    apiKey = "";
+    private contractAgreements: ContractAgreementController;
+    // private contractAgreements = this.edcConnectorClient.management.contractAgreements;
 
-    constructor(private edcConnectorClient: EdcConnectorClient) {
-
+    constructor(private edcConnectorClient: EdcConnectorClient, private configService: AppConfigService) {
+      this.config = this.configService.getConfig();
+      this.apiKey = this.config?.apiKey || '';
+      this.contractAgreements = new ContractAgreementController(this.edcConnectorClient.createContext(this.apiKey, this.edcConnectorClient.addresses));
     }
 
     /**

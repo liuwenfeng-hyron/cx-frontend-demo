@@ -25,6 +25,8 @@
 
   "assxServerUrl": "/beta/assxServer",
 
+  "wafCheckUrl": "https://a1jp.console.de.nri-caas.com:7070/file/health",
+
   "storageAccount": "",
   "storageExplorerLinkTemplate": "",
   "enddpointOverride": "",

@@ -18,17 +18,21 @@ import { Observable, from }                                        from 'rxjs';
 import { EdcConnectorClient } from '@think-it-labs/edc-connector-client';
 import { AssetInput, Asset, IdResponse, QuerySpec } from "../model"
 import {AssetController} from "../../mgmt-api-client";
-import {environment} from '../../../environments/environment';
+import {AppConfigService, AppConfig} from "../../app/app-config.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AssetService {
-
+    config?: AppConfig;
+    apiKey = "";
+    private assets: AssetController;
     // private assets = this.edcConnectorClient.management.assets;
-    private assets = new AssetController(this.edcConnectorClient.createContext(environment.apiKey, this.edcConnectorClient.addresses));
       
-    constructor(private edcConnectorClient: EdcConnectorClient) {
+    constructor(private edcConnectorClient: EdcConnectorClient, private configService: AppConfigService) {
+        this.config = this.configService.getConfig();
+        this.apiKey = this.config?.apiKey || '';
+        this.assets = new AssetController(this.edcConnectorClient.createContext(this.apiKey, this.edcConnectorClient.addresses));
     }
 
     /**

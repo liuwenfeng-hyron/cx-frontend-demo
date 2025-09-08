@@ -111,7 +111,8 @@ export class AssetEditorDialog implements OnInit {
         "asset:prop:type": "data.core.digitalTwinRegistry",
         "dct:type": {
           "@id": "cx-taxo:DigitalTwinRegistry"
-        }
+        },
+        "cx-common:version": "3.0"
       }
       // dataAddress
       assetInput.dataAddress.proxyPath = "true";
@@ -171,7 +172,7 @@ export class AssetEditorDialog implements OnInit {
       this.semanticId = "urn:samm:io.catenax.pcf:7.0.0#Pcf";
     } else if(this.assetTypeId === "Submodel") {
       this.version = "3.0";
-      this.semanticId = "urn:samm:io.catenax.xxx:3.0.0#xxx";
+      this.semanticId = "urn:bamm:io.catenax.asset_tracker_links:1.0.0#AssetTrackerLinks";
     }
   }
 

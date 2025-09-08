@@ -17,18 +17,22 @@ import {Observable, from} from 'rxjs';
 import {EdcConnectorClient} from "@think-it-labs/edc-connector-client";
 import { PolicyDefinition, PolicyDefinitionInput, IdResponse, QuerySpec } from "../model"
 import {PolicyDefinitionController} from "../../mgmt-api-client";
-import {environment} from '../../../environments/environment';
+import {AppConfigService, AppConfig} from "../../app/app-config.service";
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class PolicyService {
-
+  config?: AppConfig;
+  apiKey = "";
+  private controller: PolicyDefinitionController;
   //private policyDefinition = this.edcConnectorClient.management.policyDefinitions;
-  private controller = new PolicyDefinitionController(this.edcConnectorClient.createContext(environment.apiKey, this.edcConnectorClient.addresses));
-
-  constructor(private edcConnectorClient: EdcConnectorClient) {
+  
+  constructor(private edcConnectorClient: EdcConnectorClient, private configService: AppConfigService) {
+      this.config = this.configService.getConfig();
+      this.apiKey = this.config?.apiKey || '';
+      this.controller = new PolicyDefinitionController(this.edcConnectorClient.createContext(this.apiKey, this.edcConnectorClient.addresses));
   }
 
   /**

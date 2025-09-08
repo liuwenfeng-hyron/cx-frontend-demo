@@ -30,6 +30,8 @@ export interface AppConfig {
   dtrTenant: string;
   // 7.assxServer
   assxServerUrl: string;
+  // 8.WAF
+  wafCheckUrl: string;
 
   storageAccount: string;
   storageExplorerLinkTemplate: string;

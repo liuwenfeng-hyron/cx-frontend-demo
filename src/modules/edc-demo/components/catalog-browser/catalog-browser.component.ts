@@ -326,17 +326,18 @@ export class CatalogBrowserComponent implements OnInit {
   }
   // Added By nri On 2025.2.20 End
   // Added By nri On 2025.2.24 Start
+  // Deleted By nri On 2025.8.21
   // Connectorリスト画面を表示する
-  selectConnector(): void {
-    const dialogRef = this.dialog.open(ConnectorEndpointDialog, {enterAnimationDuration:'2000ms'}); 
-    dialogRef.afterClosed().pipe(first()).subscribe((result: { }) => {
-            const returnInfo : any = result;
-            if (returnInfo) {
-              this.customProviders = returnInfo.selectResult.endpoint;
-              this.counterPartyId = returnInfo.selectResult.bpn;
-              this.onCatalogUrlsChange();
-            }
-        })
-  }
+  // selectConnector(): void {
+  //   const dialogRef = this.dialog.open(ConnectorEndpointDialog, {enterAnimationDuration:'2000ms'}); 
+  //   dialogRef.afterClosed().pipe(first()).subscribe((result: { }) => {
+  //           const returnInfo : any = result;
+  //           if (returnInfo) {
+  //             this.customProviders = returnInfo.selectResult.endpoint;
+  //             this.counterPartyId = returnInfo.selectResult.bpn;
+  //             this.onCatalogUrlsChange();
+  //           }
+  //       })
+  // }
   // Added By nri On 2025.2.24 End
 }

@@ -1,104 +1,82 @@
 import {
   expand,
   expandArray,
+  ContractDefinition,
+  ContractDefinitionInput,
   IdResponse,
-  PolicyDefinition,
-  PolicyDefinitionInput,
   QuerySpec,
   JSON_LD_DEFAULT_CONTEXT,
   EdcConnectorClientContext
 } from "@think-it-labs/edc-connector-client";
 import { Inner } from "../inner";
 
-export class PolicyDefinitionController {
+export class ContractDefinitionController {
+  // #inner: Inner;
   #inner = new Inner();
   #context?: EdcConnectorClientContext;
-  #basePath = "/v3/policydefinitions";
-  policyContext = {"@context": [
-    "http://www.w3.org/ns/odrl.jsonld",
-    {
-      "@vocab": "https://w3id.org/edc/v0.0.1/ns/",
-      "xsd": "http://www.w3.org/2001/XMLSchema#",
-      "tx": "https://w3id.org/tractusx/v0.0.1/ns/",
-	    "cx-policy": "https://w3id.org/catenax/policy/"
-    }
-  ]};
+  #basePath = "/v3/contractdefinitions";
+
+  // constructor(inner: Inner, context?: EdcConnectorClientContext) {
+  //   this.#inner = inner;
+  //   this.#context = context;
+  // }
 
   constructor(context?: EdcConnectorClientContext) {
     this.#context = context;
   }
 
   async create(
-    input: PolicyDefinitionInput,
+    input: ContractDefinitionInput,
     context?: EdcConnectorClientContext,
   ): Promise<IdResponse> {
     const actualContext = context || this.#context!;
-    const body = {
-      ...input,
-      //"@context": JSON_LD_DEFAULT_CONTEXT,
-      ...this.policyContext,
-    };
 
     return this.#inner
       .request(actualContext.management, {
         path: this.#basePath,
         method: "POST",
         apiToken: actualContext.apiToken,
-        body: body,
+        body: {
+          ...input,
+          "@context": JSON_LD_DEFAULT_CONTEXT,
+        },
       })
       .then((body) => expand(body, () => new IdResponse()));
   }
 
-  async update(
-    policyId: string,
-    input: PolicyDefinitionInput,
-    context?: EdcConnectorClientContext,
-  ): Promise<IdResponse> {
-    const actualContext = context || this.#context!;
-    return this.#inner
-      .request(actualContext.management, {
-        path: `${this.#basePath}/${policyId}`,
-        method: "PUT",
-        apiToken: actualContext.apiToken,
-        body: {
-          ...input,
-          //"@context": JSON_LD_DEFAULT_CONTEXT,
-          ...this.policyContext,
-        },
-      })
-  }
-
   async delete(
-    policyId: string,
+    contractDefinitionId: string,
     context?: EdcConnectorClientContext,
   ): Promise<void> {
     const actualContext = context || this.#context!;
+
     return this.#inner.request(actualContext.management, {
-      path: `${this.#basePath}/${policyId}`,
+      path: `${this.#basePath}/${contractDefinitionId}`,
       method: "DELETE",
       apiToken: actualContext.apiToken,
     });
   }
 
   async get(
-    policyId: string,
+    contractDefinitionId: string,
     context?: EdcConnectorClientContext,
-  ): Promise<PolicyDefinition> {
+  ): Promise<ContractDefinition> {
     const actualContext = context || this.#context!;
-    return this.#inner
-      .request(actualContext.management, {
-        path: `${this.#basePath}/${policyId}`,
-        method: "GET",
-        apiToken: actualContext.apiToken,
-      })
-      .then((body) => expand(body, () => new PolicyDefinition()));
+
+    return this.#inner.request(actualContext.management, {
+      path: `${this.#basePath}/${contractDefinitionId}`,
+      method: "GET",
+      apiToken: actualContext.apiToken,
+    })
+    .then((body) => expand(body, () => new ContractDefinition()));
   }
 
   async queryAll(
     query: QuerySpec = {},
     context?: EdcConnectorClientContext,
-  ): Promise<PolicyDefinition[]> {
+  ): Promise<ContractDefinition[]> {
     const actualContext = context || this.#context!;
+
     return this.#inner
       .request(actualContext.management, {
         path: `${this.#basePath}/request`,
@@ -112,6 +90,23 @@ export class PolicyDefinitionController {
                 "@context": JSON_LD_DEFAULT_CONTEXT,
               },
       })
-      .then((body) => expandArray(body, () => new PolicyDefinition()));
+      .then((body) => expandArray(body, () => new ContractDefinition()));
+  }
+
+  async update(
+    input: ContractDefinitionInput,
+    context?: EdcConnectorClientContext,
+  ): Promise<void> {
+    const actualContext = context || this.#context!;
+
+    return this.#inner.request(actualContext.management, {
+      path: this.#basePath,
+      method: "PUT",
+      apiToken: actualContext.apiToken,
+      body: {
+        ...input,
+        "@context": JSON_LD_DEFAULT_CONTEXT,
+      },
+    });
   }
 }

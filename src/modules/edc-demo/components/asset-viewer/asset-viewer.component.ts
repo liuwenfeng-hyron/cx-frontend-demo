@@ -75,7 +75,7 @@ export class AssetViewerComponent implements OnInit {
       properties: {},
       dataAddress: {"type": ""}
     };
-    const dialogRef = this.dialog.open(AssetEditorDialog, {data: asset});
+    const dialogRef = this.dialog.open(AssetEditorDialog, {data: asset, disableClose: true});
     dialogRef.afterClosed().pipe(first()).subscribe((result: { assetInput?: AssetInput }) => {
       const newAsset = result?.assetInput;
       if (newAsset) {
@@ -99,7 +99,7 @@ export class AssetViewerComponent implements OnInit {
         "baseUrl": assetInfo.dataAddress.optionalValue('edc','baseUrl')
       }
     };
-    const dialogRef = this.dialog.open(AssetEditorDialog, {data: asset});
+    const dialogRef = this.dialog.open(AssetEditorDialog, {data: asset, disableClose: true});
     dialogRef.afterClosed().pipe(first()).subscribe((result: { assetInput?: AssetInput }) => {
       const newAsset = result?.assetInput;
       if (newAsset) {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../keycloak.service';
 import {environment} from '../../../../environments/environment';
+import {AppConfigService, AppConfig} from "../../../app/app-config.service";
 
 @Component({
   selector: 'app-user-info',
@@ -12,8 +13,9 @@ export class UserInfoComponent implements OnInit {
   isLoggedIn = false;
   userProfile: any | null = null;
   username: string | undefined;  
+  config?: AppConfig;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private configService: AppConfigService) {}
 
   ngOnInit() {
     this.isLoggedIn = this.authService.isLoggedIn();
@@ -43,8 +45,11 @@ export class UserInfoComponent implements OnInit {
   }
 
   showPersonInfo() {
-    const keycloakServer = environment.keycloak_url;
-    const realmName = environment.keycloak_realm;
+    // const keycloakServer = environment.keycloak_url;
+    // const realmName = environment.keycloak_realm;
+    this.config = this.configService.getConfig();
+    const keycloakServer = this.config?.keycloak_url || '';
+    const realmName = this.config?.keycloak_realm || '';
     const passwordPageUrl = `${keycloakServer}/realms/${realmName}/account/#/security/signingin`;
     window.location.href = passwordPageUrl;
   }

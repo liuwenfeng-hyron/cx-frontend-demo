@@ -16,16 +16,23 @@ import { HttpResponse, HttpEvent, HttpContext }              from '@angular/comm
 import { Observable, from }                                        from 'rxjs';
 import {EdcConnectorClient} from "@think-it-labs/edc-connector-client";
 import { TransferProcessState, TransferProcess, TransferProcessInput, QuerySpec, IdResponse } from "../model";
-
+import {TransferProcessController} from "../../mgmt-api-client";
+import {AppConfigService, AppConfig} from "../../app/app-config.service";
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class TransferProcessService {
-    private transferProcessService = this.edcConnectorClient.management.transferProcesses;
+    config?: AppConfig;
+    apiKey = "";
+    private transferProcessService: TransferProcessController;
+    // private transferProcessService = this.edcConnectorClient.management.transferProcesses;
 
-    constructor(private edcConnectorClient: EdcConnectorClient) {
+    constructor(private edcConnectorClient: EdcConnectorClient, private configService: AppConfigService) {
+      this.config = this.configService.getConfig();
+      this.apiKey = this.config?.apiKey || '';
+      this.transferProcessService = new TransferProcessController(this.edcConnectorClient.createContext(this.apiKey, this.edcConnectorClient.addresses));
     }
 
     /**

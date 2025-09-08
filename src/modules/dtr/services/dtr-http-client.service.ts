@@ -2,8 +2,7 @@ import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/c
 import {Injectable} from '@angular/core';
 import {EMPTY, Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import {environment} from '../../../environments/environment';
-
+import {AppConfigService, AppConfig} from "../../app/app-config.service";
 
 
 /**
@@ -14,42 +13,40 @@ import {environment} from '../../../environments/environment';
 })
 export class DtrHttpClient {
 
-  constructor(private httpClient: HttpClient) {
+  config?: AppConfig;
+  dtrUrl = "";
+  dtrTenant = "";
+  constructor(private configService: AppConfigService, private httpClient: HttpClient) {
+    this.config = this.configService.getConfig();
+    this.dtrUrl = this.config?.dtrUrl ?? "";
+    this.dtrTenant = this.config?.dtrTenant ?? "";
   }
 
   public get<T>(urlPath: string, offset: number, limit: number, filterExp: string,
                   params?: HttpParams | { [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>; })
     : Observable<T> {
-    let dtrUrl = environment.dtrUrl;
-    let dtrTenant = environment.dtrTenant;
-    const url = dtrUrl + `${urlPath}`;
-    let headers = new HttpHeaders({"Content-type": "application/json", "Edc-Bpn" : dtrTenant});
+    const url = this.dtrUrl + `${urlPath}`;
+    let headers = new HttpHeaders({"Content-type": "application/json", "Edc-Bpn" : this.dtrTenant});
     return this.catchError(this.httpClient.get<T>(url, {headers, params}), url, 'GET');
   }
 
   public post<T>(urlPath: string, body: string, params?: HttpParams | { [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>; })
   : Observable<T> {
-    let dtrUrl = environment.dtrUrl;
-    let dtrTenant = environment.dtrTenant;
-    const url = dtrUrl + `${urlPath}`;
-    let headers = new HttpHeaders({"Content-type": "application/json", "Edc-Bpn" : dtrTenant});
+    const url = this.dtrUrl + `${urlPath}`;
+    let headers = new HttpHeaders({"Content-type": "application/json", "Edc-Bpn" : this.dtrTenant});
     return this.httpClient.post<T>(url, body, {headers, params});
   }
 
   public put<T>(urlPath: string, body: string, params?: HttpParams | { [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>; })
   : Observable<T> {
-    let dtrUrl = environment.dtrUrl;
-    let dtrTenant = environment.dtrTenant;
-    const url = dtrUrl + `${urlPath}`;
-    let headers = new HttpHeaders({"Content-type": "application/json", "Edc-Bpn" : dtrTenant});
+    const url = this.dtrUrl + `${urlPath}`;
+    let headers = new HttpHeaders({"Content-type": "application/json", "Edc-Bpn" : this.dtrTenant});
     return this.httpClient.put<T>(url, body, {headers, params});
   }
 
   public delete<T>(urlPath: string): Observable<T> {
-    let dtrUrl = environment.dtrUrl;
-    let dtrTenant = environment.dtrTenant;
-    const url = dtrUrl + `${urlPath}`;
-    let headers = new HttpHeaders({"Content-type": "application/json", "Edc-Bpn" : dtrTenant});
+    const url = this.dtrUrl + `${urlPath}`;
+    let headers = new HttpHeaders({"Content-type": "application/json", "Edc-Bpn" : this.dtrTenant});
     return this.httpClient.delete<T>(url, {headers});
   }
 

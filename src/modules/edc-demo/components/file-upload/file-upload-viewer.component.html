@@ -1,7 +1,7 @@
 <div id="wrapper">
   <div>
     <span class="searchCond">
-      <mat-label>Search By Upload Time : </mat-label>
+      <mat-label>Search By Upload Time (UTC) : </mat-label>
       <input type="datetime-local" [(ngModel)]="searchCond.startDate" matInput>
       <mat-label>~</mat-label>
       <input type="datetime-local" [(ngModel)]="searchCond.endDate" matInput>
@@ -33,19 +33,19 @@
     </mat-paginator>
     <table mat-table [dataSource]="fileStatusResponse.result" class="mat-elevation-z8">
       <ng-container matColumnDef="no">
-          <th mat-header-cell *matHeaderCellDef scope="col">NO</th>
-          <!--<td mat-cell *matCellDef="let item">{{item.no}}</td>-->
-          <td mat-cell *matCellDef="let item; let i = index"> {{ pageIndex * pageSize + i + 1 }} </td>
+        <th mat-header-cell *matHeaderCellDef scope="col">NO</th>
+        <!--<td mat-cell *matCellDef="let item">{{item.no}}</td>-->
+        <td mat-cell *matCellDef="let item; let i = index"> {{ pageIndex * pageSize + i + 1 }} </td>
       </ng-container>
 
       <ng-container matColumnDef="fileId">
-          <th mat-header-cell *matHeaderCellDef scope="col">File Id</th>
-          <td mat-cell *matCellDef="let item">{{item.fileId}}</td>
+        <th mat-header-cell *matHeaderCellDef scope="col">File Id</th>
+        <td mat-cell *matCellDef="let item">{{item.fileId}}</td>
       </ng-container>
 
       <ng-container matColumnDef="fileName">
-          <th mat-header-cell *matHeaderCellDef scope="col">File Name</th>
-          <td mat-cell *matCellDef="let item">{{item.fileName}}</td>
+        <th mat-header-cell *matHeaderCellDef scope="col">File Name</th>
+        <td mat-cell *matCellDef="let item">{{item.fileName}}</td>
       </ng-container>
 
       <ng-container matColumnDef="messageId">
@@ -61,40 +61,40 @@
       </ng-container>
 
       <ng-container matColumnDef="uploadTime">
-          <th mat-header-cell *matHeaderCellDef scope="col">Upload Time</th>
-          <td mat-cell *matCellDef="let item" class="table-td-uploadTime">{{item.uploadTime}}</td>
+        <th mat-header-cell *matHeaderCellDef scope="col">Upload Time (UTC)</th>
+        <td mat-cell *matCellDef="let item" class="table-td-uploadTime">{{item.uploadTime}}</td>
       </ng-container>
 
       <ng-container matColumnDef="uploadStatus">
-          <th mat-header-cell *matHeaderCellDef scope="col">Upload Status</th>
-          <td mat-cell *matCellDef="let item">{{item.uploadStatus}}</td>
+        <th mat-header-cell *matHeaderCellDef scope="col">Upload Status</th>
+        <td mat-cell *matCellDef="let item">{{item.uploadStatus}}</td>
       </ng-container>
 
       <ng-container matColumnDef="sendTime">
-          <th mat-header-cell *matHeaderCellDef scope="col">Send Time</th>
-          <td mat-cell *matCellDef="let item">{{item.sendTime}}</td>
+        <th mat-header-cell *matHeaderCellDef scope="col">Send Time (UTC)</th>
+        <td mat-cell *matCellDef="let item">{{item.sendTime}}</td>
       </ng-container>
 
       <ng-container matColumnDef="feedbackMessageId">
-          <th mat-header-cell *matHeaderCellDef scope="col">Feedback MessageId</th>
-          <td mat-cell *matCellDef="let item">
-            <a
-              class="link"
-              href="javascript:void(0)"
-              (click)="onDownloadFeedbackFile(item.feedbackMessageId)">
-              {{item.feedbackMessageId}}
-            </a>
-          </td>
+        <th mat-header-cell *matHeaderCellDef scope="col">Feedback MessageId</th>
+        <td mat-cell *matCellDef="let item">
+          <a
+            class="link"
+            href="javascript:void(0)"
+            (click)="onDownloadFeedbackFile(item.feedbackMessageId)">
+            {{item.feedbackMessageId}}
+          </a>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="feedbackTime">
-          <th mat-header-cell *matHeaderCellDef scope="col">Feedback Time</th>
-          <td mat-cell *matCellDef="let item">{{item.feedbackTime}}</td>
+        <th mat-header-cell *matHeaderCellDef scope="col">Feedback Time (UTC)</th>
+        <td mat-cell *matCellDef="let item">{{item.feedbackTime}}</td>
       </ng-container>
       
-        <ng-container matColumnDef="feedbackFirstDownloadTime">
-          <th mat-header-cell *matHeaderCellDef scope="col">Feedback<br>First Download</th>
-          <td mat-cell *matCellDef="let item">{{item.feedbackFirstDownloadTime}}</td>
+      <ng-container matColumnDef="feedbackFirstDownloadTime">
+        <th mat-header-cell *matHeaderCellDef scope="col">Feedback<br>First Download</th>
+        <td mat-cell *matCellDef="let item">{{item.feedbackFirstDownloadTime}}</td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="columns" class="table-header"></tr>

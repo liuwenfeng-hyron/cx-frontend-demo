@@ -14,7 +14,6 @@ export class FileUploadDialog implements OnInit {
   autoLinkToEdc : boolean = false;
   selectedFile: File | null = null;  
   uploadStatus: string = '';
-  sChecked: boolean = false;
   response: any;
   err: any;
 
@@ -48,6 +47,9 @@ export class FileUploadDialog implements OnInit {
   }
 
   uploadFile() {
+    this.uploadStatus = '';
+    this.response = {};
+    this.err = {};
     if (!this.selectedFile) {
       this.uploadStatus = 'Please select a File';
       return;

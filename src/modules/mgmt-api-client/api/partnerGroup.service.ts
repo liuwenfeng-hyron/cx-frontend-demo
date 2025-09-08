@@ -8,18 +8,22 @@
 import { Injectable } from '@angular/core';
 import { Observable, from }  from 'rxjs';
 import {EdcConnectorClient} from "@think-it-labs/edc-connector-client";
-import {environment} from '../../../environments/environment';
 import {PartnerGroupInput} from '../../mgmt-api-client';
 import {PartnerGroupsController} from "../../mgmt-api-client";
+import {AppConfigService, AppConfig} from "../../app/app-config.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PartnerGroupService {
-
-    private controller = new PartnerGroupsController(this.edcConnectorClient.createContext(environment.apiKey, this.edcConnectorClient.addresses));
+    config?: AppConfig;
+    apiKey = "";
+    private controller: PartnerGroupsController;
       
-    constructor(private edcConnectorClient: EdcConnectorClient) {
+    constructor(private edcConnectorClient: EdcConnectorClient, private configService: AppConfigService) {
+        this.config = this.configService.getConfig();
+        this.apiKey = this.config?.apiKey || '';
+        this.controller = new PartnerGroupsController(this.edcConnectorClient.createContext(this.apiKey, this.edcConnectorClient.addresses));
     }
 
     public getPartnerGroup(bpn: string): Promise<any> {

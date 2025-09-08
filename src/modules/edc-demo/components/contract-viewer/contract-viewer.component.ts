@@ -54,7 +54,11 @@ export class ContractViewerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.contracts$ = this.contractAgreementService.queryAllAgreements();
+    // default is limit = 50;
+    // this.contracts$ = this.contractAgreementService.queryAllAgreements();
+    // Modified by ljz on 2025.8.28
+    this.contracts$ = this.contractAgreementService.queryAllAgreements({"limit" :  90000000});
+    
   }
 
   asDate(epochSeconds?: number): string {

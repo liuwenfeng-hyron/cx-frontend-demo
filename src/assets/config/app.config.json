@@ -1,8 +1,5 @@
 {
   "cofinityXcentralidpUrl": "/beta/cofinityXcentralidp",
-  "cofinityX_client_id": "sa837",
-  "cofinityX_grant_type": "client_credentials",
-  "cofinityX_client_secret": "fl8lgK3uOCz3suAN07q0vSAyifuW9OEo",
   "cofinityXbackendUrl": "/beta/cofinityXbackend",
 
   "apiKey": "password",
@@ -24,6 +21,7 @@
   "dtrTenant": "TENANT_ONE",
 
   "assxServerUrl": "/beta/assxServer",
+  "wafCheckUrl": "{{WAF_CHECK_URL}}",
 
   "storageAccount": "",
   "storageExplorerLinkTemplate": "",

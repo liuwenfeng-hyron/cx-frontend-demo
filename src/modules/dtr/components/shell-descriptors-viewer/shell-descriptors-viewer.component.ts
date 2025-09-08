@@ -35,8 +35,11 @@ export class ShellDescriptorsViewerComponent implements OnInit {
   }
 
   private showError(error: any, errorMessage: string) {
-    this.notificationService.showError(errorMessage);
     console.error(error);
+    if (error?.error?.messages?.[0]?.text) {
+      errorMessage = errorMessage + " : " + error.error.messages[0].text;
+    }
+    this.notificationService.showError(errorMessage);
   }
 
   ngOnInit(): void {
@@ -72,29 +75,37 @@ export class ShellDescriptorsViewerComponent implements OnInit {
   }
 
   onCreate() {
-    const dialogRef = this.dialog.open(ShellDescriptorEditorDialog, {data: ""});
+    const dialogRef = this.dialog.open(ShellDescriptorEditorDialog, {data: "", disableClose: true});
     dialogRef.afterClosed().pipe(first()).subscribe((result: { shellDescriptor?: ShellDescriptor }) => {
         const newShellDescriptor = result?.shellDescriptor;
         if (newShellDescriptor) {
-          this.apiService.createShellDescriptor(newShellDescriptor).subscribe({
-            next: () => this.onSearch(),
-            error: err => this.showError(err, "This Shell Descriptor cannot be created"),
-            complete: () => this.notificationService.showInfo("Successfully created"),
-          })
+          if (newShellDescriptor.id === null || newShellDescriptor.id.trim() === "") {
+            this.showError({}, "This Shell Descriptor cannot be created : ID is null or an empty string");
+          } else {
+              this.apiService.createShellDescriptor(newShellDescriptor).subscribe({
+              next: () => this.onSearch(),
+              error: err => this.showError(err, "This Shell Descriptor cannot be created"),
+              complete: () => this.notificationService.showInfo("Successfully created"),
+            })
+          }          
         }
     })
   }
 
   onUpdate(id: string) {
-    const dialogRef = this.dialog.open(ShellDescriptorEditorDialog, {data: id});
+    const dialogRef = this.dialog.open(ShellDescriptorEditorDialog, {data: id, disableClose: true});
     dialogRef.afterClosed().pipe(first()).subscribe((result: { shellDescriptor?: ShellDescriptor }) => {
         const newShellDescriptor = result?.shellDescriptor;
         if (newShellDescriptor) {
-          this.apiService.updateShellDescriptor(id, newShellDescriptor).subscribe({
-            next: () => this.onSearch(),
-            error: err => this.showError(err, "This Shell Descriptor cannot be updated"),
-            complete: () => this.notificationService.showInfo("Successfully updated"),
-          })
+          if (newShellDescriptor.id === null || newShellDescriptor.id.trim() === "") {
+            this.showError({}, "This Shell Descriptor cannot be updated : ID is null or an empty string");
+          } else {
+            this.apiService.updateShellDescriptor(id, newShellDescriptor).subscribe({
+              next: () => this.onSearch(),
+              error: err => this.showError(err, "This Shell Descriptor cannot be updated"),
+              complete: () => this.notificationService.showInfo("Successfully updated"),
+            })
+          }
         }
     })
   }

@@ -16,16 +16,23 @@ import { HttpResponse, HttpEvent, HttpContext}       from '@angular/common/http'
 import {from, Observable} from 'rxjs';
 import {EdcConnectorClient, IdResponse, QuerySpec} from "@think-it-labs/edc-connector-client";
 import {ContractNegotiation, ContractNegotiationState, ContractNegotiationRequest} from "../model"
-
+import {ContractNegotiationController} from "../../mgmt-api-client";
+import {AppConfigService, AppConfig} from "../../app/app-config.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContractNegotiationService {
 
-    private contractNegotiation = this.edcConnectorClient.management.contractNegotiations;
+    config?: AppConfig;
+    apiKey = "";
+    private contractNegotiation: ContractNegotiationController;
+    // private contractNegotiation = this.edcConnectorClient.management.contractNegotiations;
 
-    constructor(private edcConnectorClient: EdcConnectorClient) {
+    constructor(private edcConnectorClient: EdcConnectorClient, private configService: AppConfigService) {
+      this.config = this.configService.getConfig();
+      this.apiKey = this.config?.apiKey || '';
+      this.contractNegotiation = new ContractNegotiationController(this.edcConnectorClient.createContext(this.apiKey, this.edcConnectorClient.addresses));
     }
 
     /**

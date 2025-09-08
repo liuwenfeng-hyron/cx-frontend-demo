@@ -15,7 +15,8 @@
         <mat-icon>cached</mat-icon>
         Refresh
       </button>
-      <mat-paginator [length]="transferProcesses.length" pageSize="transferProcesses.length" hidePageSize="true"></mat-paginator>
+      <!--<mat-paginator [length]="transferProcesses.length" pageSize="pageSize" hidePageSize="true" (page)="onPageChange($event)"></mat-paginator>-->
+      <mat-paginator [length]="ttlCount" [pageSize]="pageSize" [pageIndex]="pageIndex" [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons (page)="onPageChange($event)"></mat-paginator>
     </div>
 
       <table mat-table [dataSource]="transferProcesses" class="transfer-history-table">

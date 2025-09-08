@@ -22,10 +22,10 @@ export class EdcApiKeyInterceptor implements HttpInterceptor {
     //return next.handle(httpRequest.clone({setHeaders: {"X-Api-Key": this._apiKey}}));
     const token = localStorage.getItem('access_token');
     const access_token = "Bearer " + token;
-    // console.log("=======================HttpInterceptor===========================");
     const url = httpRequest.url;
-    // console.log("url:" + url);
     if(url.includes('/api/public')) {
+      return next.handle(httpRequest.clone());
+    } else if(url.includes('/file/health')) {
       return next.handle(httpRequest.clone());
     } else {
       return next.handle(httpRequest.clone({setHeaders: {"X-Api-Key": this._apiKey, "Authorization": access_token}})); // only CatalogBrowser page has use

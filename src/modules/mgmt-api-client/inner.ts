@@ -18,6 +18,11 @@ export class Inner {
   async request<T>(baseUrl: string, innerRequest: InnerRequest): Promise<T> {
     innerRequest.headers = innerRequest.headers || {};
     innerRequest.headers["Content-type"] = "application/json";
+    // Added On 2025.8.25 Start
+    const token = localStorage.getItem('access_token');
+    const access_token = "Bearer " + token;
+    innerRequest.headers["Authorization"] = access_token;
+    // Added On 2025.8.25 End
 
     const response = await this.#fetch(baseUrl, innerRequest);
 

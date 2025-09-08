@@ -1,4 +1,4 @@
-import {environment} from '../../../environments/environment';
+import {AppConfigService, AppConfig} from "../../app/app-config.service";
 
 interface InnerRequest {
   method: "DELETE" | "GET" | "POST" | "PUT";
@@ -10,9 +10,23 @@ interface InnerRequest {
 
 
 export class ConnectorEndpointController {
+  config?: AppConfig;
+  cofinityXcentralidpUrl = "";
+  cofinityX_client_id = "";
+  cofinityX_grant_type = "";
+  cofinityX_client_secret = "";
+  cofinityXbackendUrl = "";
+
+  constructor(private configService: AppConfigService) {
+    this.config = this.configService.getConfig();
+    this.cofinityXcentralidpUrl = this.config?.cofinityXcentralidpUrl || '';
+    this.cofinityX_client_id = this.config?.cofinityX_client_id || '';
+    this.cofinityX_grant_type = this.config?.cofinityX_grant_type || '';
+    this.cofinityX_client_secret = this.config?.cofinityX_client_secret || '';
+    this.cofinityXbackendUrl = this.config?.cofinityXbackendUrl || '';
+  }
 
   async getAccessToken(): Promise<any> {
-    const baseUrl = environment.cofinityXcentralidpUrl;
     const basePath = "/auth/realms/CX-Central/protocol/openid-connect/token";
 
     const innerRequest : InnerRequest = {
@@ -20,13 +34,13 @@ export class ConnectorEndpointController {
         body: ""
       };
 
-      const url = `${baseUrl}${basePath}`;
+      const url = `${this.cofinityXcentralidpUrl}${basePath}`;
 
       const method = innerRequest.method;
       const params = new URLSearchParams();
-      params.append('client_id', environment.cofinityX_client_id);
-      params.append('grant_type', environment.cofinityX_grant_type);
-      params.append('client_secret', environment.cofinityX_client_secret);
+      params.append('client_id', this.cofinityX_client_id);
+      params.append('grant_type', this.cofinityX_grant_type);
+      params.append('client_secret', this.cofinityX_client_secret);
 
       const request = new Request(url, {
         method,
@@ -42,7 +56,7 @@ export class ConnectorEndpointController {
   }
 
   async request(query = {}, authorization: string): Promise<any> {
-    const baseUrl = environment.cofinityXbackendUrl;
+    const baseUrl = this.cofinityXbackendUrl;
     const basePath = "/api/administration/connectors/discovery";
 
     const innerRequest : InnerRequest = {

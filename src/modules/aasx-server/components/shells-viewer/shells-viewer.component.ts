@@ -34,8 +34,11 @@ export class ShellsViewerComponent implements OnInit {
   }
 
   private showError(error: any, errorMessage: string) {
-    this.notificationService.showError(errorMessage);
     console.error(error);
+    if (error?.error?.Messages?.[0]?.Text) {
+      errorMessage = errorMessage + " : " + error.error.Messages[0].Text;
+    }
+    this.notificationService.showError(errorMessage);    
   }
 
   ngOnInit(): void {
@@ -71,30 +74,37 @@ export class ShellsViewerComponent implements OnInit {
   }
 
   onCreate() {
-      const dialogRef = this.dialog.open(ShellEditorDialog, {data: ""});
+      const dialogRef = this.dialog.open(ShellEditorDialog, {data: "", disableClose: true});
       dialogRef.afterClosed().pipe(first()).subscribe((result: { newShell?: Shell }) => {
           const newShell = result?.newShell;
           if (newShell) {
-            let id = newShell.id;
-            this.apiService.createShell(newShell, id).subscribe({
-              next: () => this.onSearch(),
-              error: err => this.showError(err, "This Shell cannot be created"),
-              complete: () => this.notificationService.showInfo("Successfully created"),
-            })
+            if (newShell.id === null || newShell.id.trim() === "") {
+              this.showError({}, "This Shell cannot be created : ID is null or an empty string");
+            } else {
+              this.apiService.createShell(newShell, newShell.id).subscribe({
+                  next: () => this.onSearch(),
+                  error: err => this.showError(err, "This Shell cannot be created"),
+                  complete: () => this.notificationService.showInfo("Successfully created"),
+                })
+            }            
           }
       })
   }
 
   onUpdate(id: string) {
-    const dialogRef = this.dialog.open(ShellEditorDialog, {data: id});
+    const dialogRef = this.dialog.open(ShellEditorDialog, {data: id, disableClose: true});
     dialogRef.afterClosed().pipe(first()).subscribe((result: { newShell?: Shell, changeThumbnail?: boolean }) => {
         const newShell = result?.newShell;
         if (newShell) {
-          this.apiService.updateShell(id, newShell).subscribe({
-            next: () => this.fetch$.next(null),
-            error: err => this.showError(err, "This Shell cannot be updated"),
-            complete: () => this.notificationService.showInfo("Successfully updated"),
-          })
+          if (newShell.id === null || newShell.id.trim() === "") {
+            this.showError({}, "This Shell cannot be updated : ID is null or an empty string");
+          } else {
+            this.apiService.updateShell(id, newShell).subscribe({
+              next: () => this.fetch$.next(null),
+              error: err => this.showError(err, "This Shell cannot be updated"),
+              complete: () => this.notificationService.showInfo("Successfully updated"),
+            })
+          }
         } else if(result?.changeThumbnail) {
           this.fetch$.next(null);
         }

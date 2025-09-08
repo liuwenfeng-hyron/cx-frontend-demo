@@ -27,7 +27,7 @@ export class ShellEditorDialog implements OnInit {
   // jsonFieldKeys = ['displayName', 'description', 'extensions', 'embeddedDataSpecifications', 'derivedFrom.keys', 'administration.embeddedDataSpecifications'];
   jsonFieldKeys = ['displayName', 'description', 'extensions', 'embeddedDataSpecifications', 'derivedFrom.keys'];
   shell: Shell = {
-    id: "",
+    id: "xxx",
     idShort : "",
     displayName: JSON.parse("[]"),
     description: JSON.parse("[]"),

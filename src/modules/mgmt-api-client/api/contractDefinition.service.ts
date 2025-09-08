@@ -16,6 +16,8 @@ import { HttpResponse, HttpEvent, HttpContext } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
 import { EdcConnectorClient } from '@think-it-labs/edc-connector-client';
 import { ContractDefinitionInput, ContractDefinition, IdResponse, QuerySpec } from "../model"
+import {ContractDefinitionController} from "../../mgmt-api-client";
+import {AppConfigService, AppConfig} from "../../app/app-config.service";
 
 
 @Injectable({
@@ -23,9 +25,15 @@ import { ContractDefinitionInput, ContractDefinition, IdResponse, QuerySpec } fr
 })
 export class ContractDefinitionService {
 
-    private contractDefinitions = this.edcConnectorClient.management.contractDefinitions;
+    config?: AppConfig;
+    apiKey = "";
+    private contractDefinitions: ContractDefinitionController;
+    // private contractDefinitions = this.edcConnectorClient.management.contractDefinitions;
 
-    constructor(private edcConnectorClient: EdcConnectorClient) {
+    constructor(private edcConnectorClient: EdcConnectorClient, private configService: AppConfigService) {
+      this.config = this.configService.getConfig();
+      this.apiKey = this.config?.apiKey || '';
+      this.contractDefinitions = new ContractDefinitionController(this.edcConnectorClient.createContext(this.apiKey, this.edcConnectorClient.addresses));
     }
 
     /**

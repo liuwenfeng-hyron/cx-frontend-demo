@@ -50,7 +50,7 @@ export class PolicyViewComponent implements OnInit {
   }
 
   onCreate() {
-    const dialogRef = this.dialog.open(NewPolicyDialogComponent);
+    const dialogRef = this.dialog.open(NewPolicyDialogComponent, {disableClose: true});
     dialogRef.afterClosed().pipe(first()).subscribe({ next: (newPolicyDefinition: PolicyDefinitionInput) => {
         if (newPolicyDefinition) {
           this.policyService.createPolicy(newPolicyDefinition).subscribe(

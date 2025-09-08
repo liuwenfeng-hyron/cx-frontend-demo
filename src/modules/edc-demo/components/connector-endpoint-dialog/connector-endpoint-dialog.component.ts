@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JsonLdObject } from "@think-it-labs/edc-connector-client";
 import { ConnectorEndpointController } from "../../../mgmt-api-client";
 import { MatDialogRef } from "@angular/material/dialog";
-
+import {AppConfigService, AppConfig} from "../../../app/app-config.service";
 
 @Component({
   selector: 'connector-endpoint-dialog',
@@ -15,9 +15,10 @@ export class ConnectorEndpointDialog implements OnInit {
   connectorinfo: any;
   authorization: string = "";
 
-  private connectorEndpointService = new ConnectorEndpointController();
+  private connectorEndpointService :ConnectorEndpointController;
   
-  constructor(private dialogRef: MatDialogRef<ConnectorEndpointDialog>) {
+  constructor(private dialogRef: MatDialogRef<ConnectorEndpointDialog>, private configService: AppConfigService) {
+    this.connectorEndpointService = new ConnectorEndpointController(this.configService);
   }
 
   ngOnInit(): void {

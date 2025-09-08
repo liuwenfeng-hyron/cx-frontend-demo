@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Asset } from "@think-it-labs/edc-connector-client";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { JsonLdObject } from '@think-it-labs/edc-connector-client';
+// import { JsonLdObject } from "../../../mgmt-api-client";
 
 @Component({
   selector: 'edc-demo-asset-detail',
@@ -19,7 +20,7 @@ export class AssetDetail implements OnInit {
   ngOnInit(): void {
   }
 
-  getOptionalValue(types: JsonLdObject): any {
+  getOptionalValue(types: JsonLdObject | undefined): any {
     if (types && Array.isArray(types) && types.length > 0) {
       const firstType = types[0];
       if (firstType && typeof firstType === 'object' && '@id' in firstType) {

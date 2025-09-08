@@ -33,8 +33,11 @@ export class SubmodelsViewerComponent implements OnInit {
   }
 
   private showError(error: any, errorMessage: string) {
-    this.notificationService.showError(errorMessage);
     console.error(error);
+    if (error?.error?.Messages?.[0]?.Text) {
+      errorMessage = errorMessage + " : " + error.error.Messages[0].Text;
+    }
+    this.notificationService.showError(errorMessage);
   }
 
   ngOnInit(): void {
@@ -70,30 +73,37 @@ export class SubmodelsViewerComponent implements OnInit {
   }
 
   onCreate() {
-      const dialogRef = this.dialog.open(SubmodelEditorDialog, {data: ""});
+      const dialogRef = this.dialog.open(SubmodelEditorDialog, {data: "", disableClose: true});
       dialogRef.afterClosed().pipe(first()).subscribe((result: { newSubmodel?: Submodel }) => {
           const newSubmodel = result?.newSubmodel;
           if (newSubmodel) {
-            let id = newSubmodel.id;
-            this.apiService.createSubmodel(newSubmodel, id).subscribe({
-              next: () => this.onSearch(),
-              error: err => this.showError(err, "This Submodel cannot be created"),
-              complete: () => this.notificationService.showInfo("Successfully created"),
-            })
+            if (newSubmodel.id === null || newSubmodel.id.trim() === "") {
+              this.showError({}, "This Submodel cannot be created : ID is null or an empty string");
+            } else {
+              this.apiService.createSubmodel(newSubmodel, newSubmodel.id).subscribe({
+                next: () => this.onSearch(),
+                error: err => this.showError(err, "This Submodel cannot be created"),
+                complete: () => this.notificationService.showInfo("Successfully created"),
+              })
+            }            
           }
       })
   }
 
   onUpdate(id: string) {
-    const dialogRef = this.dialog.open(SubmodelEditorDialog, {data: id});
+    const dialogRef = this.dialog.open(SubmodelEditorDialog, {data: id, disableClose: true});
     dialogRef.afterClosed().pipe(first()).subscribe((result: { newSubmodel?: Submodel }) => {
         const newSubmodel = result?.newSubmodel;
         if (newSubmodel) {
-          this.apiService.updateSubmodel(id, newSubmodel).subscribe({
-            next: () => this.fetch$.next(null),
-            error: err => this.showError(err, "This Submodel cannot be updated"),
-            complete: () => this.notificationService.showInfo("Successfully updated"),
-          })
+          if (newSubmodel.id === null || newSubmodel.id.trim() === "") {
+            this.showError({}, "This Submodel cannot be updated : ID is null or an empty string");
+          } else {
+            this.apiService.updateSubmodel(id, newSubmodel).subscribe({
+              next: () => this.fetch$.next(null),
+              error: err => this.showError(err, "This Submodel cannot be updated"),
+              complete: () => this.notificationService.showInfo("Successfully updated"),
+            })
+          }          
         }
     })
   }

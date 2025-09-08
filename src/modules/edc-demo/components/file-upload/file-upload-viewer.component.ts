@@ -21,11 +21,11 @@ export class FileUploadViewer implements OnInit {
     "endDate" : "2025-08-07T23:59",
     "messageId" : "",
     "pageNum" : "1",
-    "pageSize" : "10",
+    "pageSize" : "50",
     "sortOrder" : "DESC"
   }
   pageIndex = 0;
-  pageSize = 10;
+  pageSize = 50;
   isLoading: boolean = false;
   private fetch$ = new BehaviorSubject(null);
   filteredFileStatus$: Observable<FileStatus[]> = of([]);
@@ -66,6 +66,8 @@ export class FileUploadViewer implements OnInit {
   }
 
   onSearch() {
+    this.searchCond.pageNum = "0";
+    this.searchCond.pageSize = this.pageSize.toString();
     this.isLoading = true;
     this.fetch$.next(null);
   }
@@ -79,6 +81,9 @@ export class FileUploadViewer implements OnInit {
   }
 
   onPageChange(event: any) {
+    console.log("-----------------------");
+    console.log("event.pageIndex:" + event.pageIndex);
+
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
     this.searchCond.pageNum = event.pageIndex + 1;

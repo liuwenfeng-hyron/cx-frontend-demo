@@ -32,7 +32,7 @@ export class ShellDescriptorEditorDialog implements OnInit {
         this.shellDescriptor = JSON.stringify(desc, null, 4);
       });
     } else {
-      this.shellDescriptor = JSON.stringify(JSON.parse(ShellDescriptorTemplate["withoutSubmodel"]), null, 4);
+      this.shellDescriptor = JSON.stringify(JSON.parse(ShellDescriptorTemplate["withSubmodel"]), null, 4);
     }
   }
 
