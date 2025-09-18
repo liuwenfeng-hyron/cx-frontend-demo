@@ -16,6 +16,15 @@
           </a> 
         </div>    
         <!-- Modified By Ljz On 2024.11.6 End-->    
+        <div *ngFor="let route of routes_dtr">
+          <a *ngIf="route.path == 'groupTitle'" mat-list-item >
+            {{ route.data?.title }}
+          </a>
+          <a *ngIf="route.path != 'groupTitle'" mat-list-item [routerLink]="[route.path]">
+            <mat-icon matListItemIcon>{{route.data?.icon}}</mat-icon>
+            {{route.data?.title ?? route.path}}
+          </a> 
+        </div>    
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

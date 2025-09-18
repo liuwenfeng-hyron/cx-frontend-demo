@@ -22,10 +22,10 @@ export class SubmodelService {
     // httpParams = httpParams.append("limit", limit.toString());
 
     return this.aasxHttpClient.get<JSON>("/submodels/$metadata", httpParams)
-      .pipe(map(shellDescriptor => {
+      .pipe(map(sm => {
         const arr = Array<Submodel>();
        
-        let datasets = (shellDescriptor as any)?.result || [];
+        let datasets = (sm as any)?.result || [];
         if (!Array.isArray(datasets)) {
           datasets = [datasets];
         }
@@ -47,6 +47,13 @@ export class SubmodelService {
       }));
   }
 
+  getSubmodelValueDataById(id: string): Observable<any> {
+    if (!id) {
+      return EMPTY;
+    }
+    const idBase64 = btoa(id);
+    return this.aasxHttpClient.get<any>(`/submodels/${idBase64}/$value`);
+  }
 
   getSubmodelById(id: string): Observable<Submodel> {
     let httpParams = new HttpParams();
@@ -55,8 +62,8 @@ export class SubmodelService {
     if(id) {
       idBase64 = btoa(id);
       return this.aasxHttpClient.get<any>("/submodels/" + idBase64, httpParams)
-        .pipe(map(shellDescriptor => {
-          return (shellDescriptor as Submodel);
+        .pipe(map(sm => {
+          return (sm as Submodel);
         }));
     } else {
       return EMPTY;

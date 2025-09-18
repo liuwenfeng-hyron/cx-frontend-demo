@@ -12,9 +12,12 @@ import {Submodel} from '../../models/submodel';
 })
 export class SubmodelDetail implements OnInit {
   submodel$: Observable<Submodel> = of();
-
+  idBase64 = "";
+  submodelValue$: Observable<any> = of();
   constructor(private apiService: SubmodelService, private payloadService: PayloadService, @Inject(MAT_DIALOG_DATA) id:string) {
+    this.idBase64 = btoa(id);
     this.submodel$ = this.apiService.getSubmodelById(id);
+    this.submodelValue$ = this.apiService.getSubmodelValueDataById(id);
   }
 
   ngOnInit(): void {

@@ -181,7 +181,6 @@ export class ContractViewerComponent implements OnInit {
    * @param agreementId
    */
   private getNegotiation(agreementId: string): Observable<ContractNegotiation> {
-    console.log("agreementId:" + agreementId);
     return this.contractAgreementService.getNegotiation(agreementId)
       .pipe(
         map(o => {
@@ -220,7 +219,7 @@ export class ContractViewerComponent implements OnInit {
             })
           }),
         ).subscribe(() => {
-		console.log("runningtransfers.length === 0");
+		    console.log("runningtransfers.length === 0");
         // clear interval if necessary
         if (this.runningTransfers.length === 0) {
           clearInterval(this.pollingHandleTransfer);

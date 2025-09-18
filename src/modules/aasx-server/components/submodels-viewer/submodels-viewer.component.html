@@ -10,7 +10,7 @@
         </button>
       </mat-form-field>
       <!-- paginator -->
-      <mat-paginator [length]="(filteredSubmodels)?.length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons (page)="onPageChange($event)"> </mat-paginator>
+      <mat-paginator [length]="(filteredSubmodels)?.length" [pageIndex]="pageIndex" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons (page)="onPageChange($event)"> </mat-paginator>
       <button (click)="onCreate()" color="primary" mat-raised-button  class="action-button">
         Create
       </button>

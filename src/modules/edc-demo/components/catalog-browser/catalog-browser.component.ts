@@ -59,10 +59,10 @@ export class CatalogBrowserComponent implements OnInit {
     this.filteredContractOffers$ = this.fetch$
       .pipe(
         switchMap(() => {
-          const contractOffers$ = this.apiService.getContractOffers(this.customProviders);
+          const contractOffers$ = this.apiService.getContractOffers(this.customProviders, this.counterPartyId);
           return !!this.searchText ?
-            //contractOffers$.pipe(map(contractOffers => contractOffers.filter(contractOffer => contractOffer.id.toLowerCase().includes(this.searchText))))
-            contractOffers$.pipe(map(contractOffers => contractOffers.filter(contractOffer => contractOffer.assetId.toLowerCase().includes(this.searchText))))
+            //contractOffers$.pipe(map(contractOffers => contractOffers.filter(contractOffer => contractOffer.id.toLowerCase().includes(this.searchText.toLowerCase()))))
+             contractOffers$.pipe(map(contractOffers => contractOffers.filter(contractOffer => contractOffer.assetId.toLowerCase().includes(this.searchText.toLowerCase()))))
             :
             contractOffers$;
         }));
@@ -92,6 +92,27 @@ export class CatalogBrowserComponent implements OnInit {
      */
     // Deleted By nri On 2024.11.12 End
     // Added By nri On 2024.11.12 Start
+    // Added By nri On 2025.9.16 Start
+    console.log("------------contractOffer.originator----------------");
+    console.log(contractOffer.originator);
+    console.log("------------contractOffer.participantId---------------");
+    console.log(contractOffer.participantId);
+    if (contractOffer.originator === undefined || 
+      contractOffer.originator === null || 
+      contractOffer.originator === '') {
+      contractOffer.originator = this.customProviders;
+    }
+    if (contractOffer.participantId === undefined || 
+      contractOffer.participantId === null || 
+      contractOffer.participantId === '') {
+      contractOffer.participantId = this.counterPartyId;
+    }
+    console.log("------------contractOffer.originator----------------");
+    console.log(contractOffer.originator);
+    console.log("------------contractOffer.participantId---------------");
+    console.log(contractOffer.participantId);
+    // Added By nri On 2025.9.16 End
+
     // Modified By nri On 2025.02.13 Start
     const initiateRequest  = {
       "@type": "NegotiationInitiateRequestDto",

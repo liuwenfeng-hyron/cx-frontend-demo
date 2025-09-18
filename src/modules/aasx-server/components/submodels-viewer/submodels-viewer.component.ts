@@ -17,10 +17,11 @@ import {SubmodelEditorDialog} from "../submodel-editor-dialog/submodel-editor-di
   styleUrls: ['./submodels-viewer.component.scss']
 })
 export class SubmodelsViewerComponent implements OnInit {
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  // @ViewChild(MatPaginator) paginator!: MatPaginator;
   columns: string[] = ['id', 'idShort', 'kind', 'action'];
   searchText = '';
   offset = 0;
+  pageIndex = 0;
   pageSize = 10;
   isTransferring = false;
   private fetch$ = new BehaviorSubject(null);
@@ -54,14 +55,16 @@ export class SubmodelsViewerComponent implements OnInit {
   
   onSearch() {
     this.offset = 0;
-    this.paginator.pageIndex = 0;
-    this.paginator.pageSize = this.pageSize;
+    this.pageIndex = 0;
+    // this.paginator.pageIndex = 0;
+    // this.paginator.pageSize = this.pageSize;
     this.fetch$.next(null);
   }
 
   onPageChange(event: any) {
-    this.offset = event.pageIndex * event.pageSize;
+    this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
+    this.offset = event.pageIndex * event.pageSize;
   }
 
   isBusy() {
@@ -85,7 +88,7 @@ export class SubmodelsViewerComponent implements OnInit {
                 error: err => this.showError(err, "This Submodel cannot be created"),
                 complete: () => this.notificationService.showInfo("Successfully created"),
               })
-            }            
+            }
           }
       })
   }
@@ -124,4 +127,5 @@ export class SubmodelsViewerComponent implements OnInit {
       }
     });
   }
+
 }

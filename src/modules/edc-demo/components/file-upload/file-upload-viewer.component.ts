@@ -53,7 +53,6 @@ export class FileUploadViewer implements OnInit {
             const fileStatus$ = this.apiService.getFileStatus(this.searchCond);
             if(this.isLoading) {
                 setTimeout(() => {
-                console.log('after 1 s');
                 this.isLoading = false;
               }, 1000);
             }
@@ -66,6 +65,7 @@ export class FileUploadViewer implements OnInit {
   }
 
   onSearch() {
+    this.pageIndex = 0;
     this.searchCond.pageNum = "0";
     this.searchCond.pageSize = this.pageSize.toString();
     this.isLoading = true;
@@ -81,9 +81,6 @@ export class FileUploadViewer implements OnInit {
   }
 
   onPageChange(event: any) {
-    console.log("-----------------------");
-    console.log("event.pageIndex:" + event.pageIndex);
-
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
     this.searchCond.pageNum = event.pageIndex + 1;

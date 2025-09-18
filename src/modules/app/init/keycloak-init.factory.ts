@@ -8,15 +8,11 @@ export function initializeKeycloak(
 ): () => Promise<any> {
   return () => {
     return configService.loadConfig().then((config) => {
-      // console.log('Loaded Config:', config);
-
       const keycloakConfig = {
         url: config?.keycloak_url || '',
         realm: config?.keycloak_realm || '',
         clientId: config?.keycloak_clientId || '',
       };
-
-      console.log('Using Keycloak Config:', keycloakConfig);
 
       if (!keycloakConfig.url || !keycloakConfig.realm || !keycloakConfig.clientId) {
         throw new Error('Keycloak configuration is incomplete. Check your config.json.');

@@ -2,18 +2,19 @@
 <mat-divider></mat-divider>
 <mat-dialog-content>
   <div *ngIf="edrinfo">
-    <!--<div>{{ edrinfo | json }}</div> -->
     <h3>Transfer ID</h3>
-    <div>{{id}}</div>
+    <textarea rows="1">{{ id }}</textarea>
     <h3>Endpoint</h3>
-    <!--<textarea class="endpoint">{{ edrinfo['https://w3id.org/edc/v0.0.1/ns/endpoint'][0]['@value'] }}</textarea>-->
-    <textarea class="endpoint">{{ edrinfo.optionalValue('edc','endpoint') }}</textarea>
+    <textarea rows="2">{{ edrinfo.optionalValue('edc','endpoint') }}</textarea>
     <h3>Authorization</h3>
-    <!--<textarea>{{ edrinfo['https://w3id.org/edc/v0.0.1/ns/authorization'][0]['@value'] }}</textarea>-->
-    <textarea class="endpoint">{{ edrinfo.optionalValue('edc','authorization') }}</textarea>
+    <textarea rows="7">{{ edrinfo.optionalValue('edc','authorization') }}</textarea>
     <h3>AuthType</h3>
-    <!--<div>{{ edrinfo['https://w3id.org/edc/v0.0.1/ns/authType'][0]['@value'] }}</div>-->
     <div>{{ edrinfo.optionalValue('edc','authType')  }}</div>
+    <!--Added On 2025.9.16-->
+    <label>
+      <input type="checkbox" [(ngModel)]="isGetSubmodelValue" (ngModelChange)="doGetSubmodelValue()">
+      SubmodelValue
+    </label>
   </div>
   <div *ngIf="realData">
     <h3>RealData</h3>

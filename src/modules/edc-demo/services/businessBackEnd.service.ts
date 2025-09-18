@@ -19,11 +19,6 @@ export class BusinessBackEndService {
     constructor(private backendHttpClient: BackendHttpClient) {
     }
 
-    // Added on 2025.8.26 For WAF check
-    getForWAFcheck(): Observable<any> {
-      return this.backendHttpClient.getForWAF<any>("");
-    }
-
     uploadFile(formData: FormData): Observable<JSON> {
       return this.backendHttpClient.postFile<JSON>("/file/file-upload", formData);
     }

@@ -17,7 +17,6 @@ import {
   TransferProcess,
   TransferProcessInput
 } from "../../mgmt-api-client/model";
-import {environment} from '../../../environments/environment';
 
 
 /**
@@ -36,19 +35,9 @@ export class CatalogBrowserService {
   }
 
   getContractOffers(newCounterPartyAddress ?: string, newCounterPartyId ?: string, assetTypeId ?: string): Observable<ContractOffer[]> {
-    let counterPartyAddress = environment.counterPartyAddress;
+    let counterPartyAddress = newCounterPartyAddress || "";
+    let counterPartyId = newCounterPartyId || "";
 
-    if(newCounterPartyAddress && '' !== newCounterPartyAddress) {
-      counterPartyAddress = newCounterPartyAddress;
-    }
-
-    let counterPartyId = environment.counterPartyId;
-
-    if(newCounterPartyId && '' !== newCounterPartyId) {
-      counterPartyId = newCounterPartyId;
-    }
-
-    //console.log("counterPartyId:" + counterPartyId);
     // Added by Nri On 2025.4.22 Start
     let filterExp = '';
     if(assetTypeId && '' !== assetTypeId) {
@@ -74,7 +63,6 @@ export class CatalogBrowserService {
     return this.post<Catalog>(url + "/v3/catalog/request", counterPartyAddress, counterPartyId, 0, 100, filterExp)
       .pipe(map(catalog => {
         const arr = Array<ContractOffer>();
-        console.log("catalog:" + catalog);
         let datasets = catalog["dcat:dataset"];
         if (!Array.isArray(datasets)) {
           datasets = [datasets];
@@ -98,7 +86,7 @@ export class CatalogBrowserService {
             contentType: dataSet["contenttype"]
           }
           // Modified By Ljz On 2024.11.20 End
-          const assetId = dataSet["@id"];
+          const assetId = dataSet["id"];
 
           const hasPolicy = dataSet["odrl:hasPolicy"];
 

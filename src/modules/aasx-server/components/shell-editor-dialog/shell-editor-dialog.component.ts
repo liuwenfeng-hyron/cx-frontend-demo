@@ -37,7 +37,7 @@ export class ShellEditorDialog implements OnInit {
     extensions: JSON.parse("[]"),
     category: "",
     embeddedDataSpecifications: JSON.parse("[]"),
-    derivedFrom: {type:"", keys: JSON.parse("[]")},
+    derivedFrom: {type:"ExternalReference", keys: JSON.parse("[]")},
     submodels: JSON.parse("[]"),
     modelType: "AssetAdministrationShell",
   };
@@ -208,7 +208,6 @@ export class ShellEditorDialog implements OnInit {
     this.apiService.uploadThumbnail(this.shell.id, formData)
       .subscribe({
         next: (response) => {
-          console.log('Upload successful', response);
           this.uploadStatus = 'Picture Upload Successful';
           this.shellThumbnailViewerComponent.refreshData();
           if(this.selectedFile?.name) {

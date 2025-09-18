@@ -84,6 +84,15 @@ export const routes: Routes = [
     component: TransferIdViewer,
     data: {title: 'Transfer Id Config', icon: 'assignment'}
   },
+  /**,
+  {
+    path: 'dashboard', // by ljz 2024.11.1
+    component: DashboardComponent,
+    data: {title: '', icon: ''}
+  },**/
+];
+
+export const routes_dtr: Routes = [
   {
     path: 'groupTitle',
     data: {title: 'AASX SERVER'}
@@ -111,21 +120,16 @@ export const routes: Routes = [
     path: 'shell-descriptors',
     component: ShellDescriptorsViewerComponent,
     data: {title: 'Shell Descriptors', icon: 'rule'}
-  },  
-  {
-    path: '', redirectTo: 'introduction', pathMatch: 'full'
-  },
-  /**,
-  {
-    path: 'dashboard', // by ljz 2024.11.1
-    component: DashboardComponent,
-    data: {title: '', icon: ''}
-  },**/
-
+  }
 ];
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
+const allRoutes: Routes = [
+  ...routes, 
+  ...routes_dtr
+];
+
+@NgModule({  
+  imports: [RouterModule.forRoot(allRoutes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

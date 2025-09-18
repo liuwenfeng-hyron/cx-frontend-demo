@@ -79,7 +79,6 @@ export class AasxPackageService {
           const xFileName = headers.get('X-FileName');
 
           if (xFileName) {
-            console.log('FileName:', xFileName);
             this.downloadBlob(blob, xFileName);
           } else {
             console.warn('X-FileName Header Not Found');

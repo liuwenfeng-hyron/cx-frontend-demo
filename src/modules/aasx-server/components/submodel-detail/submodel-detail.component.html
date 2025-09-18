@@ -3,8 +3,9 @@
 
 <div *ngIf="submodel$ | async as submodel">
   <mat-tab-group>
-    <mat-tab label="payload">
+    <mat-tab label="Payload">
       <mat-dialog-content>
+        <p>Path : <span class="value-span"> /submodels/{{idBase64}} </span></p>
         <p>Id : <span class="value-span"> {{submodel.id}} </span></p>
         <p>IdShort: <span class="value-span"> {{submodel.idShort}} </span></p>
         <p>Kind : <span class="value-span"> {{submodel.kind}} </span></p>
@@ -12,9 +13,11 @@
         <div class="div-submodel-element"><submodel-element-table [dataSource]="submodel.submodelElements" [isReadOnly]="true"></submodel-element-table></div>        
       </mat-dialog-content>
     </mat-tab>
-    <mat-tab label="json">
+    <mat-tab label="Value">
       <mat-dialog-content>
-          <ngx-json-viewer [json]=submodel [depth]="2"></ngx-json-viewer>
+          <div *ngIf="submodelValue$ | async as data">
+            <ngx-json-viewer [json]=data></ngx-json-viewer>
+          </div>
       </mat-dialog-content>
     </mat-tab>
   </mat-tab-group>

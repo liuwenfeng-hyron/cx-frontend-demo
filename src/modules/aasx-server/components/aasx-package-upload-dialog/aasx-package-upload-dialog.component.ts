@@ -55,7 +55,6 @@ export class AasxPackageUploadDialog implements OnInit {
     this.apiService.uploadPackage(this.id, formData)
       .subscribe({
         next: (response) => {
-          console.log('Upload successful', response);
           this.uploadStatus = 'Aasx File Upload Successful';
         },
         error: (err) => {

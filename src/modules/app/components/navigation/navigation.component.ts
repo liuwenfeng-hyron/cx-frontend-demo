@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { routes } from '../../app-routing.module';
+import { routes, routes_dtr } from '../../app-routing.module';
 import { Title } from '@angular/platform-browser';
+import { KeycloakService } from 'keycloak-angular';
 
 @Component({
   selector: 'app-navigation',
@@ -19,9 +20,17 @@ export class NavigationComponent {
     );
 
   routes = routes;
+  routes_dtr : any;
 
   constructor(
     public titleService: Title,
-    private breakpointObserver: BreakpointObserver) {
+    private breakpointObserver: BreakpointObserver,
+    private keycloakService: KeycloakService) {
+      let roles = this.keycloakService.getUserRoles();
+      roles.forEach(role => {
+        if(role === 'dtr-role') {
+          this.routes_dtr = routes_dtr;
+        }
+      });
   }
 }

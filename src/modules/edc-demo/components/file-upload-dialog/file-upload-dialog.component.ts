@@ -1,5 +1,4 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import {BusinessBackEndService} from "../../services/businessBackEnd.service";
 import {MatDialogRef} from '@angular/material/dialog';
 import {NotificationService} from "../../services/notification.service";
@@ -63,7 +62,6 @@ export class FileUploadDialog implements OnInit {
     this.apiService.uploadFile(formData)
       .subscribe({
         next: (response) => {
-          console.log('Upload successful', response);
           this.uploadStatus = 'File Upload Successful';
           this.response = response;
         },

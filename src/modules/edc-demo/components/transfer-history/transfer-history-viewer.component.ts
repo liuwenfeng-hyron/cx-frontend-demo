@@ -33,7 +33,6 @@ export class TransferHistoryViewerComponent implements OnInit {
     // Added By ljz On 2025.8.27 Start
     this.transferProcesses$.subscribe((dataArray) => {
       const currentItemCount = dataArray.length;
-      console.log('currentItemCount:', currentItemCount);
       this.ttlCount = currentItemCount;
     });
     this.limit = this.pageSize;
@@ -83,7 +82,6 @@ export class TransferHistoryViewerComponent implements OnInit {
   // Added By ljz On 2024.11.12 Start
   // EDR情報を表示する
   onGetDataAddressClick(id: string): void {
-    //console.log("onGetDataAddressClick id:" + id);
     this.dialog.open(EdrInfoDialog, {data: id, enterAnimationDuration:'1000ms'});   
   }
   // Added By ljz On 2024.11.12 End

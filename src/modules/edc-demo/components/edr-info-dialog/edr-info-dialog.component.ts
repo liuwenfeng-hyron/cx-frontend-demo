@@ -19,6 +19,7 @@ export class EdrInfoDialog implements OnInit {
   realData: string  | null = null;
   config?: AppConfig;
   apiKey = "";
+  isGetSubmodelValue = false;
   private edrService: EdrController;
   private proxyService: ProxyController;
 
@@ -64,5 +65,35 @@ export class EdrInfoDialog implements OnInit {
       document.body.removeChild(a);
       window.URL.revokeObjectURL(url);
     });
+  }
+
+  doGetSubmodelValue():void {
+    if(this.isGetSubmodelValue) {
+      this.getSubmodelValue().then((data: any) =>{
+        this.realData = data;
+      });
+    }    
+  }
+
+  async getSubmodelValue(): Promise<String> {
+    if(!this.edrinfo) {
+      return "";
+    }
+    const access_token = this.edrinfo?.optionalValue('edc','authorization') as string;
+    const url = this.edrinfo?.optionalValue('edc','endpoint') + "/$value";
+    const request = new Request(url, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": access_token
+      },
+      body: null,
+    });
+    const response = await fetch(request);
+    if(response.ok) {
+      return response.text();
+    } else {
+      return "";
+    }
   }
 }

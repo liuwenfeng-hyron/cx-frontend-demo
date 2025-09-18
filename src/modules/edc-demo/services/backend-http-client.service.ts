@@ -84,10 +84,6 @@ export class BackendHttpClient {
     : Observable<T> {
     let baseUrl = this.config?.wafCheckUrl;
     const url = baseUrl + `${urlPath}`;
-    console.log("--------------getForWAF--------------");
-    console.log(url);
-    // let headers = new HttpHeaders({});
-    // return this.catchError(this.httpClient.get<T>(url, {headers, params}), url, 'GET');
     return this.httpClient.get<any>(url);
   }
 

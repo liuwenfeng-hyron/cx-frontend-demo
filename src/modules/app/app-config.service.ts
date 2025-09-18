@@ -49,7 +49,6 @@ export class AppConfigService {
 
   // loadConfig2(): void /* Promise<void> */ {
   //   this.config = environment
-  //   console.log(this.config.managementApiUrl)
   // }
 
   async loadConfig(): Promise<AppConfig> {

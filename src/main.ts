@@ -19,8 +19,6 @@ window.fetch = new Proxy(window.fetch, {
       if(headers.get("access_token")) {
         const token = localStorage.getItem('access_token')
         if (token) {
-          console.log("=================Proxy=================");
-          console.log("Authorization:" + headers.get("Authorization"));
           if(headers.get("Authorization")) {
             headers.append('Authorization', "Bearer " +token)
           }

@@ -15,4 +15,12 @@ export class SubmodelElementViewerComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
+  onNumberInputChange(newValue: string, item: any) {
+    if (newValue) {
+      item.value = newValue.toString();
+    } else {
+      item.value = "";
+    }
+  }
 }
