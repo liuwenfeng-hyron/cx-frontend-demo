@@ -4,6 +4,7 @@ import { MatDialogRef } from "@angular/material/dialog";
 import { StorageType } from "../../models/storage-type";
 import { AssetType } from '../../models/asset-type';
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import {AppConfigService, AppConfig} from "../../../app/app-config.service";
 
 @Component({
   selector: 'edc-demo-asset-editor-dialog',
@@ -12,6 +13,7 @@ import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 })
 export class AssetEditorDialog implements OnInit {
 
+  config?: AppConfig;
   id: string = '';
   version: string = '';
   name: string = '';
@@ -27,10 +29,12 @@ export class AssetEditorDialog implements OnInit {
   blobname: string = '';
   baseUrl: string = '';
   semanticId: string = '';
+  news_submodel_path: string = '';
 
   isEditMode = false;
 
   constructor(private dialogRef: MatDialogRef<AssetEditorDialog>,
+      private configService: AppConfigService,
       @Inject('STORAGE_TYPES') public storageTypes: StorageType[],
       @Inject('ASSET_TYPES') public assetTypes: AssetType[],
       @Inject(MAT_DIALOG_DATA) assetInfo:AssetInput) {
@@ -47,6 +51,7 @@ export class AssetEditorDialog implements OnInit {
   }
 
   ngOnInit(): void {
+    this.config = this.configService.getConfig();
   }
 
   onSave() {
@@ -117,8 +122,8 @@ export class AssetEditorDialog implements OnInit {
       // dataAddress
       assetInput.dataAddress.proxyPath = "true";
       assetInput.dataAddress.proxyQueryParams = "true";
-      assetInput.dataAddress.proxyBody = "true";
-      assetInput.dataAddress.proxyMethod = "true";
+      assetInput.dataAddress.proxyBody = "false";
+      assetInput.dataAddress.proxyMethod = "false";
     } else if(this.assetTypeId === "PcfExchange") {
       // properties
       assetInput.properties = {
@@ -134,8 +139,8 @@ export class AssetEditorDialog implements OnInit {
       // dataAddress
       assetInput.dataAddress.proxyPath = "true";
       assetInput.dataAddress.proxyQueryParams = "true";
-      assetInput.dataAddress.proxyBody = "true";
-      assetInput.dataAddress.proxyMethod = "true";
+      assetInput.dataAddress.proxyBody = "false";
+      assetInput.dataAddress.proxyMethod = "false";
     } else if(this.assetTypeId === "Submodel") {
       // properties
       assetInput.properties = {
@@ -152,8 +157,8 @@ export class AssetEditorDialog implements OnInit {
       // dataAddress
       assetInput.dataAddress.proxyPath = "true";
       assetInput.dataAddress.proxyQueryParams = "true";
-      assetInput.dataAddress.proxyBody = "true";
-      assetInput.dataAddress.proxyMethod = "true";
+      assetInput.dataAddress.proxyBody = "false";
+      assetInput.dataAddress.proxyMethod = "false";
     }
 
     return assetInput;
@@ -161,18 +166,33 @@ export class AssetEditorDialog implements OnInit {
 
   // added by nri 2025.3.7 End
   onAssetTypeChange(): void {
+    this.baseUrl = "";
     if(this.assetTypeId === "EcuCSRDataPushFeedbackNotification") {
       this.version = "2.1";
       this.semanticId = "";
     } else if(this.assetTypeId === "DigitalTwinRegistry") {
       this.version = "";
       this.semanticId = "";
+      this.baseUrl = this.config?.dtrHost + "/api/v3" || ''; 
     } else if(this.assetTypeId === "PcfExchange") {
       this.version = "3.0";
       this.semanticId = "urn:samm:io.catenax.pcf:7.0.0#Pcf";
+      this.baseUrl = this.config?.aasxHost  + "/" || '';
+      this.news_submodel_path = localStorage.getItem('news_submodel_path') || '';
+      if(this.news_submodel_path)
+      {
+        this.baseUrl = this.baseUrl + this.news_submodel_path;
+      }
     } else if(this.assetTypeId === "Submodel") {
       this.version = "3.0";
-      this.semanticId = "urn:bamm:io.catenax.asset_tracker_links:1.0.0#AssetTrackerLinks";
+      // this.semanticId = "urn:bamm:io.catenax.asset_tracker_links:1.0.0#AssetTrackerLinks";
+      this.semanticId = "urn:samm:io.catenax.pcf:7.0.0#Pcf";
+      this.baseUrl = this.config?.aasxHost || '';
+      this.news_submodel_path = localStorage.getItem('news_submodel_path') || '';
+      if(this.news_submodel_path)
+      {
+        this.baseUrl = this.baseUrl + this.news_submodel_path;
+      }
     }
   }
 

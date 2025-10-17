@@ -29,7 +29,7 @@
   </div>
   <div *ngIf="fileStatusResponse$ | async as fileStatusResponse" >
     <!-- paginator -->
-    <mat-paginator [length]="fileStatusResponse.count" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons (page)="onPageChange($event)">
+    <mat-paginator [length]="fileStatusResponse.count" [pageIndex]="pageIndex" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons (page)="onPageChange($event)">
     </mat-paginator>
     <table mat-table [dataSource]="fileStatusResponse.result" class="mat-elevation-z8">
       <ng-container matColumnDef="no">

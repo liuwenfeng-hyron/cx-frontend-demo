@@ -10,7 +10,7 @@ export interface AppConfig {
   cofinityX_grant_type:  string;
   cofinityX_client_secret:  string;
   cofinityXbackendUrl:  string;
-  // 2.EDC
+  // 2.EDC 
   apiKey:  string;
   managementApiUrl:  string;
   catalogUrl:  string;
@@ -28,8 +28,10 @@ export interface AppConfig {
   // 6.DTR
   dtrUrl: string;
   dtrTenant: string;
+  dtrHost: string;
   // 7.assxServer
   assxServerUrl: string;
+  aasxHost: string;
   // 8.WAF
   wafCheckUrl: string;
 

@@ -71,6 +71,9 @@ export class SubmodelService {
   }
 
   createSubmodel(body: any, id: string): Observable<JSON> {
+    // for EDC Create Asset(submodel)
+    localStorage.setItem('news_submodel_path', "/submodels/" + btoa(id));
+
     let httpParams = new HttpParams();
     httpParams = httpParams.append("aasIdentifier", btoa(id));
     let requestBody = body;

@@ -4,44 +4,46 @@
 
 export const environment = {
   production: false,
-  apiKey: "password",
-  //managementApiUrl: "http://132.145.140.230/consumer/cp/api/management",
-  //catalogUrl: "http://132.145.140.230/consumer/cp/api/management",
-  //managementApiUrl: "http://localhost:4300/consumer/cp/api/management",
-  //catalogUrl: "http://localhost:4300/consumer/cp/api/management",
-  // Added On 20250224 Start
-  cofinityXcentralidpUrl: "http://localhost:4300/cofinityXcentralidp",
+  // 1.cofinityX(prod)
+  cofinityXcentralidpUrl: "/cofinityXcentralidp",
   cofinityX_client_id: "sa201",
   cofinityX_grant_type: "client_credentials",
   cofinityX_client_secret: "BWrdYJuBcWYoqK5ciKUUhgCoV6iUAGzk",
-  cofinityXbackendUrl: "http://localhost:4300/cofinityXbackend",
-  // Added On 20250224 End
-  // Added On 20250123 Start
-  dataPlaneProxyApiUrl: "https://c3r3zxlu3jnfddljkmzul6eofi.apigateway.us-ashburn-1.oci.customer-oci.com/proxy-beta1",
-  // Added On 20250123 End
-  managementApiUrl: "https://c3r3zxlu3jnfddljkmzul6eofi.apigateway.us-ashburn-1.oci.customer-oci.com/management-beta1",
-  catalogUrl: "https://c3r3zxlu3jnfddljkmzul6eofi.apigateway.us-ashburn-1.oci.customer-oci.com/management-beta1",
+  cofinityXbackendUrl: "/cofinityXbackend",
+  // 2.EDC
+  apiKey: "password",
+  managementApiUrl: "/beta/edc/management",
+  catalogUrl: "/beta/edc/management",
+  dataPlaneProxyApiUrl: "/beta/edc/proxy",
+  // 3.Dashboard
+  // counterPartyAddress: "https://c3r3zxlu3jnfddljkmzul6eofi.apigateway.us-ashburn-1.oci.customer-oci.com/api/v1/dsp",
+  // counterPartyId: "BPNL0000002VWII2",
+  // counterPartyAddress: "https://edc.hk.us.nri-caas.com/api/v1/dsp",
+  // counterPartyId: "BPNL0000000L3MA9",
+  counterPartyAddress: "https://doneca-94cfb8ff-de.shared.dev.dih-cloud.com/api/v1/dsp",
+  counterPartyId: "BPNL0000000KPAFJ",
+  theme: "theme-4",  
+  // 4.keycloak
+  // keycloak_url: "https://150.136.64.85:8443",
+  // keycloak_realm: "demoEDC",
+  // keycloak_clientId: "demoNri666",
+  keycloak_url: "https://144.24.55.134",
+  keycloak_realm: "aisj-jp-beta",
+  keycloak_clientId: "aisj-jp-caas-beta",
+  // 5.NRI backend
+  backendServerUrl: "/beta/backendServer",
+  // 6.DTR
+  dtrUrl: "/beta/dtr",
+  dtrTenant: "TENANT_ONE",
+  // 7.assxServer
+  assxServerUrl: "/beta/assxServer",
+  // ===not use Start===
   storageAccount: "company2assets",
   storageExplorerLinkTemplate: "storageexplorer://v=1",
-  theme: "theme-4",
-  counterPartyAddress: "https://doneca-d5008a12-de.shared.dev.dih-cloud.com/api/v1/dsp",
-  // Added On 20241009 Start
-  counterPartyId: "BPNL0000000KPAFJ",
-  // Added On 20241009 End
   enddpointOverride: "http://bob-minio:9000",
-  receiverHttpEndpoint: "http://localhost/receiver",
-  //receiverHttpEndpoint: "http://localhost:4200/receiver"
-  keycloak_url: "https://150.136.64.85:8443",
-  keycloak_realm: "demoEDC",
-  keycloak_clientId: "demoNri666",
-  // Added On 2025.4.28 Start
-  //dtrUrl: "http://129.213.90.219:4243",
-  dtrUrl: "http://localhost:4300/beta/dtr",
-  dtrTenant: "TENANT_ONE",
-  // Added On 2025.4.28 End
-  // Added On 2025.5.15 Start
-  assxServerUrl: "http://localhost:4300/beta/assxServer"
-  // Added On 2025.5.15 End
+  receiverHttpEndpoint: "https://dashboard.provider.edc.dev.openstandia.jp/receiver"
+  // ===not use End===
+ 
 };
 
 /*

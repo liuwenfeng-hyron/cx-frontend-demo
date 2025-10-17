@@ -4,41 +4,39 @@
 
 export const environment = {
   production: false,
-  apiKey: "password",
-  // Added On 20250224 Start
-  cofinityXcentralidpUrl: "https://150.136.64.85:18093/beta/cofinityXcentralidp",
+  // 1.cofinityX(beta)
+  cofinityXcentralidpUrl: "/beta/cofinityXcentralidp",
   cofinityX_client_id: "sa837",
   cofinityX_grant_type: "client_credentials",
   cofinityX_client_secret: "fl8lgK3uOCz3suAN07q0vSAyifuW9OEo",
-  cofinityXbackendUrl: "https://150.136.64.85:18093/beta/cofinityXbackend",
-  // Added On 20250224 End
-  // Added By Lujianzhou On 20250123 Start
-  dataPlaneProxyApiUrl: "https://150.136.64.85:18093/beta/provider/proxy",
-  // Added By Lujianzhou On 20250123 End
-  managementApiUrl: "https://150.136.64.85:18093/beta/provider/management",
-  catalogUrl: "https://150.136.64.85:18093/beta/provider/management",
-  storageAccount: "company2assets",
-  storageExplorerLinkTemplate: "storageexplorer://v=1",
-  theme: "theme-4",
-  //counterPartyAddress: "http://bob-controlplane:8084/api/v1/dsp",
-  counterPartyAddress: "https://doneca-d5008a12-de.shared.dev.dih-cloud.com/api/v1/dsp",
-  // Added By Lujianzhou On 20241009 Start
-  counterPartyId: "BPNL0000000KPAFJ",
-  // Added By Lujianzhou On 20241009 End
-  enddpointOverride: "http://bob-minio:9000",
-  receiverHttpEndpoint: "https://dashboard.provider.edc.dev.openstandia.jp/receiver",
-  //receiverHttpEndpoint: "http://localhost:4200/receiver"
-  keycloak_url: "https://150.136.64.85:8443",
+  cofinityXbackendUrl: "/beta/cofinityXbackend",
+  // 2.EDC
+  apiKey: "wQ4rZ9xM",
+  managementApiUrl: "/beta/provider/management",
+  catalogUrl: "/beta/provider/management",
+  dataPlaneProxyApiUrl: "/beta/provider/proxy",
+  // 3.Dashboard
+  counterPartyAddress: "https://edc.hk.us.nri-caas.com/api/v1/dsp",
+  counterPartyId: "BPNL0000000MOUR8",
+  theme: "theme-4",  
+  // 4.keycloak
+  keycloak_url: "https://idp.us.nri-caas.com:8443/",
   keycloak_realm: "demoEDC",
   keycloak_clientId: "demoNri",
-  // Added On 2025.4.28 Start
-  //dtrUrl: "http://129.213.90.219:4243",
-  dtrUrl: "https://150.136.64.85:18093/beta/dtr",
+  // 5.NRI backend
+  backendServerUrl: "/nri/backendServer",
+  // 6.DTR
+  dtrUrl: "/beta/dtr",
   dtrTenant: "TENANT_ONE",
-  // Added On 2025.4.28 End
-  // Added On 2025.5.15 Start
-  assxServerUrl: "https://150.136.64.85:18093/beta/assxServer"
-  // Added On 2025.5.15 End
+  // 7.assxServer
+  assxServerUrl: "/beta/assxServer",
+  // ===not use Start===
+  storageAccount: "company2assets",
+  storageExplorerLinkTemplate: "storageexplorer://v=1",
+  enddpointOverride: "http://bob-minio:9000",
+  receiverHttpEndpoint: "https://dashboard.provider.edc.dev.openstandia.jp/receiver"
+  // ===not use End===
+
 };
 
 /*

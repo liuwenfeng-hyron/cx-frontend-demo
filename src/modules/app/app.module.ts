@@ -103,6 +103,7 @@ import {AasxServerModule} from '../aasx-server/aasx-server.module';
       useFactory: (s: AppConfigService) => {
         return new EdcConnectorClient.Builder()
           .apiToken(environment.apiKey)
+          // .apiToken(s.getConfig()?.apiKey as string)
           .managementUrl(s.getConfig()?.managementApiUrl as string)
           .build();
       },
@@ -121,10 +122,10 @@ import {AasxServerModule} from '../aasx-server/aasx-server.module';
       provide: AuthService,
     },
     {
-      provide: HTTP_INTERCEPTORS, multi: true, useFactory: () => {
-        let i = new EdcApiKeyInterceptor();
+      provide: HTTP_INTERCEPTORS, multi: true, useFactory: (s: AppConfigService) => {
+        let i = new EdcApiKeyInterceptor(s);
         // TODO: read this from app.config.json??
-        i.apiKey = environment.apiKey
+        //i.apiKey = environment.apiKey
         return i;
       }, deps: [AppConfigService]
     }

@@ -13,12 +13,15 @@ fi
 TEMPLATE_PATH="/usr/share/nginx/html/assets/config/app.config.json"
 # replace word
 sed \
+  -e "s|{{API_KEY}}|$API_KEY|g" \
   -e "s|{{COUNTER_PARTY_ADDRESS}}|$COUNTER_PARTY_ADDRESS|g" \
   -e "s|{{COUNTER_PARTY_ID}}|$COUNTER_PARTY_ID|g" \
   -e "s|{{KEYCLOAK_URL}}|$KEYCLOAK_URL|g" \
   -e "s|{{KEYCLOAK_REALM}}|$KEYCLOAK_REALM|g" \
   -e "s|{{KEYCLOAK_CLIENT_ID}}|$KEYCLOAK_CLIENT_ID|g" \
   -e "s|{{WAF_CHECK_URL}}|$WAF_CHECK_URL|g" \
+  -e "s|{{DTR_HOST}}|$DTR_HOST|g" \
+  -e "s|{{AASX_HOST}}|$AASX_HOST|g" \
   "$TEMPLATE_PATH" > "$TEMPLATE_PATH.tmp" && mv "$TEMPLATE_PATH.tmp" "$TEMPLATE_PATH"
 
 TEMPLATE_PATH="/etc/nginx/nginx.conf"
@@ -27,6 +30,8 @@ sed \
   -e "s|{{EDC_HOST}}|$EDC_HOST|g" \
   -e "s|{{BACK_END_HOST}}|$BACK_END_HOST|g" \
   -e "s|{{AWS_HOST}}|$AWS_HOST|g" \
+  -e "s|{{DTR_HOST}}|$DTR_HOST|g" \
+  -e "s|{{AASX_HOST}}|$AASX_HOST|g" \
   "$TEMPLATE_PATH" > "$TEMPLATE_PATH.tmp" && mv "$TEMPLATE_PATH.tmp" "$TEMPLATE_PATH"
 
 # run nginx

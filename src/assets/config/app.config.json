@@ -2,7 +2,7 @@
   "cofinityXcentralidpUrl": "/beta/cofinityXcentralidp",
   "cofinityXbackendUrl": "/beta/cofinityXbackend",
 
-  "apiKey": "password",
+  "apiKey": "{{API_KEY}}",
   "managementApiUrl": "/beta/edc/management",
   "catalogUrl": "/beta/edc/management",
   "dataPlaneProxyApiUrl": "/beta/edc/proxy",
@@ -19,8 +19,11 @@
 
   "dtrUrl": "/beta/dtr",
   "dtrTenant": "TENANT_ONE",
+  "dtrHost": "{{DTR_HOST}}",
 
   "assxServerUrl": "/beta/assxServer",
+  "aasxHost": "{{AASX_HOST}}",
+  
   "wafCheckUrl": "{{WAF_CHECK_URL}}",
 
   "storageAccount": "",
