@@ -1,4 +1,21 @@
 <mat-dialog-content>
+  <div *ngIf="!isEditMode">
+    <label>Submodel Template : </label>
+    <select
+      id="submodel-select"
+      (change)="onChangeSubmodelType()"
+      [(ngModel)]="selectedKey"
+      name="submodelSelect"
+      class="form-control"
+    >
+      <option *ngFor="let option of submodelOptions" [value]="option.value">
+        {{ option.label }}
+      </option>
+    </select>
+    <h3 *ngIf="selectedKey === 'submodel_blank' || selectedKey === undefined">
+      Please Choose a Submodel Template ! 
+    </h3>
+  </div>
   <div>
     <mat-form-field class="form-field" color="accent">
       <mat-label>Id</mat-label>
@@ -44,7 +61,7 @@
     <div *ngIf="!isEditMode">
       <button (click)="onSave()" color="accent" mat-stroked-button>
         <mat-icon>add_circle_outline</mat-icon> Save
-    </button>
+      </button>
     </div>
     <div *ngIf="isEditMode">
       <button (click)="onSave()" color="accent" mat-stroked-button>
@@ -54,5 +71,5 @@
 
     <button color="accent" mat-dialog-close mat-stroked-button>
         <mat-icon>cancel</mat-icon> Cancel
-    </button>
+    </button>    
 </mat-dialog-actions>

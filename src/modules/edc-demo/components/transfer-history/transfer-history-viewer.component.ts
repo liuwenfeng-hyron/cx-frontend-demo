@@ -18,6 +18,7 @@ export class TransferHistoryViewerComponent implements OnInit {
   offset = 0;
   limit = 90000000;
   ttlCount = 0;
+  stateLabel = '';
   //columns: string[] = ['id', 'state', 'lastUpdated', 'connectorId', 'assetId', 'contractId', 'action'];
   columns: string[] = ['id', 'state', 'lastUpdated', 'type','assetId', 'contractId', 'action'];
   transferProcesses$: Observable<TransferProcess[]> = of([]);
@@ -29,15 +30,7 @@ export class TransferHistoryViewerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadTransferProcesses();
-    // Added By ljz On 2025.8.27 Start
-    this.transferProcesses$.subscribe((dataArray) => {
-      const currentItemCount = dataArray.length;
-      this.ttlCount = currentItemCount;
-    });
-    this.limit = this.pageSize;
-    this.loadTransferProcesses();
-    // Added By ljz On 2025.8.27 End
+    this.getTransferHistory();
     this.storageExplorerLinkTemplate = this.appConfigService.getConfig()?.storageExplorerLinkTemplate
   }
 
@@ -64,10 +57,41 @@ export class TransferHistoryViewerComponent implements OnInit {
     return ['COMPLETED', 'PROVISIONED', 'REQUESTED', 'REQUESTED_ACK', 'IN_PROGRESS', 'STREAMING'].includes(transferProcess.state!);
   }
 
+  getTransferHistory() {
+    this.pageIndex = 0;
+    this.offset = 0;
+    this.limit = 90000000;
+    this.loadTransferProcesses();
+    this.transferProcesses$.subscribe((dataArray) => {
+      this.ttlCount = dataArray.length;
+    });
+    this.limit = this.pageSize;
+    this.loadTransferProcesses();
+  }
+
   loadTransferProcesses() {
+    let filterExpObj: any = null;
+    const stateMapping: { [key: string]: number } = {
+      'INITIAL': 100,
+      'REQUESTED': 500,
+      'STARTED': 600,
+      'TERMINATED': 850,
+      'DEPROVISIONED': 1000
+    };
+
+    let stateCode = stateMapping[this.stateLabel];
+
+    if (stateCode !== undefined) {
+      filterExpObj = {
+        "@context": { "edc": "https://w3id.org/edc/v0.0.1/ns/" },
+        "@type": "edc:Criterion",
+        "operandLeft": "state",
+        "operator": "=",
+        "operandRight": stateCode
+      };
+    }
     //  this.transferProcesses$ = this.transferProcessService.queryAllTransferProcesses();
-    // if need to sort the result, you can write like this (by ljz 2024.11.19)
-    this.transferProcesses$ = this.transferProcessService.queryAllTransferProcesses({"offset": this.offset, "limit": this.limit, "sortField" :  "stateTimestamp", "sortOrder" : "DESC"});
+    this.transferProcesses$ = this.transferProcessService.queryAllTransferProcesses({"offset": this.offset, "limit": this.limit, "sortField" :  "stateTimestamp", "sortOrder" : "DESC", "filterExpression" : filterExpObj ? [filterExpObj] : []});
   }
 
   asDate(epochMillis?: number) {

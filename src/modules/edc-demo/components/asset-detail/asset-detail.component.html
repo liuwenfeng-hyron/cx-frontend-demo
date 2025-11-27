@@ -16,6 +16,10 @@
       <!--<span class="value">{{ getOptionalValue(asset.properties.optionalValue('dct','type')) }}</span>-->
   </div>
   <div class="row">
+      <span class="label">semanticId</span>
+      <span class="value">{{ getOptionalValue(asset.properties["https://admin-shell.io/aas/3/0/HasSemantics/semanticId"])}}</span>
+  </div>
+  <div class="row">
       <span class="label">Content Type</span>
       <span class="value">{{ asset.properties.optionalValue('edc','contenttype') }}</span>
   </div>

@@ -2,7 +2,15 @@
     <div *ngIf="filteredShellDescriptors$ | async as filteredShellDescriptors" >
       <!-- Search Bar -->
       <mat-form-field class="search-form-field" color="accent">
-        <mat-label>Search by IdShort</mat-label>
+        <mat-label>edcBPN</mat-label>
+        <input (input)="onSearch()" [(ngModel)]="edcBpn" matInput>
+        <mat-icon matPrefix>search</mat-icon>
+        <button (click)="edcBpn=''; onSearch()" *ngIf="edcBpn" mat-icon-button matSuffix>
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field class="search-form-field" color="accent">
+        <mat-label>IdShort</mat-label>
         <input (input)="onSearch()" [(ngModel)]="searchText" matInput>
         <mat-icon matPrefix>search</mat-icon>
         <button (click)="searchText=''; onSearch()" *ngIf="searchText" mat-icon-button matSuffix>

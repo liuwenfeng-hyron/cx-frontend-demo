@@ -13,6 +13,7 @@ export class AasxPackageUploadDialog implements OnInit {
   id: string = '';
   selectedFile: File | null = null;  
   uploadStatus: string = '';
+  err: any;
 
   constructor(private apiService: AasxPackageService,
     private notificationService: NotificationService,    
@@ -60,6 +61,7 @@ export class AasxPackageUploadDialog implements OnInit {
         error: (err) => {
           console.error('Upload Failed', err);
           this.uploadStatus = 'Aasx File Upload Failed';
+          this.err = err;
         }
       });
   }

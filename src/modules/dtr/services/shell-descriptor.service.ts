@@ -15,10 +15,10 @@ export class ShellDescriptorService {
   constructor(private dtrHttpClient: DtrHttpClient) {
   }
 
-  getShellDescriptors(): Observable<ShellDescriptor[]> {
+  getShellDescriptors(edcBpn: string): Observable<ShellDescriptor[]> {
     let filterExp = '';
 
-    return this.dtrHttpClient.get<JSON>("/api/v3/shell-descriptors", 0, 100, filterExp)
+    return this.dtrHttpClient.get<JSON>("/api/v3/shell-descriptors", 0, 100, filterExp, edcBpn)
       .pipe(map(shellDescriptor => {
         const arr = Array<ShellDescriptor>();
        
@@ -45,13 +45,13 @@ export class ShellDescriptorService {
   }
 
 
-  getShellDescriptorById(id: string): Observable<JSON> {
+  getShellDescriptorById(id: string, edcBpn: string): Observable<JSON> {
     let filterExp = '';
     let idBase64 = ''
 
     if(id) {
       idBase64 = btoa(id);
-      return this.dtrHttpClient.get<any>("/api/v3/shell-descriptors/" + idBase64, 0, 1, filterExp)
+      return this.dtrHttpClient.get<any>("/api/v3/shell-descriptors/" + idBase64, 0, 1, filterExp, edcBpn)
         .pipe(map(shellDescriptor => {
           return (shellDescriptor as JSON);
         }));

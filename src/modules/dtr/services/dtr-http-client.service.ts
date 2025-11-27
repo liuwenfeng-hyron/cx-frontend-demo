@@ -22,11 +22,12 @@ export class DtrHttpClient {
     this.dtrTenant = this.config?.dtrTenant ?? "";
   }
 
-  public get<T>(urlPath: string, offset: number, limit: number, filterExp: string,
+  public get<T>(urlPath: string, offset: number, limit: number, filterExp: string, edcBpn: string,
                   params?: HttpParams | { [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>; })
     : Observable<T> {
     const url = this.dtrUrl + `${urlPath}`;
-    let headers = new HttpHeaders({"Content-type": "application/json", "Edc-Bpn" : this.dtrTenant});
+    // let headers = new HttpHeaders({"Content-type": "application/json", "Edc-Bpn" : this.dtrTenant});
+    let headers = new HttpHeaders({"Content-type": "application/json", "Edc-Bpn" : edcBpn});
     return this.catchError(this.httpClient.get<T>(url, {headers, params}), url, 'GET');
   }
 

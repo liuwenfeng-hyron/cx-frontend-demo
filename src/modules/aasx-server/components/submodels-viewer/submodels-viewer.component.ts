@@ -103,10 +103,44 @@ export class SubmodelsViewerComponent implements OnInit {
           } else {
             this.apiService.updateSubmodel(id, newSubmodel).subscribe({
               next: () => this.fetch$.next(null),
-              error: err => this.showError(err, "This Submodel cannot be updated"),
+              error: err => {
+                console.log('update error:', err);
+                //this.showError(err, "This Submodel cannot be updated")
+                const isConcurrencyIssue =
+                    err.status === 500 &&
+                    err.error &&
+                    Array.isArray(err.error.Messages) &&
+                    err.error.Messages.some(
+                      (msg: any) =>
+                        msg.Text &&
+                        (
+                          msg.Text.includes('expected to affect') ||
+                          msg.Text.includes('actually affected') ||
+                          msg.Text.includes('data may have been modified')
+                        )
+                    );
+
+                  if (isConcurrencyIssue) {
+                    console.log('isConcurrencyIssue，Try again to do the update...');
+
+                    // try again 
+                    this.apiService.updateSubmodel(id, newSubmodel).subscribe({
+                      next: () => {
+                        this.fetch$.next(null);
+                        this.notificationService.showInfo('Successfully updated');
+                      },
+                      error: (err2) => {
+                        this.showError(err2, 'This Submodel cannot be updated（after try again）');
+                      }
+                    });
+
+                  } else {
+                    this.showError(err, 'This Submodel cannot be updated');
+                  }
+              },
               complete: () => this.notificationService.showInfo("Successfully updated"),
             })
-          }          
+          }
         }
     })
   }

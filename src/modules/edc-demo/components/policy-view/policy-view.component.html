@@ -46,7 +46,8 @@
             <mat-icon matListItemIcon>adjust</mat-icon>
             <div matListItemTitle>Constraint</div>
             <div *ngFor="let permission of policyDef.policy.permissions">
-              <div *ngFor='let con of permission.array("odrl","constraint")'>
+              <!--<div *ngFor='let con of permission.array("odrl","constraint")'></div> -->
+              <div *ngFor='let con of getPermissionConstraints(permission)'>
                  <p *ngIf='dohandan(con["http://www.w3.org/ns/odrl/2/and"])'>
                   <span matListItemLine *ngFor='let aaa of con["http://www.w3.org/ns/odrl/2/and"]'>
                     {{processString(aaa["http://www.w3.org/ns/odrl/2/leftOperand"][0]["@id"])}}

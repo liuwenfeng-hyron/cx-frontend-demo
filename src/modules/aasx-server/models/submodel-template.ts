@@ -1,4 +1,14 @@
 export enum SubmodelTemplate {
+  submodel_blank = `{
+	"idShort": "",
+	"description": [],
+	"administration": {},
+	"id": "",
+	"kind": "Instance",
+	"semanticId": {},
+	"supplementalSemanticIds": []
+}`,
+
   submodel_pcf = `{
 	"idShort": "Pcf001",
 	"description": [
@@ -2281,4 +2291,432 @@ export enum SubmodelTemplate {
 	"modelType": "Submodel"
 }
   `
+  ,
+  submodel_ItemStock = `{
+	"idShort": "ItemStock001",
+	"description": [
+		{
+			"language": "en",
+			"text": "This aspect represents the latest quantities of a partner's items that are on stock. The stock represent the build-to-order (BTO) stocks already available."
+		}
+	],
+	"administration": {},
+	"id": "https://www.nri.com/sm/ItemStock001",
+	"kind": "Instance",
+	"semanticId": {
+		"type": "ExternalReference",
+		"keys": [
+			{
+				"type": "GlobalReference",
+				"value": "urn:samm:io.catenax.item_stock:2.0.0#ItemStock"
+			}
+		]
+	},
+	"submodelElements": [
+		{
+			"idShort": "materialGlobalAssetId",
+			"displayName": [
+				{
+					"language": "en",
+					"text": "UUID of the Part Type Twin"
+				}
+			],
+			"semanticId": {
+				"type": "ExternalReference",
+				"keys": [
+					{
+						"type": "GlobalReference",
+						"value": "urn:samm:io.catenax.item_stock:2.0.0#materialGlobalAssetId"
+					}
+				]
+			},
+			"valueType": "xs:string",
+			"value": "860fb504-b884-4009-9313-c6fb6cdc776b",
+			"modelType": "Property"
+		},
+		{
+			"idShort": "direction",
+			"displayName": [
+				{
+					"language": "en",
+					"text": "Direction of Stock"
+				}
+			],
+			"semanticId": {
+				"type": "ExternalReference",
+				"keys": [
+					{
+						"type": "GlobalReference",
+						"value": "urn:samm:io.catenax.item_stock:2.0.0#direction"
+					}
+				]
+			},
+			"valueType": "xs:string",
+			"value": "OUTBOUND",
+			"modelType": "Property"
+		},
+		{
+			"idShort": "positions",
+			"displayName": [
+				{
+					"language": "en",
+					"text": "Positions"
+				}
+			],
+			"description": [
+				{
+					"language": "en",
+					"text": "In case of a supplier's stocks for a customer, positions MUST be empty."
+				}
+			],
+			"semanticId": {
+				"type": "ExternalReference",
+				"keys": [
+					{
+						"type": "GlobalReference",
+						"value": "urn:samm:io.catenax.item_stock:2.0.0#PositionsSet"
+					}
+				]
+			},
+			"orderRelevant": false,
+			"typeValueListElement": "SubmodelElementCollection",
+			"valueTypeListElement": "xs:anyURI",
+			"value": [
+				{
+					"displayName": [
+						{
+							"language": "en",
+							"text": "Positions"
+						}
+					],
+					"description": [
+						{
+							"language": "en",
+							"text": "In case of a supplier's stocks for a customer, positions MUST be empty."
+						}
+					],
+					"value": [
+						{
+							"idShort": "allocatedStocks",
+							"displayName": [
+								{
+									"language": "en",
+									"text": "Allocated Stocks"
+								}
+							],
+							"description": [
+								{
+									"language": "en",
+									"text": "Stocks that have been already allocated to the customer or delivered by a specific supplier. An allocated stock always refers to a stock location."
+								}
+							],
+							"semanticId": {
+								"type": "ExternalReference",
+								"keys": [
+									{
+										"type": "GlobalReference",
+										"value": "urn:samm:io.catenax.item_stock:2.0.0#AllocatedStockSet"
+									}
+								]
+							},
+							"orderRelevant": false,
+							"typeValueListElement": "SubmodelElementCollection",
+							"valueTypeListElement": "xs:anyURI",
+							"value": [
+								{
+									"displayName": [
+										{
+											"language": "en",
+											"text": "Allocated Stocks"
+										}
+									],
+									"description": [
+										{
+											"language": "en",
+											"text": "Stocks that have been already allocated to the customer or delivered by a specific supplier. An allocated stock always refers to a stock location."
+										}
+									],
+									"value": [
+										{
+											"idShort": "stockLocationBPNS",
+											"displayName": [
+												{
+													"language": "en",
+													"text": "BPNS of Stock Location"
+												}
+											],
+											"semanticId": {
+												"type": "ExternalReference",
+												"keys": [
+													{
+														"type": "GlobalReference",
+														"value": "urn:samm:io.catenax.item_stock:2.0.0#stockLocationBPNS"
+													}
+												]
+											},
+											"supplementalSemanticIds": [
+												{
+													"type": "ExternalReference",
+													"keys": [
+														{
+															"type": "GlobalReference",
+															"value": "https://catena-x.net/fileadmin/user_upload/Standard-Bibliothek/Update_PDF_Maerz/5_BPDM/CX_-_0010_BUSINESS_PARTNER_NUMBER_PlatformCapabilityBPDM_v_1.0.1.pdf"
+														}
+													]
+												}
+											],
+											"valueType": "xs:string",
+											"value": "BPNS0000000MOUR8",
+											"modelType": "Property"
+										},
+										{
+											"idShort": "isBlocked",
+											"displayName": [
+												{
+													"language": "en",
+													"text": "Is Blocked"
+												}
+											],
+											"semanticId": {
+												"type": "ExternalReference",
+												"keys": [
+													{
+														"type": "GlobalReference",
+														"value": "urn:samm:io.catenax.item_stock:2.0.0#isBlocked"
+													}
+												]
+											},
+											"valueType": "xs:boolean",
+											"value": "false",
+											"modelType": "Property"
+										},
+										{
+											"idShort": "stockLocationBPNA",
+											"displayName": [
+												{
+													"language": "en",
+													"text": "BPNA of Stock Location"
+												}
+											],
+											"semanticId": {
+												"type": "ExternalReference",
+												"keys": [
+													{
+														"type": "GlobalReference",
+														"value": "urn:samm:io.catenax.item_stock:2.0.0#stockLocationBPNA"
+													}
+												]
+											},
+											"supplementalSemanticIds": [
+												{
+													"type": "ExternalReference",
+													"keys": [
+														{
+															"type": "GlobalReference",
+															"value": "https://catena-x.net/fileadmin/user_upload/Standard-Bibliothek/Update_PDF_Maerz/5_BPDM/CX_-_0010_BUSINESS_PARTNER_NUMBER_PlatformCapabilityBPDM_v_1.0.1.pdf"
+														}
+													]
+												}
+											],
+											"valueType": "xs:string",
+											"value": "BPNA0000000MOUR8",
+											"modelType": "Property"
+										},
+										{
+											"idShort": "lastUpdatedOnDateTime",
+											"displayName": [
+												{
+													"language": "en",
+													"text": "Lasted Updated on Date"
+												}
+											],
+											"semanticId": {
+												"type": "ExternalReference",
+												"keys": [
+													{
+														"type": "GlobalReference",
+														"value": "urn:samm:io.catenax.item_stock:2.0.0#lastUpdatedOnDateTime"
+													}
+												]
+											},
+											"valueType": "xs:dateTime",
+											"value": "2025-11-17T00:20",
+											"modelType": "Property"
+										},
+										{
+											"idShort": "quantityOnAllocatedStock",
+											"displayName": [
+												{
+													"language": "en",
+													"text": "Quantity on Allocated Stock"
+												}
+											],
+											"description": [
+												{
+													"language": "en",
+													"text": "This is the quantity of the material on stock. the stock may refer to an order position of a customer."
+												}
+											],
+											"value": [
+												{
+													"idShort": "unit",
+													"displayName": [
+														{
+															"language": "en",
+															"text": "unit"
+														}
+													],
+													"semanticId": {
+														"type": "ExternalReference",
+														"keys": [
+															{
+																"type": "GlobalReference",
+																"value": "urn:samm:io.catenax.shared.quantity:2.0.0#itemUnit"
+															}
+														]
+													},
+													"supplementalSemanticIds": [
+														{
+															"type": "ExternalReference",
+															"keys": [
+																{
+																	"type": "GlobalReference",
+																	"value": "https://eclipse-esmf.github.io/samm-specification/2.1.0/index.html"
+																}
+															]
+														}
+													],
+													"valueType": "xs:string",
+													"value": "unit:piece",
+													"modelType": "Property"
+												},
+												{
+													"idShort": "value",
+													"displayName": [
+														{
+															"language": "en",
+															"text": "value"
+														}
+													],
+													"semanticId": {
+														"type": "ExternalReference",
+														"keys": [
+															{
+																"type": "GlobalReference",
+																"value": "urn:samm:io.catenax.shared.quantity:2.0.0#quantityValue"
+															}
+														]
+													},
+													"valueType": "xs:float",
+													"value": "160.6",
+													"modelType": "Property"
+												}
+											],
+											"modelType": "SubmodelElementCollection"
+										}
+									],
+									"modelType": "SubmodelElementCollection"
+								}
+							],
+							"modelType": "SubmodelElementList"
+						},
+						{
+							"idShort": "orderPositionReference",
+							"displayName": [
+								{
+									"language": "en",
+									"text": "Order Position Reference"
+								}
+							],
+							"description": [
+								{
+									"language": "en",
+									"text": "The order position reference contains information to identify a position within an order."
+								}
+							],
+							"value": [
+								{
+									"idShort": "supplierOrderId",
+									"displayName": [
+										{
+											"language": "en",
+											"text": "Supplier Order ID"
+										}
+									],
+									"semanticId": {
+										"type": "ExternalReference",
+										"keys": [
+											{
+												"type": "GlobalReference",
+												"value": "urn:samm:io.catenax.item_stock:2.0.0#supplierOrderId"
+											}
+										]
+									},
+									"valueType": "xs:string",
+									"value": "M-Nbr-4712",
+									"modelType": "Property"
+								},
+								{
+									"idShort": "customerOrderId",
+									"displayName": [
+										{
+											"language": "en",
+											"text": "Customer Order ID"
+										}
+									],
+									"semanticId": {
+										"type": "ExternalReference",
+										"keys": [
+											{
+												"type": "GlobalReference",
+												"value": "urn:samm:io.catenax.item_stock:2.0.0#customerOrderId"
+											}
+										]
+									},
+									"valueType": "xs:string",
+									"value": "C-Nbr-4712",
+									"modelType": "Property"
+								},
+								{
+									"idShort": "customerOrderPositionId",
+									"displayName": [
+										{
+											"language": "en",
+											"text": "Customer Order Position ID"
+										}
+									],
+									"semanticId": {
+										"type": "ExternalReference",
+										"keys": [
+											{
+												"type": "GlobalReference",
+												"value": "urn:samm:io.catenax.item_stock:2.0.0#customerOrderPositionId"
+											}
+										]
+									},
+									"valueType": "xs:string",
+									"value": "PositionId-01",
+									"modelType": "Property"
+								}
+							],
+							"modelType": "SubmodelElementCollection"
+						}
+					],
+					"modelType": "SubmodelElementCollection"
+				}
+			],
+			"modelType": "SubmodelElementList"
+		}
+	],
+	"modelType": "Submodel"
+}`
+  ,
+  submodel_Delivery = `{xxx}`
+  ,
+  submodel_DaysOfSupply = `{xxx}`
+  ,
+  submodel_PlannedProductionOutput= `{xxx}`
+  ,
+  submodel_PartType = `{xxx}`
+  ,
 }

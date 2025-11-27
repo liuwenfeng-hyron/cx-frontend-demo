@@ -52,7 +52,7 @@ withSubmodel = `{
 				{
 					"interface": "SUBMODEL-3.0",
 					"protocolInformation": {
-						"href": "https://edc-beta.us.nri-caas.com/api-beta1/public/$value",
+						"href": "https://edc-beta.us.nri-caas.com/api-beta1/public",
 						"endpointProtocol": "HTTP",
 						"endpointProtocolVersion": [
 							"1.1"

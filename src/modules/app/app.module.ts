@@ -84,7 +84,11 @@ import {AasxServerModule} from '../aasx-server/aasx-server.module';
     },
     {
       provide: 'ASSET_TYPES',
-      useFactory: () => [{id: "", name: ""}, {id: "EcuCSRDataPushNotification", name: "EcuCSRDataPushNotification"}, {id: "EcuCSRDataPushFeedbackNotification", name: "EcuCSRDataPushFeedbackNotification"}, {id: "DigitalTwinRegistry", name: "DigitalTwinRegistry"}, {id: "PcfExchange", name: "PcfExchange"}, {id: "Submodel", name: "Submodel"}],
+      useFactory: () => [{id: "", name: ""}, {id: "EcuCSRDataPushNotification", name: "EcuCSRDataPushNotification"}, {id: "EcuCSRDataPushFeedbackNotification", name: "EcuCSRDataPushFeedbackNotification"}, {id: "DigitalTwinRegistry", name: "DigitalTwinRegistry"}, {id: "Submodel", name: "Submodel"}, {id: "DemandAndCapacityNotificationApi", name: "DemandAndCapacityNotificationApi"}, {id: "PcfExchange", name: "PcfExchange"}],
+    },
+    {
+      provide: 'SUBMODEL_TYPES',
+      useFactory: () => [{id: "", name: ""}, {id: "ItemStock", name: "ItemStock"}, {id: "PlannedProductionOutput", name: "PlannedProductionOutput"}, {id: "DeliveryInformation", name: "DeliveryInformation"}, {id: "DaysOfSupply", name: "DaysOfSupply"}, {id: "PartTypeInformation", name: "PartTypeInformation"}, {id: "ShortTermMaterialDemand", name: "ShortTermMaterialDemand"}],
     },
     {
       provide: 'SUBMODEL_KIND',

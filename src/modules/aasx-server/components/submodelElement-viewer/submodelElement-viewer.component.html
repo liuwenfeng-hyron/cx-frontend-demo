@@ -13,8 +13,12 @@
           <div *ngIf="!isReadOnly">
             <ng-container [ngSwitch]="item.valueType">
               <input *ngSwitchCase="'xs:dateTime'" type="datetime-local" [(ngModel)]="item.value" matInput>
-              <input *ngSwitchCase="'xs:float'" type="number" [ngModel]="item.value?.toString()" (ngModelChange)="onNumberInputChange($event, item)" step="0.1" matInput>
-              <input *ngSwitchCase="'xs:decimal'" type="number" [ngModel]="item.value?.toString()" (ngModelChange)="onNumberInputChange($event, item)" step="0.1" matInput>
+              <!-- <input *ngSwitchCase="'xs:float'" type="number" [ngModel]="item.value?.toString()" (ngModelChange)="onNumberInputChange($event, item)" (blur)="onInputBlur(item)" step="0.1" matInput>
+              <input *ngSwitchCase="'xs:decimal'" type="number" [ngModel]="item.value?.toString()" (ngModelChange)="onNumberInputChange($event, item)" (blur)="onInputBlur(item)" step="0.1" matInput>
+               -->
+              <input *ngSwitchCase="'xs:float'" type="text" [ngModel]="item.value?.toString()" (ngModelChange)="onNumberInputChange($event, item)" (blur)="onInputBlur(item)" matInput>
+              <input *ngSwitchCase="'xs:double'" type="text" [ngModel]="item.value?.toString()" (ngModelChange)="onNumberInputChange($event, item)" (blur)="onInputBlur(item)" matInput>
+              <input *ngSwitchCase="'xs:decimal'" type="text" [ngModel]="item.value?.toString()" (ngModelChange)="onNumberInputChange($event, item)" (blur)="onInputBlur(item)" matInput>
               <input *ngSwitchDefault [(ngModel)]="item.value" matInput>
             </ng-container>            
             <span *ngIf="item.valueType" class="td-value-span">( {{item.valueType}} )</span>

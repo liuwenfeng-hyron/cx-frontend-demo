@@ -1,5 +1,27 @@
 <mat-dialog-content>
   <div>
+    <!-- Asset Type -->
+    <mat-form-field class="form-field form-field-assetTypes" color="accent" matBadgeColor="warn">
+      <mat-label>Asset Type</mat-label>
+      <mat-select (selectionChange)="onAssetTypeChange()" [(ngModel)]="assetTypeId">
+        <mat-option *ngFor="let assetType of assetTypes " [value]="assetType.id">
+          {{assetType.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div *ngIf="assetTypeId === 'Submodel'">
+    <!-- Submodel Type -->
+    <mat-form-field class="form-field form-field-submodelTypes" color="accent" matBadgeColor="warn">
+      <mat-label>Submodel Type</mat-label>
+      <mat-select (selectionChange)="onSubmodelTypeChange()" [(ngModel)]="submodelTypeId">
+        <mat-option *ngFor="let submodelType of submodelTypes " [value]="submodelType.id">
+          {{submodelType.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div>
     <mat-form-field class="form-field" color="accent">
       <mat-label>Id</mat-label>
       <div *ngIf="!isEditMode">
@@ -26,22 +48,15 @@
     </mat-form-field>
   </div>
   <div>
-    <!-- Asset Type -->
-    <mat-form-field
-      class="form-field form-field-assetTypes" color="accent" matBadgeColor="warn"
-      >
-      <mat-label>Asset Type</mat-label>
-      <mat-select (selectionChange)="onAssetTypeChange()" [(ngModel)]="assetTypeId">
-        <mat-option *ngFor="let assetType of assetTypes " [value]="assetType.id">
-          {{assetType.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <div>
     <mat-form-field class="form-field form-field-baseUrl" color="accent" id="form-field-baseUrl">
       <mat-label>baseUrl</mat-label>
       <input [(ngModel)]="baseUrl" matInput>
+    </mat-form-field>
+  </div>
+  <div *ngIf="assetTypeId === 'Submodel' || assetTypeId === 'PcfExchange'">
+    <mat-form-field class="form-field form-field-semanticId" color="accent" id="form-field-semanticId">
+      <mat-label>semanticId</mat-label>
+      <input [(ngModel)]="semanticId" matInput>
     </mat-form-field>
   </div>
   <div>
@@ -53,11 +68,12 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+    <!--
     <mat-form-field class="form-field" color="accent" id="form-field-semanticId">
       <mat-label>semanticId</mat-label>
       <input [(ngModel)]="semanticId" matInput>
     </mat-form-field>
-    <!--
+    
     <mat-form-field class="form-field" color="accent" id="form-field-account">
       <mat-label>Account</mat-label>
       <input [(ngModel)]="account" matInput>

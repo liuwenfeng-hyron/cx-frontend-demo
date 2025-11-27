@@ -11,8 +11,8 @@ import { ShellDescriptorService } from "../../services/shell-descriptor.service"
 export class ShellDescriptorDetail implements OnInit {
   shellDesc$: Observable<JSON> = of();
 
-  constructor(private apiService: ShellDescriptorService, @Inject(MAT_DIALOG_DATA) id:string) {
-    this.shellDesc$ = this.apiService.getShellDescriptorById(id);
+  constructor(private apiService: ShellDescriptorService, @Inject(MAT_DIALOG_DATA) data: { id: string; edcBpn: string }) {
+    this.shellDesc$ = this.apiService.getShellDescriptorById(data.id, data.edcBpn);
   }
 
   ngOnInit(): void {

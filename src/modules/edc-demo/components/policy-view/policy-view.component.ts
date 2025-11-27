@@ -37,7 +37,7 @@ export class PolicyViewComponent implements OnInit {
   ngOnInit(): void {
     this.filteredPolicies$ = this.fetch$.pipe(
       switchMap(() => {
-        const policyDefinitions = this.policyService.queryAllPolicies();
+        const policyDefinitions = this.policyService.queryAllPolicies({"limit" :  10000000});
         return !!this.searchText ?
           policyDefinitions.pipe(map(policies => policies.filter(policy => this.isFiltered(policy, this.searchText))))
           :
@@ -112,6 +112,16 @@ export class PolicyViewComponent implements OnInit {
       .replace(/gt/g, '>')
       .replace(/lt/g, '<') 
       .replace(/eq/g, '='); 
+  }
+
+  getPermissionConstraints(permission: any): any[] {
+    try {
+        const constraints = permission.array('odrl', 'constraint');
+        return Array.isArray(constraints) ? constraints : [];
+    } catch (error) {
+        //console.warn('Permission has no constraints:', error);
+        return [];
+    }
   }
 
   dohandan(value: any) :boolean{

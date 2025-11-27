@@ -18,11 +18,12 @@ export class ShellDescriptorEditorDialog implements OnInit {
   id: string = '';
   isEditMode = false;
 
-  constructor(private apiService: ShellDescriptorService, private dialogRef: MatDialogRef<ShellDescriptorEditorDialog>, @Inject(MAT_DIALOG_DATA) id:string) {   
-    this.id = id;
+  constructor(private apiService: ShellDescriptorService, private dialogRef: MatDialogRef<ShellDescriptorEditorDialog>
+    , @Inject(MAT_DIALOG_DATA) data: { id: string; edcBpn: string }) {   
+    this.id = data.id;
     if(this.id) {
       this.isEditMode = true;
-      this.shellDesc$ = this.apiService.getShellDescriptorById(id);
+      this.shellDesc$ = this.apiService.getShellDescriptorById(data.id, data.edcBpn);
     }
   }
 

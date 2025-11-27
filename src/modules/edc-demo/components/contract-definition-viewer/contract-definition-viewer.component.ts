@@ -31,7 +31,7 @@ export class ContractDefinitionViewerComponent implements OnInit {
     this.filteredContractDefinitions$ = this.fetch$
       .pipe(
         switchMap(() => {
-          const contractDefinitions$ = this.contractDefinitionService.queryAllContractDefinitions();
+          const contractDefinitions$ = this.contractDefinitionService.queryAllContractDefinitions({"limit" :  10000000});
           return !!this.searchText ?
             contractDefinitions$.pipe(map(contractDefinitions => contractDefinitions.filter(contractDefinition => contractDefinition['@id']!.toLowerCase().includes(this.searchText))))
             :

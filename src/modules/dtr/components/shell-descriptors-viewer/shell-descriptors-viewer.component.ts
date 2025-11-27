@@ -22,6 +22,7 @@ export class ShellDescriptorsViewerComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   columns: string[] = ['id', 'idShort', 'displayName', 'action'];
   searchText = '';
+  edcBpn = '';
   offset = 0;
   pageSize = 10;
   isTransferring = false;
@@ -46,7 +47,7 @@ export class ShellDescriptorsViewerComponent implements OnInit {
     this.filteredShellDescriptors$ = this.fetch$
       .pipe(
         switchMap(() => {
-          const shellDescs$ = this.apiService.getShellDescriptors();
+          const shellDescs$ = this.apiService.getShellDescriptors(this.edcBpn);
           return !!this.searchText ?
             shellDescs$.pipe(map(shellDescs => shellDescs.filter(shellDesc => shellDesc.idShort.toLowerCase().includes(this.searchText.toLowerCase()))))
             :
@@ -71,7 +72,7 @@ export class ShellDescriptorsViewerComponent implements OnInit {
   }
 
   onShowDetail(id: string) {
-    this.dialog.open(ShellDescriptorDetail, {data: id});
+    this.dialog.open(ShellDescriptorDetail, {data: { id: id, edcBpn: this.edcBpn }});
   }
 
   onCreate() {
@@ -93,7 +94,7 @@ export class ShellDescriptorsViewerComponent implements OnInit {
   }
 
   onUpdate(id: string) {
-    const dialogRef = this.dialog.open(ShellDescriptorEditorDialog, {data: id, disableClose: true});
+    const dialogRef = this.dialog.open(ShellDescriptorEditorDialog, {data: { id: id, edcBpn: this.edcBpn }, disableClose: true});
     dialogRef.afterClosed().pipe(first()).subscribe((result: { shellDescriptor?: ShellDescriptor }) => {
         const newShellDescriptor = result?.shellDescriptor;
         if (newShellDescriptor) {

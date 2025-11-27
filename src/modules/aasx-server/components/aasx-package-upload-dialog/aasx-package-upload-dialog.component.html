@@ -4,6 +4,9 @@
       <input type="file" (change)="onFileSelected($event)" accept=".aasx">
       <button (click)="uploadFile()">Upload</button>
       <p *ngIf="uploadStatus">{{ uploadStatus }}</p>
+      <div *ngIf="err">
+      <p *ngIf="err.error.Messages">{{ err.error.Messages[0].Text }}</p>
+    </div>
     </div>
   </div>
 </mat-dialog-content>
