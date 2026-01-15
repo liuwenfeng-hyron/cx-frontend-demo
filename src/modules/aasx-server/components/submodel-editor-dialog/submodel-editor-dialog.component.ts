@@ -6,6 +6,9 @@ import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Observable, of } from 'rxjs';
 import { SubmodelService } from "../../services/submodel.service";
 import { SubmodelTemplate } from '../../models/submodel-template';
+import { SubmodelTemplatePuris } from '../../models/submodel-template-puris';
+import { SubmodelTemplateDpp } from '../../models/submodel-template-dpp';
+import { SubmodelTemplatePcf } from '../../models/submodel-template-pcf';
 
 export type SubmodelKey = keyof typeof SubmodelTemplate; 
 
@@ -16,18 +19,14 @@ export type SubmodelKey = keyof typeof SubmodelTemplate;
 })
 export class SubmodelEditorDialog implements OnInit {
   submodelOptions: { label: string; value: SubmodelKey }[] = [
-    { label: 'submodel_ItemStock', value: 'submodel_ItemStock' },
-    { label: 'submodel_pcf', value: 'submodel_pcf' },
+    { label: 'PURIS_ItemStock', value: 'submodel_ItemStock' },
+    { label: 'PURIS_Delivery', value: 'submodel_Delivery' },
+    { label: 'PURIS_DaysOfSupply', value: 'submodel_DaysOfSupply' },
+    { label: 'PURIS_PlannedProductionOutput', value: 'submodel_PlannedProductionOutput' },
+    { label: 'PURIS_PartType', value: 'submodel_PartType' },
+    { label: 'DPP_battery_pass', value: 'submodel_battery_pass' },
+    { label: 'PCF_pcf', value: 'submodel_pcf' },
   ];
-
-  /*submodelOptions: { label: string; value: SubmodelKey }[] = [
-    { label: 'submodel_ItemStock', value: 'submodel_ItemStock' },
-    { label: 'submodel_Delivery', value: 'submodel_Delivery' },
-    { label: 'submodel_DaysOfSupply', value: 'submodel_DaysOfSupply' },
-    { label: 'submodel_PlannedProductionOutput', value: 'submodel_PlannedProductionOutput' },
-    { label: 'submodel_PartType', value: 'submodel_PartType' },
-    { label: 'submodel_pcf', value: 'submodel_pcf' },
-  ];*/
 
   submodel$: Observable<Submodel> = of();
   submodel: Submodel = JSON.parse(SubmodelTemplate["submodel_blank"]);
@@ -84,7 +83,17 @@ export class SubmodelEditorDialog implements OnInit {
       console.warn('No submodel selected yet');
       return;
     }
-    const value = SubmodelTemplate[this.selectedKey];
+    
+    var value = '';
+    if (this.selectedKey in SubmodelTemplatePuris) {
+      value = SubmodelTemplatePuris[this.selectedKey as keyof typeof SubmodelTemplatePuris];
+    } else if (this.selectedKey in SubmodelTemplateDpp) {
+      value = SubmodelTemplateDpp[this.selectedKey as keyof typeof SubmodelTemplateDpp];
+    } else if (this.selectedKey in SubmodelTemplatePcf) {
+      value = SubmodelTemplatePcf[this.selectedKey as keyof typeof SubmodelTemplatePcf];
+    } else {
+      value = SubmodelTemplate[this.selectedKey];
+    }
     // console.log(value);
     try {
       this.submodel = JSON.parse(value);
