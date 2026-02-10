@@ -96,10 +96,14 @@ export class CatalogBrowserService {
             "dcat:service": catalog["dcat:service"],
             "dcat:dataset": datasets,
             id: hasPolicy["@id"],
-            originator: catalog["dcat:service"]['dct:endpointUrl'] || "",
-            participantId: catalog.participantId,
+            originator: catalog["dcat:service"]['dcat:endpointUrl'] || "",
+            // participantId: catalog.participantId,
+            participantId: catalog["dspace:participantId"]|| "",
             policy: hasPolicy
           };
+
+          // console.log("endpointUrl:" + catalog["dcat:service"]['dcat:endpointUrl'] || "");
+          // console.log("participantId:" + catalog["dspace:participantId"]|| "");
 
           arr.push(newContractOffer)
         }

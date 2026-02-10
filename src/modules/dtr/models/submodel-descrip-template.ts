@@ -15,13 +15,13 @@ export enum SubmodelDescriptorTemplate {
           {
             "interface": "SUBMODEL-3.0",
             "protocolInformation": {
-              "href": "http://111.111.111.110/api/public",
+              "https://edc-xxx.us.nri-caas.com/api/public/submodel_Id_Base64/$value",
               "endpointProtocol": "HTTP",
               "endpointProtocolVersion": [
                 "1.1"
               ],
               "subprotocol": "DSP",
-              "subprotocolBody": "id=AssetId_of_EDC;dspEndpoint=http://111.111.111.110/api/v1/dsp",
+              "subprotocolBody": "id=AssetId_for_Submodel;dspEndpoint=https://edc-xxx.us.nri-caas.com/api/v1/dsp",
               "subprotocolBodyEncoding": "plain",
               "securityAttributes": [
                 {
@@ -50,13 +50,13 @@ export enum SubmodelDescriptorTemplate {
           {
             "interface": "SUBMODEL-3.0",
             "protocolInformation": {
-              "href": "http://111.111.111.110/api/public",
+              "https://edc-xxx.com/api/public/submodel_Id_Base64/$value",
               "endpointProtocol": "HTTP",
               "endpointProtocolVersion": [
                 "1.1"
               ],
               "subprotocol": "DSP",
-              "subprotocolBody": "id=AssetId_of_EDC;dspEndpoint=http://111.111.111.110/api/v1/dsp",
+              "subprotocolBody": "id=AssetId_for_Submodel;dspEndpoint=https://edc-xxx.com/api/v1/dsp",
               "subprotocolBodyEncoding": "plain",
               "securityAttributes": [
                 {
@@ -71,17 +71,27 @@ export enum SubmodelDescriptorTemplate {
 }`,
   delivery2 = `
           {
+            "id": "https://www.nri.com/sm/Delivery001",
+            "semanticId": {
+              "type": "ExternalReference",
+              "keys": [
+                {
+                  "type": "GlobalReference",
+                  "value": "urn:samm:io.delivery_information:2.0.0#DeliveryInformation"
+                }
+              ]
+            },
             "endpoints": [
               {
                 "interface": "SUBMODEL-3.0",
                 "protocolInformation": {
-                  "href": "http://aisin-edc-phoenix.nri-caas.com/api/public",
+                  "https://edc-xxx.com/api/public/submodel_Id_Base64/$value",
                   "endpointProtocol": "HTTP",
                   "endpointProtocolVersion": [
                     "1.1"
                   ],
                   "subprotocol": "DSP",
-                  "subprotocolBody": "id=smDelivery001;dspEndpoint=http://aisin-edc-phoenix.nri-caas.com/api/v1/dsp",
+                  "subprotocolBody": "id=AssetId_for_Submodel;dspEndpoint=https://edc-xxx.com/api/v1/dsp",
                   "subprotocolBodyEncoding": "plain",
                   "securityAttributes": [
                     {
@@ -92,17 +102,7 @@ export enum SubmodelDescriptorTemplate {
                   ]
                 }
               }
-            ],
-            "id": "https://www.nri.com/sm/Delivery001",
-            "semanticId": {
-              "type": "ExternalReference",
-              "keys": [
-                {
-                  "type": "GlobalReference",
-                  "value": "urn:samm:io.delivery_information:2.0.0#DeliveryInformation"
-                }
-              ]
-            }
+            ]
           }
   `
 }

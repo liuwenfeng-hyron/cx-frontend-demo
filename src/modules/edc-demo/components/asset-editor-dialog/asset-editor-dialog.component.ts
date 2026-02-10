@@ -81,7 +81,7 @@ export class AssetEditorDialog implements OnInit {
         "type": this.storageTypeId,
         "name": this.name,
         "baseUrl": this.baseUrl,
-        "proxyPass": "true"
+        "proxyPath": "true" // Change By nri 2026.1.29 proxyPass >> proxyPath
       }
     };
 

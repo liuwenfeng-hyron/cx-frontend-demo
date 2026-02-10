@@ -18,7 +18,7 @@ export type SubmodelKey = keyof typeof SubmodelTemplate;
   styleUrls: ['./submodel-editor-dialog.component.scss']
 })
 export class SubmodelEditorDialog implements OnInit {
-  submodelOptions: { label: string; value: SubmodelKey }[] = [
+  submodelOptions: { label: string; value: string }[] = [
     { label: 'PURIS_ItemStock', value: 'submodel_ItemStock' },
     { label: 'PURIS_Delivery', value: 'submodel_Delivery' },
     { label: 'PURIS_DaysOfSupply', value: 'submodel_DaysOfSupply' },

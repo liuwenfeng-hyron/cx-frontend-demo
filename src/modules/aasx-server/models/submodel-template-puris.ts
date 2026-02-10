@@ -247,7 +247,7 @@ export enum SubmodelTemplatePuris {
 												]
 											},
 											"valueType": "xs:dateTime",
-											"value": "2025-11-17T00:20",
+											"value": "2026-01-01T08:20:00.000Z",
 											"modelType": "Property"
 										},
 										{
@@ -560,7 +560,7 @@ export enum SubmodelTemplatePuris {
                                                 ]
                                             },
                                             "valueType": "xs:dateTime",
-                                            "value": "2025-11-12T09:29",
+                                            "value": "2026-01-01T08:20:00.000Z",
                                             "modelType": "Property"
                                         },
                                         {
@@ -639,7 +639,7 @@ export enum SubmodelTemplatePuris {
                                                         {
                                                             "idShort": "dateTimeOfEvent",
                                                             "valueType": "xs:dateTime",
-                                                            "value": "2025-11-15T09:20",
+                                                            "value": "2026-01-01T08:20:00.000Z",
                                                             "modelType": "Property"
                                                         },
                                                         {
@@ -656,7 +656,7 @@ export enum SubmodelTemplatePuris {
                                                         {
                                                             "idShort": "dateTimeOfEvent",
                                                             "valueType": "xs:dateTime",
-                                                            "value": "2025-11-17T09:50",
+                                                            "value": "2026-01-03T08:20:00.000Z",
                                                             "modelType": "Property"
                                                         },
                                                         {
@@ -1163,7 +1163,7 @@ export enum SubmodelTemplatePuris {
                                 ]
                             },
                             "valueType": "xs:dateTime",
-                            "value": "2025-11-08T11:16",
+                            "value": "2026-01-01T08:20:00.000Z",
                             "modelType": "Property"
                         },
                         {
@@ -1225,7 +1225,7 @@ export enum SubmodelTemplatePuris {
                                                 ]
                                             },
                                             "valueType": "xs:dateTime",
-                                            "value": "2025-11-08T15:16",
+                                            "value": "2026-01-01T08:20:00.000Z",
                                             "modelType": "Property"
                                         },
                                         {
@@ -1439,7 +1439,7 @@ export enum SubmodelTemplatePuris {
                                                 ]
                                             },
                                             "valueType": "xs:dateTime",
-                                            "value": "2025-11-17T07:10",
+                                            "value": "2026-01-01T08:20:00.000Z",
                                             "modelType": "Property"
                                         },
                                         {
@@ -1460,7 +1460,7 @@ export enum SubmodelTemplatePuris {
                                                 ]
                                             },
                                             "valueType": "xs:dateTime",
-                                            "value": "2025-11-16T22:06",
+                                            "value": "2026-01-01T08:20:00.000Z",
                                             "modelType": "Property"
                                         },
                                         {

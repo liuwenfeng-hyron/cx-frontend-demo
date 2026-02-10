@@ -7,4 +7,5 @@ export interface Catalog {
     "dcat:dataset": Array<any>;
     "dcat:service": DataService;
     "participantId": string;
+    "dspace:participantId": string;
 }

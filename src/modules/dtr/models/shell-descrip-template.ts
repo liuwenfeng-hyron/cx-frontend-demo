@@ -19,18 +19,74 @@ export enum ShellDescriptorTemplate {
 	]
 }`,
 withSubmodel = `{
+    "description": [
+        {
+            "language": "en",
+            "text": "example text"
+        }
+    ],
+    "displayName": [
+        {
+            "language": "en",
+            "text": "this is an example name"
+        }
+    ],
+	"globalAssetId": "860fb504-b884-4009-9313-c6fb6cdc111b",
 	"id": "urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d001",
 	"idShort": "shellDescriptor001",
 	"specificAssetIds": [
 		{
+			"supplementalSemanticIds": [],
 			"name": "manufacturerPartId",
-			"value": "123-000-567001",
+			"value": "MNR-7307-AU340474.001",
 			"externalSubjectId": {
 				"type": "ExternalReference",
 				"keys": [
 					{
 						"type": "GlobalReference",
-						"value": "BPNL0000000L3MA9"
+						"value": "BPN_COMPANY_1"
+					}
+				]
+			}
+		},
+		{
+			"supplementalSemanticIds": [],
+			"name": "manufacturerId",
+			"value": "BPNL0000000AAAA8",
+			"externalSubjectId": {
+				"type": "ExternalReference",
+				"keys": [
+					{
+						"type": "GlobalReference",
+						"value": "BPN_COMPANY_1"
+					}
+				]
+			}
+		},
+		{
+			"supplementalSemanticIds": [],
+			"name": "customerPartId",
+			"value": "MNR-7307-AU340474.001",
+			"externalSubjectId": {
+				"type": "ExternalReference",
+				"keys": [
+					{
+						"type": "GlobalReference",
+						"value": "BPN_COMPANY_1"
+					}
+				]
+			}
+		},
+		{
+			"supplementalSemanticIds": [],
+			"name": "digitalTwinType",
+			"value": "PartInstance",
+			"externalSubjectId": {
+				"type": "ExternalReference",
+				"keys": [
+					{
+						"type": "GlobalReference",
+						"value": "BPN_COMPANY_1"
 					}
 				]
 			}
@@ -52,13 +108,13 @@ withSubmodel = `{
 				{
 					"interface": "SUBMODEL-3.0",
 					"protocolInformation": {
-						"href": "https://edc-beta.us.nri-caas.com/api-beta1/public",
+						"href": "https://edc-xxx.com/api/public/submodel_Id_Base64/$value",
 						"endpointProtocol": "HTTP",
 						"endpointProtocolVersion": [
 							"1.1"
 						],
 						"subprotocol": "DSP",
-						"subprotocolBody": "id=submodel001;dspEndpoint=https://edc-beta.us.nri-caas.com/api-beta1/v1/dsp",
+						"subprotocolBody": "id=AssetId_for_Submodel;dspEndpoint=https://edc-xxx.com/api/v1/dsp",
 						"subprotocolBodyEncoding": "plain",
 						"securityAttributes": [
 							{

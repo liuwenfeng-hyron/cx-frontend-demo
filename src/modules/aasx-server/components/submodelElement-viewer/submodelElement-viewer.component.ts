@@ -33,4 +33,23 @@ export class SubmodelElementViewerComponent implements OnInit {
       item.value = val + '.0';
     }
   }
+
+  onBooleanInputChange(value: boolean | null, item: any): void {
+    if (value === null || value === undefined) {
+      item.value = null;
+    } else {
+      item.value = value;
+    }
+  }
+
+  onDateTimeChange(item: any) {
+    if (item.value) {
+      const dateObj = new Date(item.value);
+      if (!isNaN(dateObj.getTime())) {
+        item.value = dateObj.toISOString();
+      }
+    } else {
+      item.value = '';
+    }
+  }
 }

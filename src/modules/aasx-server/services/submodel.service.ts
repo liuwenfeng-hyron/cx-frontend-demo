@@ -1,6 +1,7 @@
 import {HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {EMPTY, Observable} from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import {map} from 'rxjs/operators';
 import {Submodel} from '../models/submodel';
 import {AasxHttpClient} from './aasx-http-client.service'
@@ -72,18 +73,23 @@ export class SubmodelService {
 
   createSubmodel(body: any, id: string): Observable<JSON> {
     // for EDC Create Asset(submodel)
-    localStorage.setItem('news_submodel_path', "/submodels/" + btoa(id));
+    let idBase64 = btoa(id);
+    localStorage.setItem('news_submodel_path', "/submodels/" + idBase64);
 
     let httpParams = new HttpParams();
-    httpParams = httpParams.append("aasIdentifier", btoa(id));
+    httpParams = httpParams.append("aasIdentifier", idBase64);
     let requestBody = body;
     return this.aasxHttpClient.post<JSON>("/submodels/", requestBody, httpParams);
   }
 
   updateSubmodel(id: string, body: any): Observable<JSON> {
-    let idBase64 = btoa(id);
-    let requestBody = body;
-    return this.aasxHttpClient.put<JSON>("/submodels/" + idBase64, requestBody);
+    // PUT func has BUG, can not use PUT
+    // let idBase64 = btoa(id);
+    // let requestBody = body;
+    // return this.aasxHttpClient.put<JSON>("/submodels/" + idBase64, requestBody);
+    return this.deleteSubmodel(id).pipe(
+      switchMap(() => this.createSubmodel(body, id))
+    );
   }
 
   deleteSubmodel(id: string): Observable<JSON> {
