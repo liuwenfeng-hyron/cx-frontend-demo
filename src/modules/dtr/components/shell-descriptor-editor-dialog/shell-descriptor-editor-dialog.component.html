@@ -3,10 +3,13 @@
     <mat-form-field class="form-field" color="accent">
       <mat-label>Shell Descriptor</mat-label>
       <textarea [(ngModel)]="shellDescriptor" matInput rows="20"></textarea>
-    </mat-form-field>    
-  </div>
+    </mat-form-field>  
+  </div>  
 </mat-dialog-content>
-
+<div *ngIf="errorMsg" class="error-message">
+    <mat-icon color="warn">error</mat-icon>
+    <pre>{{ errorMsg }}</pre>
+</div>
 
 <mat-dialog-actions>
     <div *ngIf="!isEditMode">

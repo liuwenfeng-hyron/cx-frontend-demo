@@ -14,6 +14,7 @@ import { ShellDescriptorTemplate } from '../../models/shell-descrip-template';
 export class ShellDescriptorEditorDialog implements OnInit {
   shellDesc$: Observable<JSON> = of();
   shellDescriptor: string = '';
+  errorMsg: string = '';
 
   id: string = '';
   isEditMode = false;
@@ -38,7 +39,17 @@ export class ShellDescriptorEditorDialog implements OnInit {
   }
 
   onSave() {
-    const shellDescriptor: ShellDescriptor = JSON.parse(this.shellDescriptor);
-    this.dialogRef.close({ shellDescriptor });
+    this.errorMsg = "";
+    try {
+      const shellDescriptor: ShellDescriptor = JSON.parse(this.shellDescriptor);
+      this.dialogRef.close({ shellDescriptor });
+    } catch (error) {
+      if (error instanceof SyntaxError) {
+        console.error('JSON error:', error.message);
+        this.errorMsg = error.message;
+      } else {
+        console.error('error:', error);
+      }
+    }    
   }
 }
