@@ -5,6 +5,9 @@ import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Observable, of } from 'rxjs';
 import { ShellDescriptorService } from "../../services/shell-descriptor.service";
 import { ShellDescriptorTemplate } from '../../models/shell-descrip-template';
+import { ShellDescriptorTemplatePuris } from '../../models/shell-descrip-template-puris';
+import { ShellDescriptorTemplateDPP } from '../../models/shell-descrip-template-dpp';
+import { UsecaseKind } from '../../models/usecase-kind';
 
 @Component({
   selector: 'dtr-shell-descriptor-editor-dialog',
@@ -12,6 +15,7 @@ import { ShellDescriptorTemplate } from '../../models/shell-descrip-template';
   styleUrls: ['./shell-descriptor-editor-dialog.component.scss']
 })
 export class ShellDescriptorEditorDialog implements OnInit {
+  usecaseKind: string = '';
   shellDesc$: Observable<JSON> = of();
   shellDescriptor: string = '';
   errorMsg: string = '';
@@ -20,7 +24,7 @@ export class ShellDescriptorEditorDialog implements OnInit {
   isEditMode = false;
 
   constructor(private apiService: ShellDescriptorService, private dialogRef: MatDialogRef<ShellDescriptorEditorDialog>
-    , @Inject(MAT_DIALOG_DATA) data: { id: string; edcBpn: string }) {   
+    , @Inject(MAT_DIALOG_DATA) data: { id: string; edcBpn: string }, @Inject('USE_CASE') public usecases: UsecaseKind[]) {   
     this.id = data.id;
     if(this.id) {
       this.isEditMode = true;
@@ -52,4 +56,23 @@ export class ShellDescriptorEditorDialog implements OnInit {
       }
     }    
   }
+
+  onChangeUsecase() {
+      var value = '';
+      if (this.usecaseKind in ShellDescriptorTemplate) {
+        value = ShellDescriptorTemplate[this.usecaseKind as keyof typeof ShellDescriptorTemplate];
+      } else if (this.usecaseKind in ShellDescriptorTemplatePuris) {
+        value = ShellDescriptorTemplatePuris[this.usecaseKind as keyof typeof ShellDescriptorTemplatePuris];
+      } else if (this.usecaseKind in ShellDescriptorTemplateDPP) {
+        value = ShellDescriptorTemplateDPP[this.usecaseKind as keyof typeof ShellDescriptorTemplateDPP];
+      } else {
+        value = ShellDescriptorTemplate["withSubmodel"];
+      }
+
+      try {
+        this.shellDescriptor = JSON.stringify(JSON.parse(value), null, 4);
+      } catch (err) {
+        console.error('Failed to parse Template value as JSON:', err);
+      }
+    }
 }

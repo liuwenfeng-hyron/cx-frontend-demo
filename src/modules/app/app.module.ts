@@ -88,7 +88,7 @@ import {AasxServerModule} from '../aasx-server/aasx-server.module';
     },
     {
       provide: 'SUBMODEL_TYPES',
-      useFactory: () => [{id: "", name: ""}, {id: "ItemStock", name: "ItemStock"}, {id: "PlannedProductionOutput", name: "PlannedProductionOutput"}, {id: "DeliveryInformation", name: "DeliveryInformation"}, {id: "DaysOfSupply", name: "DaysOfSupply"}, {id: "PartTypeInformation", name: "PartTypeInformation"}, {id: "ShortTermMaterialDemand", name: "ShortTermMaterialDemand"}],
+      useFactory: () => [{id: "", name: ""}, {id: "ItemStock", name: "ItemStock"}, {id: "PlannedProductionOutput", name: "PlannedProductionOutput"}, {id: "DeliveryInformation", name: "DeliveryInformation"}, {id: "DaysOfSupply", name: "DaysOfSupply"}, {id: "PartTypeInformation", name: "PartTypeInformation"}, {id: "ShortTermMaterialDemand", name: "ShortTermMaterialDemand"}, {id: "BatteryPass", name: "BatteryPass"}],
     },
     {
       provide: 'SUBMODEL_KIND',
@@ -101,6 +101,10 @@ import {AasxServerModule} from '../aasx-server/aasx-server.module';
     {
       provide: 'DERIVED_FROM_TYPES',
       useFactory: () => [{id: "", name: ""}, {id: "ExternalReference", name: "ExternalReference"}, {id: "ModelReference", name: "ModelReference"}],
+    },
+    {
+      provide: 'USE_CASE',
+      useFactory: () => [{id: "PURIS", name: "PURIS"}, {id: "DPP", name: "DPP"}, {id: "Quality", name: "Quality"}, {id: "DCM", name: "DCM"}, {id: "Traceability", name: "Traceability"}],
     },
     {
       provide: EdcConnectorClient,

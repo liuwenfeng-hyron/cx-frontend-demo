@@ -257,6 +257,10 @@ export class AssetEditorDialog implements OnInit {
       this.id = "submodel-ShortTermMaterialDemand" ;
       this.name = "submodel-ShortTermMaterialDemand" ;
       this.semanticId = "urn:samm:io.catenax.short_term_material_demand:1.0.0#ShortTermMaterialDemand";
+    } else if(this.submodelTypeId === "BatteryPass") {
+      this.id = "submodel-BatteryPass" ;
+      this.name = "submodel-BatteryPass" ;
+      this.semanticId = "urn:samm:io.catenax.battery.battery_pass:6.1.0#BatteryPass";
     }
   }
 

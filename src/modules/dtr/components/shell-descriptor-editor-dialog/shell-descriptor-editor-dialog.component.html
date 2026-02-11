@@ -1,4 +1,14 @@
 <mat-dialog-content>
+  <div *ngIf="!isEditMode">
+    <mat-form-field class="form-field" color="accent">
+      <mat-label>UseCase For Template</mat-label>
+      <mat-select [(ngModel)]="usecaseKind" (selectionChange)="onChangeUsecase()">
+        <mat-option *ngFor="let usecase of usecases " [value]="usecase.id">
+          {{usecase.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
   <div>
     <mat-form-field class="form-field" color="accent">
       <mat-label>Shell Descriptor</mat-label>
