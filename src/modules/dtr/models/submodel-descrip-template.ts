@@ -15,7 +15,7 @@ export enum SubmodelDescriptorTemplate {
           {
             "interface": "SUBMODEL-3.0",
             "protocolInformation": {
-              "https://edc-xxx.us.nri-caas.com/api/public/submodel_Id_Base64/$value",
+              "href": "https://edc-xxx.us.nri-caas.com/api/public/submodel_Id_Base64/$value",
               "endpointProtocol": "HTTP",
               "endpointProtocolVersion": [
                 "1.1"
@@ -50,7 +50,7 @@ export enum SubmodelDescriptorTemplate {
           {
             "interface": "SUBMODEL-3.0",
             "protocolInformation": {
-              "https://edc-xxx.com/api/public/submodel_Id_Base64/$value",
+              "href": "https://edc-xxx.us.nri-caas.com/api/public/submodel_Id_Base64/$value",
               "endpointProtocol": "HTTP",
               "endpointProtocolVersion": [
                 "1.1"
@@ -85,7 +85,7 @@ export enum SubmodelDescriptorTemplate {
               {
                 "interface": "SUBMODEL-3.0",
                 "protocolInformation": {
-                  "https://edc-xxx.com/api/public/submodel_Id_Base64/$value",
+                  "href": "https://edc-xxx.us.nri-caas.com/api/public/submodel_Id_Base64/$value",
                   "endpointProtocol": "HTTP",
                   "endpointProtocolVersion": [
                     "1.1"
