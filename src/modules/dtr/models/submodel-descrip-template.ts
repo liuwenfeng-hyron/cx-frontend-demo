@@ -1,6 +1,6 @@
 export enum SubmodelDescriptorTemplate {
   pcf5 = `{
-        "idShort": "submodelxxx",
+        "idShort": "PCFExchangeEndpoint",
         "id": "xxxxxx-xxxx-xxxx-xxxx-aaaaaaa",
         "semanticId": {
           "type": "ExternalReference",
@@ -35,7 +35,7 @@ export enum SubmodelDescriptorTemplate {
         ]
 }`,
   pcf7 = `{
-        "idShort": "submodelxxx",
+        "idShort": "PCFExchangeEndpoint",
         "id": "xxxxxx-xxxx-xxxx-xxxx-aaaaaaa",
         "semanticId": {
           "type": "ExternalReference",

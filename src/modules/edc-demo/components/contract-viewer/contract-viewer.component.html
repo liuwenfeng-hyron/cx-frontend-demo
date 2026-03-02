@@ -1,3 +1,24 @@
+<div class="container">
+  <mat-form-field appearance="fill" appearance="outline" class="search-form-field" color="accent">
+    <label for="limitInput">Return the top </label>
+  </mat-form-field>
+  <mat-form-field appearance="fill" appearance="outline" class="search-form-field" color="accent">
+    <input 
+      type="number" 
+      id="limitInput"
+      [(ngModel)]="userLimit" 
+      min="1" 
+      max="10000" 
+    />
+  </mat-form-field>
+  <mat-form-field appearance="fill" appearance="outline" class="search-form-field" color="accent">
+   <button (click)="search()" color="accent" mat-stroked-button>
+    <mat-icon>search</mat-icon>
+    search
+  </button>
+  </mat-form-field>
+ 
+</div>
 <div *ngIf="contracts$ | async as contracts" id="wrapper">
   <div fxLayout="row wrap" fxLayoutAlign="start start">
     <mat-card *ngFor="let contract of contracts" class="contract-card">

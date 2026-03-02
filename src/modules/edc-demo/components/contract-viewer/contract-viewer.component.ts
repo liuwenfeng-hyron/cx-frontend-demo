@@ -35,6 +35,7 @@ export class ContractViewerComponent implements OnInit {
   contracts$: Observable<ContractAgreement[]> = of([]);
   private runningTransfers: RunningTransferProcess[] = [];
   private pollingHandleTransfer?: any;
+  userLimit: number = 100;
 
   constructor(private contractAgreementService: ContractAgreementService,
               private assetService: AssetService,
@@ -57,8 +58,11 @@ export class ContractViewerComponent implements OnInit {
     // default is limit = 50;
     // this.contracts$ = this.contractAgreementService.queryAllAgreements();
     // Modified by ljz on 2025.8.28
-    this.contracts$ = this.contractAgreementService.queryAllAgreements({"limit" :  90000000, "sortField" :  "contractSigningDate", "sortOrder" : "DESC"});
-    
+    this.search();
+  }
+
+  search(): void {
+    this.contracts$ = this.contractAgreementService.queryAllAgreements({"limit" :  this.userLimit, "sortField" :  "contractSigningDate", "sortOrder" : "DESC"});
   }
 
   asDate(epochSeconds?: number): string {
