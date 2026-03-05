@@ -52,11 +52,17 @@ export class NewPolicyDialogComponent implements OnInit {
       this.policy.obligation = JSON.parse(this.obligationsJson);
     }
 
-    this.policy["@context"]="http://www.w3.org/ns/odrl.jsonld"
-     this.dialogRef.close({
-
-      policy : this.policyDefinition.policy,
-      '@id': this.policyDefinition.id
-    })
+    this.dialogRef.close({
+      "@context": [
+        "http://www.w3.org/ns/odrl.jsonld",
+        "https://w3id.org/catenax/2025/9/policy/context.jsonld",
+        {
+          "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
+        }
+      ],
+      "@type": "PolicyDefinition",
+      "@id": this.policyDefinition.id,
+      "policy": this.policy
+    });
   }
 }

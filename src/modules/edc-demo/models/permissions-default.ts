@@ -1,7 +1,7 @@
 export enum PermissionsDefault {
   Duration = `[
   {
-      "action": "use",
+      "action": "access",
       "constraint": [
           {
             "leftOperand": "inForceDate",
@@ -18,10 +18,10 @@ export enum PermissionsDefault {
 ]`,
   BusinessPartnerNumber = `[
   {
-      "action": "use",
+      "action": "access",
       "constraint": [
           {
-              "leftOperand": "tx:BusinessPartnerNumber",
+              "leftOperand": "BusinessPartnerNumber",
               "operator": "eq",
               "rightOperand": "<bpnNumber>"
           }
@@ -30,10 +30,10 @@ export enum PermissionsDefault {
 ]`,
   BusinessPartnerGroup = `[
   {
-      "action": "use",
+      "action": "access",
       "constraint": [
           {
-              "leftOperand": "tx:BusinessPartnerGroup",
+              "leftOperand": "BusinessPartnerGroup",
               "operator": "isAnyOf",
               "rightOperand": ["<groupName>"]
           }
@@ -42,10 +42,10 @@ export enum PermissionsDefault {
 ]`,
   Purpose = `[
   {
-      "action": "use",
+      "action": "access",
       "constraint": [
           {
-              "leftOperand": "cx-policy:UsagePurpose",
+              "leftOperand": "UsagePurpose",
               "operator": "eq",
               "rightOperand": "cx.core.legalRequirementForThirdparty:1"
           }
@@ -54,10 +54,10 @@ export enum PermissionsDefault {
 ]`,
   ContractReference = `[
     {
-        "action": "use",
+        "action": "access",
         "constraint": [
             {
-                "leftOperand": "cx-policy:ContractReference",
+                "leftOperand": "ContractReference",
                 "operator": "eq",
                 "rightOperand": "<ContractName>"
             }
@@ -66,10 +66,10 @@ export enum PermissionsDefault {
   ]`,
   FrameworkAgreement = `[
     {
-        "action": "use",
+        "action": "access",
         "constraint": [
             {
-                "leftOperand": "cx-policy:FrameworkAgreement",
+                "leftOperand": "FrameworkAgreement",
                 "operator": "eq",
                 "rightOperand": "DataExchangeGovernance:1.0"
             }
@@ -78,7 +78,7 @@ export enum PermissionsDefault {
   ]`,
   Other = `[
     {
-        "action": "use",
+        "action": "access",
         "constraint": [
             {
                 "leftOperand": "xxx",
