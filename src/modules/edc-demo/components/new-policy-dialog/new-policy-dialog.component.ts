@@ -22,6 +22,7 @@ export class NewPolicyDialogComponent implements OnInit {
   };
 
   policyTypeId: string = '';
+  policyAction: string = 'access';
   permissionsJson: string = '';
   prohibitionsJson: string = '';
   obligationsJson: string = '';
@@ -36,7 +37,28 @@ export class NewPolicyDialogComponent implements OnInit {
   }
 
   onChangePolicyType() {
-    this.permissionsJson = PermissionsDefault[this.policyTypeId as keyof typeof PermissionsDefault];
+    this.updatePermissionsJson();
+  }
+
+  onChangeAction() {
+    this.updatePermissionsJson();
+  }
+
+  private updatePermissionsJson() {
+    let template = PermissionsDefault[this.policyTypeId as keyof typeof PermissionsDefault];
+    if (template) {
+      try {
+        let permissions = JSON.parse(template);
+        if (Array.isArray(permissions)) {
+          permissions.forEach(p => p.action = this.policyAction);
+          this.permissionsJson = JSON.stringify(permissions, null, 2);
+        } else {
+          this.permissionsJson = template;
+        }
+      } catch (e) {
+        this.permissionsJson = template;
+      }
+    }
   }
 
   onSave() {
@@ -52,11 +74,17 @@ export class NewPolicyDialogComponent implements OnInit {
       this.policy.obligation = JSON.parse(this.obligationsJson);
     }
 
-    this.policy["@context"]="http://www.w3.org/ns/odrl.jsonld"
-     this.dialogRef.close({
-
-      policy : this.policyDefinition.policy,
-      '@id': this.policyDefinition.id
-    })
+    this.dialogRef.close({
+      "@context": [
+        "http://www.w3.org/ns/odrl.jsonld",
+        "https://w3id.org/catenax/2025/9/policy/context.jsonld",
+        {
+          "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
+        }
+      ],
+      "@type": "PolicyDefinition",
+      "@id": this.policyDefinition.id,
+      "policy": this.policy
+    });
   }
 }

@@ -16,6 +16,15 @@
     </mat-select>
   </mat-form-field>
 
+  <!--  Action -->
+  <mat-form-field class="form-field-half" color="accent" id="form-field-action">
+    <mat-label>Action</mat-label>
+    <mat-select (selectionChange)="onChangeAction()" [(ngModel)]="policyAction">
+      <mat-option value="access">access</mat-option>
+      <mat-option value="use">use</mat-option>
+    </mat-select>
+  </mat-form-field>
+
   <!--  Permissions -->
   <mat-form-field class="form-field-stretch" color="accent" id="form-field-permissions">
     <mat-label>Permissions (JSON)</mat-label>

@@ -121,7 +121,7 @@ export class ContractViewerComponent implements OnInit {
             keyName: "alice-test-document.txt",
             bucketName: "bob-bucket",
             region: "us-east-1",
-            endpointOverride: environment.enddpointOverride, //"http://bob-minio:9000",
+            endpointOverride: (environment as any).endpointOverride || (environment as any).enddpointOverride, //"http://bob-minio:9000",
             accessKeyId: "bobawsclient",
             secretAccessKey: "bobawssecret"
             // account: this.homeConnectorStorageAccount, // CAUTION: hardcoded value for AzureBlob
