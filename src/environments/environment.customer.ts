@@ -33,7 +33,7 @@ export const environment = {
   // ===not use Start===
   storageAccount: "company2assets",
   storageExplorerLinkTemplate: "storageexplorer://v=1",
-  enddpointOverride: "http://bob-minio:9000",
+  endpointOverride: "http://bob-minio:9000",
   receiverHttpEndpoint: "https://dashboard.provider.edc.dev.openstandia.jp/receiver"
   // ===not use End===
 
