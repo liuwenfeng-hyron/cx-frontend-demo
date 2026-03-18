@@ -4,7 +4,7 @@ import { Inner } from "../inner";
 
 export class PartnerGroupsController {
   #inner = new Inner();
-  #basePath = "/business-partner-groups";
+  #basePath = "/v3/business-partner-groups";
   #txContext = {
     "tx": "https://w3id.org/tractusx/v0.0.1/ns/"
   };  
@@ -56,6 +56,15 @@ export class PartnerGroupsController {
         ...input,
         "@context": this.#txContext,
       },
+    });
+  }
+
+  async getAllGroups(context?: EdcConnectorClientContext): Promise<any> {
+    const actualContext = context || this.#context!;
+    return this.#inner.request(actualContext.management, {
+      path: `${this.#basePath}/groups`,
+      method: "GET",
+      apiToken: actualContext.apiToken,
     });
   }
 }
