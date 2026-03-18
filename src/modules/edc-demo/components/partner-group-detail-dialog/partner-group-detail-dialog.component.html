@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Partner Group Detail: {{groupId}}</h1>
+<div mat-dialog-content>
+  <mat-list>
+    <div mat-subheader>Business Partner Numbers (BPNs)</div>
+    <mat-list-item *ngFor="let bpn of bpns">
+      <mat-icon matListItemIcon>person</mat-icon>
+      <div matListItemTitle>{{bpn}}</div>
+    </mat-list-item>
+    <mat-list-item *ngIf="bpns.length === 0">
+      <div matListItemTitle>No BPNs assigned to this group.</div>
+    </mat-list-item>
+  </mat-list>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onClose()">Close</button>
+</div>

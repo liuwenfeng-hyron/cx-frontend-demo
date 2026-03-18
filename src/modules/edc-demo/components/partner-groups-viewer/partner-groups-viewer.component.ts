@@ -4,6 +4,7 @@ import {first, map, switchMap} from 'rxjs/operators';
 import {MatDialog} from '@angular/material/dialog';
 import {PartnerGroupInput} from "../../../mgmt-api-client";
 import {PartnerGroupsEditorDialog} from "../partner-groups-editor-dialog/partner-groups-editor-dialog.component";
+import {PartnerGroupDetailDialogComponent} from "../partner-group-detail-dialog/partner-group-detail-dialog.component";
 import {ConfirmationDialogComponent, ConfirmDialogModel} from "../confirmation-dialog/confirmation-dialog.component";
 import {NotificationService} from "../../services/notification.service";
 import {PartnerGroupService} from "../../../mgmt-api-client";
@@ -90,6 +91,18 @@ export class PartnerGroupsViewerComponent implements OnInit {
           })
         }
     })
-}
+  }
+
+  onGroupClick(groupId: string) {
+    this.partnerGroupsService.getPartnerGroupDetail(groupId).subscribe({
+      next: (detail) => {
+        this.dialog.open(PartnerGroupDetailDialogComponent, {
+          data: detail,
+          width: '500px'
+        });
+      },
+      error: (err) => this.showError(err, "Could not fetch group details")
+    });
+  }
 
 }

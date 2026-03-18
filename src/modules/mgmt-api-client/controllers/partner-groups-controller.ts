@@ -67,4 +67,13 @@ export class PartnerGroupsController {
       apiToken: actualContext.apiToken,
     });
   }
+
+  async getGroupDetails(groupId: string, context?: EdcConnectorClientContext): Promise<any> {
+    const actualContext = context || this.#context!;
+    return this.#inner.request(actualContext.management, {
+      path: `${this.#basePath}/group/${groupId}`,
+      method: "GET",
+      apiToken: actualContext.apiToken,
+    });
+  }
 }

@@ -18,7 +18,11 @@
     <mat-card *ngIf="partnerGroupsInfo" class="partnerGroups-card">
       <mat-card-header>
         <mat-icon mat-card-avatar></mat-icon>
-        <mat-card-title>{{partnerGroupsInfo['@id']}}</mat-card-title>
+        <mat-card-title>
+          <a (click)="onGroupClick(partnerGroupsInfo['@id'])" class="group-id-link">
+            {{partnerGroupsInfo['@id']}}
+          </a>
+        </mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <mat-list dense>
