@@ -34,6 +34,10 @@ export class PartnerGroupService {
         return from(this.controller.get(bpn));
     }
 
+    public getAllGroups(): Observable<any> {
+        return from(this.controller.getAllGroups());
+    }
+
     public createPartnerGroup(partnerGroupEntryDto: PartnerGroupInput): Observable<any> {
         return from(this.controller.create(partnerGroupEntryDto));
     }

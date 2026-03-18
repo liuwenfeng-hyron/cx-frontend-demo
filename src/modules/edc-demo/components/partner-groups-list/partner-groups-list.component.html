@@ -1,0 +1,23 @@
+<div id="wrapper">
+  <div class="container">
+    <h2>Partner Groups List</h2>
+    <mat-divider></mat-divider>
+    <div *ngIf="error" class="error-message">
+      {{ error }}
+    </div>
+
+    <mat-list *ngIf="(groups$ | async) as groups; else loading">
+      <mat-list-item *ngFor="let group of groups">
+        <mat-icon matListItemIcon>group</mat-icon>
+        <div matListItemTitle>{{ group }}</div>
+      </mat-list-item>
+      <mat-list-item *ngIf="groups.length === 0 && !error">
+        No groups found.
+      </mat-list-item>
+    </mat-list>
+
+    <ng-template #loading>
+      <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+    </ng-template>
+  </div>
+</div>

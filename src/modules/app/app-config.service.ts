@@ -37,7 +37,7 @@ export interface AppConfig {
 
   storageAccount: string;
   storageExplorerLinkTemplate: string;
-  enddpointOverride: string;
+  endpointOverride: string;
   receiverHttpEndpoint: string;
   production: boolean
 }

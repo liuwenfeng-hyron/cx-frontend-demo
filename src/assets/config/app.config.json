@@ -28,7 +28,7 @@
 
   "storageAccount": "",
   "storageExplorerLinkTemplate": "",
-  "enddpointOverride": "",
+  "endpointOverride": "",
   "receiverHttpEndpoint": "",
   "production": ""
 }
