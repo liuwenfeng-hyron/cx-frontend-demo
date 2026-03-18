@@ -56,6 +56,7 @@ import {FileUploadViewer} from "./components/file-upload/file-upload-viewer.comp
 import {FileUploadDialog} from "./components/file-upload-dialog/file-upload-dialog.component";
 import {TransferIdViewer} from "./components/transfer-id/transfer-id-viewer.component";
 import {TransferIdDialog} from "./components/transfer-id-dialog/transfer-id-dialog.component";
+import {PartnerGroupDetailDialogComponent} from "./components/partner-group-detail-dialog/partner-group-detail-dialog.component";
 
 @NgModule({
   imports: [
@@ -113,7 +114,8 @@ import {TransferIdDialog} from "./components/transfer-id-dialog/transfer-id-dial
     FileUploadViewer,
     FileUploadDialog,
     TransferIdViewer,
-    TransferIdDialog
+    TransferIdDialog,
+    PartnerGroupDetailDialogComponent
   ],
   exports: [
     CatalogBrowserComponent,

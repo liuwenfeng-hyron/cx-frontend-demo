@@ -48,4 +48,8 @@ export class PartnerGroupService {
     public updatePartnerGroup(partnerGroupEntryDto: PartnerGroupInput): Observable<any> {
         return from(this.controller.update(partnerGroupEntryDto))
     }
+
+    public getPartnerGroupDetail(groupId: string): Observable<any> {
+        return from(this.controller.getGroupDetails(groupId));
+    }
 }

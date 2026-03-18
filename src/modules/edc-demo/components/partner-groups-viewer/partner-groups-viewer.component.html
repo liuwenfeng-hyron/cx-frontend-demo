@@ -25,7 +25,12 @@
           <mat-list-item>
             <mat-icon matListItemIcon>info</mat-icon>
             <div class="partnerGroups-property" matListItemTitle>Groups</div>
-            <div matListItemLine>{{partnerGroupsInfo['tx:groups']}}</div>
+            <div matListItemLine>
+              <span *ngFor="let group of partnerGroupsInfo['tx:groups']; last as isLast">
+                <a (click)="onGroupClick(group)" class="group-id-link">{{group}}</a>{{isLast ? '' : ', '}}
+              </span>
+              <span *ngIf="!partnerGroupsInfo['tx:groups'] || partnerGroupsInfo['tx:groups'].length === 0">None</span>
+            </div>
           </mat-list-item>
         </mat-list>
       </mat-card-content>
