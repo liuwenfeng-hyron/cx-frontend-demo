@@ -18,18 +18,19 @@
     <mat-card *ngIf="partnerGroupsInfo" class="partnerGroups-card">
       <mat-card-header>
         <mat-icon mat-card-avatar></mat-icon>
-        <mat-card-title>
-          <a (click)="onGroupClick(partnerGroupsInfo['@id'])" class="group-id-link">
-            {{partnerGroupsInfo['@id']}}
-          </a>
-        </mat-card-title>
+        <mat-card-title>{{partnerGroupsInfo['@id']}}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <mat-list dense>
           <mat-list-item>
             <mat-icon matListItemIcon>info</mat-icon>
             <div class="partnerGroups-property" matListItemTitle>Groups</div>
-            <div matListItemLine>{{partnerGroupsInfo['tx:groups']}}</div>
+            <div matListItemLine>
+              <span *ngFor="let group of partnerGroupsInfo['tx:groups']; last as isLast">
+                <a (click)="onGroupClick(group)" class="group-id-link">{{group}}</a>{{isLast ? '' : ', '}}
+              </span>
+              <span *ngIf="!partnerGroupsInfo['tx:groups'] || partnerGroupsInfo['tx:groups'].length === 0">None</span>
+            </div>
           </mat-list-item>
         </mat-list>
       </mat-card-content>
