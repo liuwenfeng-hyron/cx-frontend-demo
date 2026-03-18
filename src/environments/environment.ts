@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiKey: "password"
+  apiKey: "password",
+  enddpointOverride: "http://localhost:9000"
 };
 
 /*

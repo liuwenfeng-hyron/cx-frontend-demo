@@ -23,6 +23,15 @@ export class PartnerGroupsController {
     });
   }
 
+  async getAllGroups(context?: EdcConnectorClientContext): Promise<any> {
+    const actualContext = context || this.#context!;
+    return this.#inner.request(actualContext.management, {
+      path: `/v3${this.#basePath}/groups`,
+      method: "GET",
+      apiToken: actualContext.apiToken,
+    });
+  }
+
   async create(input: PartnerGroupInput, context?: EdcConnectorClientContext): Promise<IdResponse> {
     const actualContext = context || this.#context!;
     return this.#inner.request(actualContext.management, {

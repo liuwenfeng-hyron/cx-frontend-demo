@@ -1,0 +1,49 @@
+
+> edc-demo-client@0.0.0 start
+> ng serve --configuration=test --proxy-config proxy.conf.json --host 0.0.0.0 --port 4300
+
+Warning: This is a simple server for use in testing or debugging Angular applications
+locally. It hasn't been reviewed for security issues.
+
+Binding this server to an open connection can result in compromising your application or
+computer. Using a different host than the one passed to the "--host" flag might result in
+websocket connection issues. You might need to use "--disable-host-check" if that's the
+case.
+Warning: 'outputHashing' option is disabled when using the dev-server.
+****************************************************************************************
+This is a simple server for use in testing or debugging Angular applications locally.
+It hasn't been reviewed for security issues.
+
+DON'T USE IT FOR PRODUCTION!
+****************************************************************************************
+    Components styles sourcemaps are not generated when styles optimization is enabled.
+- Generating browser application bundles (phase: setup)...
+    TypeScript compiler options "target" and "useDefineForClassFields" are set to "ES2022" and "false" respectively by the Angular CLI. To control ECMA version and features use the Browerslist configuration. For more information, see https://angular.io/guide/build#configuring-browser-compatibility
+    NOTE: You can set the "target" to "ES2022" in the project's tsconfig to remove this warning.
+✔ Browser application bundle generation complete.
+
+Initial Chunk Files   | Names         |  Raw Size | Estimated Transfer Size
+main.js               | main          |   1.82 MB |               300.45 kB
+styles.css, styles.js | styles        | 467.68 kB |                45.43 kB
+polyfills.js          | polyfills     | 152.98 kB |                39.79 kB
+runtime.js            | runtime       |   1.30 kB |               705 bytes
+
+| Initial Total |   2.43 MB |               386.36 kB
+
+Build at: 2026-03-18T05:42:04.294Z - Hash: df05a75ac0a20245 - Time: 60429ms
+
+Warning: /app/node_modules/keycloak-js/dist/keycloak.mjs depends on 'base64-js'. CommonJS or AMD dependencies can cause optimization bailouts.
+For more info see: https://angular.io/guide/build#configuring-commonjs-dependencies
+
+Warning: /app/node_modules/keycloak-js/dist/keycloak.mjs depends on 'js-sha256'. CommonJS or AMD dependencies can cause optimization bailouts.
+For more info see: https://angular.io/guide/build#configuring-commonjs-dependencies
+
+Warning: /app/src/modules/app/app.module.ts depends on '@think-it-labs/edc-connector-client'. CommonJS or AMD dependencies can cause optimization bailouts.
+For more info see: https://angular.io/guide/build#configuring-commonjs-dependencies
+
+
+
+** Angular Live Development Server is listening on 0.0.0.0:4300, open your browser on http://localhost:4300/ **
+
+
+✔ Compiled successfully.

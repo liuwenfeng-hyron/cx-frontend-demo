@@ -8,6 +8,7 @@ import {
   ContractDefinitionViewerComponent
 } from '../edc-demo/components/contract-definition-viewer/contract-definition-viewer.component';
 import {PartnerGroupsViewerComponent} from '../edc-demo/components/partner-groups-viewer/partner-groups-viewer.component';
+import {PartnerGroupsListComponent} from '../edc-demo/components/partner-groups-list/partner-groups-list.component';
 import {
   TransferHistoryViewerComponent
 } from '../edc-demo/components/transfer-history/transfer-history-viewer.component';
@@ -55,7 +56,12 @@ export const routes: Routes = [
     path: 'partner-groups', // by nri 2025.2.6
     component: PartnerGroupsViewerComponent,
     data: {title: 'Partner Groups', icon: 'assignment'}
-  }, 
+  },
+  {
+    path: 'partner-groups-list',
+    component: PartnerGroupsListComponent,
+    data: {title: 'Partner Groups List', icon: 'list'}
+  },
   {
     path: 'groupTitle',
     data: {title: 'CONSUMING'}

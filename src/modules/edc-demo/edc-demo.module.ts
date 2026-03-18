@@ -25,6 +25,7 @@ import {
   ContractDefinitionViewerComponent
 } from './components/contract-definition-viewer/contract-definition-viewer.component';
 import {PartnerGroupsViewerComponent} from './components/partner-groups-viewer/partner-groups-viewer.component';
+import {PartnerGroupsListComponent} from './components/partner-groups-list/partner-groups-list.component';
 import {PartnerGroupsEditorDialog} from "./components/partner-groups-editor-dialog/partner-groups-editor-dialog.component";
 import {IntroductionComponent} from './components/introduction/introduction.component';
 import {RouterModule} from '@angular/router';
@@ -89,6 +90,7 @@ import {TransferIdDialog} from "./components/transfer-id-dialog/transfer-id-dial
     TransferHistoryViewerComponent,
     ContractDefinitionViewerComponent,
     PartnerGroupsViewerComponent,
+    PartnerGroupsListComponent,
     PartnerGroupsEditorDialog,
     AssetViewerComponent,
     AssetEditorDialog,
@@ -120,6 +122,7 @@ import {TransferIdDialog} from "./components/transfer-id-dialog/transfer-id-dial
     TransferHistoryViewerComponent,
     ContractDefinitionViewerComponent,
     PartnerGroupsViewerComponent,
+    PartnerGroupsListComponent,
     PartnerGroupsEditorDialog,
     AssetViewerComponent,
     IntroductionComponent,
